@@ -170,11 +170,11 @@ paths:
     shot_work_area: shots/{Sequence}/{Shot}/{Step}/work
     shot_publish_area: shots/{Sequence}/{Shot}/{Step}/publish
 
-    asset_root: assets/{sg_asset_type}/{Asset}
-    asset_step: assets/{sg_asset_type}/{Asset}/{Step}
+    asset_root: assets/{Asset}
+    asset_step: assets/{Asset}/{Step}
 
-    asset_work_area: assets/{sg_asset_type}/{Asset}/{Step}/work
-    asset_publish_area: assets/{sg_asset_type}/{Asset}/{Step}/publish
+    asset_work_area: assets/{Asset}/{Step}/work
+    asset_publish_area: assets/{Asset}/{Step}/publish
 
     ##########################################################################################
     # Nuke Tools Paths
