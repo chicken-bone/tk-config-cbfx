@@ -372,7 +372,9 @@ paths:
     houdini_shot_snapshot:
         definition: '@shot_work_area/houdini/snapshots/{name}.v{version}.{timestamp}.hip'
     houdini_shot_work_alembic_cache:
-        definition: '@shot_work_area/houdini/cache/alembic/{name}/{houdini.node}/v{version}/{Shot}_{name}_v{version}.abc'
+        definition: '@shot_work_area/data/abc/{Shot}_{Step}_{houdini.node}/v{version}/{Shot}_{Step}_{houdini.node}_v{version}.abc'
+    houdini_shot_work_bgeo_cache:
+        definition: '@shot_work_area/data/bgeo/{Shot}_{Step}_{houdini.node}/v{version}/{Shot}_{Step}_{houdini.node}_v{version}.bgeo.sc'
 
     # define the location of a publish area
     shot_publish_area_houdini:
@@ -382,15 +384,19 @@ paths:
 
     # Rendered images
     houdini_shot_render:
-        definition: '@shot_work_area/images/{name}/{houdini.node}/v{version}/{width}x{height}/{Shot}_{name}_v{version}.{SEQ}.exr'
+        definition: '@shot_work_area/images/{Shot}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
 
     # Additional mantra outputs
     houdini_shot_ifd:
-        definition: '@shot_work_area/data/{name}/{houdini.node}/v{version}/{width}x{height}/{Shot}_{name}_v{version}.{SEQ}.ifd'
+        definition: '@shot_work_area/data/ifd/{Shot}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.ifd'
     houdini_shot_dcm:
-        definition: '@shot_work_area/images/{name}_deep/{houdini.node}/v{version}/{width}x{height}/{Shot}_{name}_v{version}.{SEQ}.exr'
+        definition: '@shot_work_area/images/{Shot}_{Step}_{houdini.node}_deep/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
     houdini_shot_extra_plane:
-        definition: '@shot_work_area/images/{name}/{houdini.node}/{aov_name}/v{version}/{width}x{height}/{Shot}_{name}_v{version}.{SEQ}.exr'
+        definition: '@shot_work_area/images/{Shot}_{Step}_{houdini.node}/{aov_name}/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
+
+    # Redshift outputs
+    houdini_shot_rs:
+        definition: '@shot_work_area/data/rs/{Shot}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.rs'
 
 
     #
@@ -620,7 +626,9 @@ paths:
     houdini_asset_snapshot:
         definition: '@asset_work_area/houdini/snapshots/{name}.v{version}.{timestamp}.hip'
     houdini_asset_work_alembic_cache:
-        definition: '@asset_work_area/houdini/cache/alembic/{name}/{houdini.node}/v{version}/{Asset}_{name}_v{version}.abc'
+        definition: '@asset_work_area/data/abc/{Asset}_{Step}_{houdini.node}/v{version}/{Asset}_{Step}_{houdini.node}_v{version}.abc'
+    houdini_shot_work_bgeo_cache:
+        definition: '@asset_work_area/data/bgeo/{Asset}_{Step}_{houdini.node}/v{version}/{Asset}_{Step}_{houdini.node}_v{version}.bgeo.sc'
 
     # define the location of a publish area
     asset_publish_area_houdini:
@@ -630,16 +638,19 @@ paths:
 
     # Rendered images
     houdini_asset_render:
-        definition: '@asset_work_area/images/{name}/{houdini.node}/v{version}/{width}x{height}/{Asset}_{name}_v{version}.{SEQ}.exr'
+        definition: '@asset_work_area/images/{Asset}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Asset}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
 
     # Additional mantra outputs
     houdini_asset_ifd:
-        definition: '@asset_work_area/data/{name}/{houdini.node}/v{version}/{width}x{height}/{Asset}_{name}_v{version}.{SEQ}.ifd'
+        definition: '@asset_work_area/data/ifd/{Asset}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Asset}_{Step}_{houdini.node}_v{version}.{SEQ}.ifd'
     houdini_asset_dcm:
-        definition: '@asset_work_area/images/{name}_deep/{houdini.node}/v{version}/{width}x{height}/{Asset}_{name}_v{version}.{SEQ}.exr'
+        definition: '@asset_work_area/images/{Asset}_{Step}_{houdini.node}_deep/v{version}/{width}x{height}/{Asset}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
     houdini_asset_extra_plane:
-        definition: '@asset_work_area/images/{name}/{houdini.node}/{aov_name}/v{version}/{width}x{height}/{Asset}_{name}_v{version}.{SEQ}.exr'
+        definition: '@asset_work_area/images/{Asset}_{Step}_{houdini.node}/{aov_name}/v{version}/{width}x{height}/{Asset}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
 
+    # Redshift outputs
+    houdini_shot_rs:
+        definition: '@asset_work_area/data/rs/{Asset}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Asset}_{Step}_{houdini.node}_v{version}.{SEQ}.rs'
 
     #
     # 3dsmax
