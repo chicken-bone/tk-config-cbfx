@@ -271,7 +271,7 @@ settings.tk-multi-workfiles2.maya.shot_step:
 # asset_step
 settings.tk-multi-workfiles2.nuke.asset_step:
   saveas_default_name: comp
-  launch_at_startup: true
+  launch_at_startup: false
   template_publish: nuke_asset_publish
   template_publish_area: asset_publish_area_nuke
   template_work: nuke_asset_work
@@ -300,7 +300,7 @@ settings.tk-multi-workfiles2.nuke.asset_step:
 # shot_step
 settings.tk-multi-workfiles2.nuke.shot_step:
   saveas_default_name: comp
-  launch_at_startup: true
+  launch_at_startup: false
   template_publish: nuke_shot_publish
   template_publish_area: shot_publish_area_nuke
   template_work: nuke_shot_work

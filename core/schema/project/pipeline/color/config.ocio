@@ -1,6 +1,6 @@
 ocio_profile_version: 1
 
-search_path: \\CBONE-FILE-06\Pipeline\tools\ocio\aces_1.0.3\luts:luts\$SEQUENCE\$SHOT:luts
+search_path: \\CBONE-FILE-06\Pipeline\tools\ocio\aces_1.0.3\luts:\\CBONE-FILE-06\Pipeline\tools\ocio\nuke-default\luts:luts\$SEQ\$SHOT:luts
 strictparsing: true
 luma: [0.2126, 0.7152, 0.0722]
 
@@ -21,7 +21,7 @@ roles:
 
 displays:
   Monitor:
-    - !<View> {name: AutoLUT CC, colorspace: Show LUT, looks: +shot_look}
+    - !<View> {name: AutoLUT CC, colorspace: Show LUT, looks: "-neutral, +dailies"}
     - !<View> {name: AutoLUT, colorspace: Show LUT}
     - !<View> {name: Rec709, colorspace: Output - Rec.709}
     - !<View> {name: sRGB, colorspace: Output - sRGB}
@@ -33,12 +33,21 @@ active_views: [AutoLUT CC, AutoLUT, Rec709, sRGB, Camera Raw, None]
 
 looks:
   - !<Look>
-    name: shot_look
+    name: dailies
     process_space: Camera Raw
-    transform: !<FileTransform> {src: $LOOK, interpolation: linear, cccid: 0}
+    transform: !<FileTransform> {src: dailies.cc, interpolation: linear, cccid: 0}
+
+  - !<Look>
+    name: neutral
+    process_space: Camera Raw
+    transform: !<FileTransform> {src: neutral.cc, interpolation: linear, cccid: 0}
+
+  - !<Look>
+    name: di
+    process_space: Camera Raw
+    transform: !<FileTransform> {src: di.cc, interpolation: linear, cccid: 0}
 
 colorspaces:
-
   - !<ColorSpace>
     # The 'Camera Raw' colorspace may need to be changed depending on the
     # project and its native capture format. The dafault is set up for
@@ -50,11 +59,16 @@ colorspaces:
     equalitygroup: ""
     bitdepth: 32f
     description: |
-      Curve - V3 LogC (EI800)
+      V3 LogC (EI800) - Wide Gamut
+
+      ACES Transform ID : IDT.ARRI.Alexa-v3-logC-EI800.a1.v1
     isdata: false
     allocation: uniform
     allocationvars: [0, 1]
-    to_reference: !<ColorSpaceTransform> {src: Input - ARRI - Curve - V3 LogC (EI800), dst: ACES - ACES2065-1}
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: V3_LogC_800_to_linear.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.680206, 0.236137, 0.083658, 0, 0.085415, 1.01747, -0.102886, 0, 0.002057, -0.062563, 1.06051, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
     # This custom LUT convert the incoming image to the 'Camera Raw' format
@@ -70,8 +84,212 @@ colorspaces:
     allocationvars: [0, 1]
     from_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: acescg, dst: Camera Raw}
+        - !<ColorSpaceTransform> {src: ACES - ACES2065-1, dst: Camera Raw}
         - !<FileTransform> {src: $LUT, interpolation: linear, cccid: 0}
+
+# The colorspaces defined from below are all from the standard nuke-default config
+# and are provided for convenience and should not be modified.
+
+  - !<ColorSpace>
+    name: Nuke - linear
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Scene-linear, high dynamic range. Used for rendering and compositing.
+    isdata: false
+    allocation: lg2
+    allocationvars: [-15, 6]
+
+  - !<ColorSpace>
+    name: Nuke - sRGB
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Standard RGB Display Space
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: srgb.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - sRGBf
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Standard RGB Display Space, but with additional range to preserve float highlights.
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 4.875]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: srgbf.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - rec709
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Rec. 709 (Full Range) Display Space
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: rec709.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - Cineon
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Cineon (Log Film Scan)
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: cineon.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - Gamma1.8
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Emulates a idealized Gamma 1.8 display device.
+    isdata: false
+    allocation: uniform
+    allocationvars: [0, 1]
+    to_reference: !<GroupTransform>
+      children:
+        - !<ExponentTransform> {value: [1.8, 1.8, 1.8, 1]}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - Gamma2.2
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Emulates a idealized Gamma 2.2 display device.
+    isdata: false
+    allocation: uniform
+    allocationvars: [0, 1]
+    to_reference: !<GroupTransform>
+      children:
+        - !<ExponentTransform> {value: [2.2, 2.2, 2.2, 1]}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - Panalog
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Sony/Panavision Genesis Log Space
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: panalog.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - REDLog
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      RED Log Space
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: redlog.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - ViperLog
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Viper Log Space
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: viperlog.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - AlexaV3LogC
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Alexa Log C
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: alexalogc.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - PLogLin
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Josh Pines style pivoted log/lin conversion. 445->0.18
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: ploglin.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - SLog
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Sony SLog
+    isdata: false
+    allocation: uniform
+    allocationvars: [-0.125, 1.125]
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: slog.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.695452, 0.140679, 0.163869, 0, 0.0447946, 0.859671, 0.0955343, 0, -0.00552588, 0.00402521, 1.0015, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Nuke - raw
+    family: Nuke
+    equalitygroup: ""
+    bitdepth: 32f
+    description: |
+      Raw Data. Used for normals, points, etc.
+    isdata: true
+    allocation: uniform
 
 # The colorspaces defined from here down are all from the standard ACES 1.0.3
 # config and should not be modified.

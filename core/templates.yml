@@ -233,7 +233,7 @@ paths:
     # OCIO config path
     #
     ocio_config_path:
-      definition: 'pipeline/color'
+      definition: 'pipeline/color/config.ocio'
 
     #
     # LUTs and Looks
@@ -245,9 +245,9 @@ paths:
 
     # The location of look/cc files
     look_sequence_publish_area:
-      definition: 'pipeline/color/luts/{Sequence}'
+      definition: '@sequence_root/luts'
     look_shot_publish_area:
-      definition: 'pipeline/color/luts/{Sequence}/{Shot}'
+      definition: '@shot_root/luts'
 
     #
     # Hiero

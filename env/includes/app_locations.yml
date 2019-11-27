@@ -219,30 +219,6 @@ apps.tk-nuke-writenode.location:
   # type: app_store
   # version: v1.4.1
 
-# nuke tools app
-apps.tk-nuke-tools.location:
-  ## Toolkit App Entity
-  type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-nuke-tools
-  field: sg_uploaded_app
-  version: 63055 #v0.0.6
-  ## Dev
-  # type: dev
-  # path: R:\work\anthony.kramer\github\tk-nuke-tools
-
-# ocio
-apps.tk-nuke-ocio.location:
-  ### Toolkit App Entity
-  type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-nuke-ocio
-  field: sg_uploaded_app
-  version: 43373 #v0.0.4-cbfx
-  ### Dev
-  # type: dev
-  # path: R:\work\anthony.kramer\github\tk-nuke-ocio
-
 # ---- Flame apps
 
 # flame export
@@ -264,6 +240,45 @@ apps.tk-flame-review.location:
 #   name: tk-mari-projectmanager
 #   type: app_store
 #   version: v1.2.0
+
+# ---- CBFX apps
+
+# ocio
+apps.tk-multi-ocio.location:
+  name: tk-multi-ocio
+  ### Toolkit Component Entity
+  # type: shotgun
+  # entity_type: *ToolkitComponent
+  # field: sg_uploaded_app
+  # version: ### #tk-multi-ocio-0.0.#
+  ## Dev
+  type: dev
+  path: R:\work\anthony.kramer\github\tk-multi-ocio
+
+
+# nuke tools app
+apps.tk-nuke-tools.location:
+  ## Toolkit App Entity
+  type: shotgun
+  entity_type: *ToolkitComponent
+  name: tk-nuke-tools
+  field: sg_uploaded_app
+  version: 63055 #v0.0.6
+  ## Dev
+  # type: dev
+  # path: R:\work\anthony.kramer\github\tk-nuke-tools
+
+# ocio - DEPRECATED
+# apps.tk-nuke-ocio.location:
+  ### Toolkit App Entity
+  # type: shotgun
+  # entity_type: *ToolkitComponent
+  # name: tk-nuke-ocio
+  # field: sg_uploaded_app
+  # version: 43373 #v0.0.4-cbfx
+  ### Dev
+  # type: dev
+  # path: R:\work\anthony.kramer\github\tk-nuke-ocio
 
 ################################################################################
 # reference all of the common frameworks

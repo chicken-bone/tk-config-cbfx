@@ -1,4 +1,4 @@
-<ColorCorrection id="default">
+<ColorCorrection id="neutral">
   <SOPNode>
     <Description></Description>
     <Slope>1 1 1</Slope>

@@ -24,7 +24,7 @@ includes:
 - ./tk-multi-snapshot.yml
 - ./tk-multi-workfiles2.yml
 - ./tk-nuke-writenode.yml
-- ./tk-nuke-ocio.yml
+- ./tk-multi-ocio.yml
 - ./tk-nuke-tools.yml
 
 ################################################################################
@@ -74,6 +74,7 @@ settings.tk-nuke.hiero.project:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 ################################################################################
 # Nuke
@@ -81,7 +82,7 @@ settings.tk-nuke.hiero.project:
 # asset
 settings.tk-nuke.asset:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
@@ -94,11 +95,12 @@ settings.tk-nuke.asset:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 # asset_step
 settings.tk-nuke.asset_step:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     # tk-multi-render:
     #   location: "@apps.tk-multi-render.location"
@@ -125,11 +127,12 @@ settings.tk-nuke.asset_step:
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   # - {app_instance: tk-multi-render, name: Render Version..., hotkey: "F5"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 # project
 settings.tk-nuke.project:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
@@ -142,11 +145,12 @@ settings.tk-nuke.project:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 # sequence
 settings.tk-nuke.sequence:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
@@ -159,11 +163,12 @@ settings.tk-nuke.sequence:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 # shot
 settings.tk-nuke.shot:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
@@ -176,11 +181,12 @@ settings.tk-nuke.shot:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 # shot_step
 settings.tk-nuke.shot_step:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     # tk-multi-render:
     #   location: "@apps.tk-multi-render.location"
@@ -214,6 +220,7 @@ settings.tk-nuke.shot_step:
   # - {app_instance: tk-multi-publish2, name: Publish..., hotkey: "F6"}
   - {app_instance: tk-multi-setframerange, name: Sync Frame Range with Shotgun, hotkey: "F8"}
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
 
 ################################################################################
 # NukeStudio
@@ -259,6 +266,7 @@ settings.tk-nuke.nukestudio.asset_step:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   location: '@engines.tk-nuke.location'
+  compatibility_dialog_min_version: 13
 
 # project
 settings.tk-nuke.nukestudio.project:
@@ -306,6 +314,7 @@ settings.tk-nuke.nukestudio.project:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   location: '@engines.tk-nuke.location'
+  compatibility_dialog_min_version: 13
 
 # shot_step
 settings.tk-nuke.nukestudio.shot_step:
@@ -348,6 +357,7 @@ settings.tk-nuke.nukestudio.shot_step:
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   location: '@engines.tk-nuke.location'
+  compatibility_dialog_min_version: 13
 
 
 ################################################################################
@@ -356,14 +366,14 @@ settings.tk-nuke.nukestudio.shot_step:
 # project
 settings.tk-nuke.render.project:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
   location: "@engines.tk-nuke.location"
 
 # asset_step
 settings.tk-nuke.render.asset_step:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-nuke-writenode: "@settings.tk-nuke-writenode.asset"
   location: "@engines.tk-nuke.location"
@@ -371,7 +381,7 @@ settings.tk-nuke.render.asset_step:
 # shot_step
 settings.tk-nuke.render.shot_step:
   apps:
-    tk-nuke-ocio: "@settings.tk-nuke-ocio"
+    tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-nuke-writenode: "@settings.tk-nuke-writenode.shot"
   location: '@engines.tk-nuke.location'
