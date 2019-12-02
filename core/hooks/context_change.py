@@ -52,7 +52,66 @@ class ContextChange(get_hook_baseclass()):
         :param next_context: The context the engine is switching to.
         :type next_context: :class:`~sgtk.Context`
         """
-        pass
+        if next_context != current_context and next_context is not None:
+
+            env_vars = {
+                "PROJECT": None,
+                "SEQ": None,
+                "SHOT": None,
+                "LUT": None,
+                "CAMERA_RAW": None
+            }
+
+            seq_color_config = None
+            shot_color_config = None
+            project_color_config = None
+            current_color_config = None
+
+            # Sets the SEQ and SHOT env vars and color configs
+            if next_context.entity:
+                type = next_context.entity['type']
+                id = next_context.entity['id']
+                entity = next_context.sgtk.shotgun.find_one(type, [['id', 'is', id]], ['code', 'sg_sequence', color_config_field])
+                if type == "Sequence":
+                    env_vars["SEQ"] = entity.get('sg_sequence').get('name')
+                    seq_color_config = entity.get(color_config_field)
+                if type == "Shot":
+                    seq_id = entity.get('sg_sequence').get('id')
+                    env_vars["SEQ"] = entity.get('sg_sequence').get('name')
+                    env_vars["SHOT"] = entity.get("code")
+                    shot_color_config = entity.get(color_config_field)
+                    seq_entity = next_context.sgtk.shotgun.find_one('Sequence', [['id', 'is', seq_id]], ['code', color_config_field])
+                    seq_color_config = seq_entity.get(color_config_field)
+
+            # Get the PROJECT color config
+            if next_context.project:
+                id = next_context.project['id']
+                entity = next_context.sgtk.shotgun.find_one('Project', [['id', 'is', id]], ['code', color_config_field])
+                project_color_config = entity.get(color_config_field)
+                env_vars["PROJECT"] = entity.get("code")
+
+            # each color config will override the previous if one exists
+            if project_color_config:
+                current_color_config = project_color_config
+            if seq_color_config:
+                current_color_config = seq_color_config
+            if shot_color_config:
+                current_color_config = shot_color_config
+
+            if current_color_config:
+                color = next_context.sgtk.shotgun.find_one(color_config_entity, [['id', 'is', current_color_config['id']]], ['code', 'sg_camera_raw', 'sg_project_lut'])
+                env_vars["LUT"] = color.get("sg_project_lut")
+                env_vars["CAMERA_RAW"] = color.get("sg_camera_raw")
+
+            # set the env variables for OCIO to pick up
+            for key, value in env_vars.iteritems():
+                if not value:
+                    if os.environ.get(key):
+                        self.logger.debug("Clearing ENV variable: {}".format(key))
+                        os.environ.pop(key)
+                else:
+                    self.logger.debug("Setting ENV variable: {} = {}".format(key, value))
+                    os.environ[key] = value
 
     def post_context_change(self, previous_context, current_context):
         """
@@ -65,60 +124,4 @@ class ContextChange(get_hook_baseclass()):
         :param current_context: The current context of the engine.
         :type current_context: :class:`~sgtk.Context`
         """
-        if current_context != previous_context and current_context is not None:
-
-            env_vars = {
-                "SEQ": None,
-                "SHOT": None,
-                "LUT": None,
-                "CAMERA_RAW": None,
-            }
-
-            seq_color_config = None
-            shot_color_config = None
-            project_color_config = None
-            current_color_config = None
-
-            # Sets the SEQ and SHOT env vars and color configs
-            if current_context.entity:
-                type = current_context.entity['type']
-                id = current_context.entity['id']
-                entity = current_context.sgtk.shotgun.find_one(type, [['id', 'is', id]], ['code', 'sg_sequence', color_config_field])
-                if type == "Sequence":
-                    env_vars["SEQ"] = entity.get('sg_sequence').get('name')
-                    seq_color_config = entity.get(color_config_field)
-                if type == "Shot":
-                    seq_id = entity.get('sg_sequence').get('id')
-                    env_vars["SEQ"] = entity.get('sg_sequence').get('name')
-                    env_vars["SHOT"] = entity.get("code")
-                    shot_color_config = entity.get(color_config_field)
-                    seq_entity = current_context.sgtk.shotgun.find_one('Sequence', [['id', 'is', seq_id]], ['code', color_config_field])
-                    seq_color_config = seq_entity.get(color_config_field)
-
-            # Sets the PROJECT env var
-            if current_context.project:
-                id = current_context.project['id']
-                entity = current_context.sgtk.shotgun.find_one('Project', [['id', 'is', id]], ['code', color_config_field])
-                project_color_config = entity.get(color_config_field)
-
-            # each color config will override the previous if one exists
-            if project_color_config:
-                current_color_config = project_color_config
-            if seq_color_config:
-                current_color_config = seq_color_config
-            if shot_color_config:
-                current_color_config = shot_color_config
-
-            if current_color_config:
-                color = current_context.sgtk.shotgun.find_one(color_config_entity, [['id', 'is', current_color_config['id']]], ['code', 'sg_camera_raw', 'sg_project_lut'])
-                env_vars["LUT"] = color.get("sg_project_lut")
-
-            # set the env variables for OCIO to pick up
-            for key, value in env_vars.iteritems():
-                if not value:
-                    if os.environ.get(key):
-                        self.log_debug("Clearing ENV variable: {}".format(key))
-                        os.environ.pop(key)
-                else:
-                    self.log_debug("Setting ENV variable: {} = {}".format(key, value))
-                    os.environ[key] = value
+        pass

@@ -13,6 +13,8 @@
 # A single, top-level setting is defined: "@frameworks". This setting can
 # be included and referenced wherever shared frameworks are required.
 
+alias: &ToolkitComponent CustomNonProjectEntity03
+
 frameworks:
   # adobe - Common functionality for adobe products
   tk-framework-adobe_v1.x.x:
@@ -31,17 +33,15 @@ frameworks:
   # desktopserver - provides a server to run local commands.
   tk-framework-desktopserver_v1.x.x:
     location:
-      version: v1.3.7
+      version: v1.3.8
       type: app_store
       name: tk-framework-desktopserver
-
   # qtwidgets - collection of Toolkit related QT Widgets
   tk-framework-qtwidgets_v2.x.x:
     location:
-      version: v2.8.3
+      version: v2.8.6
       type: app_store
       name: tk-framework-qtwidgets
-
   # shotgunutils v4 - Shotgun Related Utilities
   tk-framework-shotgunutils_v4.x.x:
     location:
@@ -66,14 +66,14 @@ frameworks:
 # ---- CBFX Frameworks
 
  # cbfx - CBFX Studio utilities
-  tk-framework-cbfx_v0.0.x:
+  tk-framework-cbfx_v1.0.x:
     location:
       name: tk-framework-cbfx
       ### Toolkit Component Entity
-      # type: shotgun
-      # entity_type: *ToolkitComponent
-      # field: sg_uploaded_app
-      # version: ### #tk-framework-cbfx-0.0.#
+      type: shotgun
+      entity_type: *ToolkitComponent
+      field: sg_uploaded_app
+      version: 82893 #tk-framework-cbfx-1.0.0
       ## Dev
-      type: dev
-      path: R:\work\anthony.kramer\github\tk-framework-cbfx
+      # type: dev
+      # path: R:\work\anthony.kramer\github\tk-framework-cbfx

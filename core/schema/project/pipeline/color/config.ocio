@@ -1,6 +1,6 @@
 ocio_profile_version: 1
 
-search_path: \\CBONE-FILE-06\Pipeline\tools\ocio\aces_1.0.3\luts:\\CBONE-FILE-06\Pipeline\tools\ocio\nuke-default\luts:luts\$SEQ\$SHOT:luts
+search_path: //cbone-file-06/pipeline/tools/ocio/aces_1.0.3/luts://cbone-file-06/pipeline/tools/ocio/nuke-default/luts:../../shots/$SEQ/luts:../../shots/$SEQ/$SHOT/luts:luts
 strictparsing: true
 luma: [0.2126, 0.7152, 0.0722]
 
@@ -49,26 +49,25 @@ looks:
 
 colorspaces:
   - !<ColorSpace>
-    # The 'Camera Raw' colorspace may need to be changed depending on the
-    # project and its native capture format. The dafault is set up for
-    # Alexa V3 LogC. If you need a different colrospace, you can copy it
-    # from the  Utility/Aliases section at the bottom of this config and
-    # overwrite this one.
+    # This 'Camera Raw' ColorSpace will need to be set per-project depending on
+    # its native capture format. This can be set in the 'Color Config' page on
+    # Shotgun to one of the aliases for an ocio 'ColorSpace' like
+    # 'logc3ei800_alexawide' for example.
     name: Camera Raw
     family: CBFX
     equalitygroup: ""
     bitdepth: 32f
     description: |
-      V3 LogC (EI800) - Wide Gamut
-
-      ACES Transform ID : IDT.ARRI.Alexa-v3-logC-EI800.a1.v1
+      Camera Raw format
     isdata: false
     allocation: uniform
     allocationvars: [0, 1]
-    to_reference: !<GroupTransform>
-      children:
-        - !<FileTransform> {src: V3_LogC_800_to_linear.spi1d, interpolation: linear}
-        - !<MatrixTransform> {matrix: [0.680206, 0.236137, 0.083658, 0, 0.085415, 1.01747, -0.102886, 0, 0.002057, -0.062563, 1.06051, 0, 0, 0, 0, 1]}
+    to_reference: !<ColorSpaceTransform> {src: '${CAMERA_RAW}', dst: ACES - ACES2065-1}
+  	# It may be required by some older OCIO-integrated apps that the CAMERA_RAW context
+  	# variable be hard-coded in this config.ocio because the 'ColorSpaceTransform'
+    # did not always support context variable. If so, you can comment out the
+    # above line and uncomment the below line.
+    #to_reference: !<ColorSpaceTransform> {src: logc3ei800_alexawide, dst: ACES - ACES2065-1}
 
   - !<ColorSpace>
     # This custom LUT convert the incoming image to the 'Camera Raw' format
@@ -2530,6 +2529,8 @@ colorspaces:
     allocation: uniform
     allocationvars: [-0.3584, 1.468]
     to_reference: !<ColorSpaceTransform> {src: ACES - ACEScc, dst: ACES - ACES2065-1}
+
+# ALIASES
 
   - !<ColorSpace>
     name: lin_ap0

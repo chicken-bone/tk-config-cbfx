@@ -36,7 +36,7 @@ apps.tk-multi-about.location:
 apps.tk-multi-breakdown.location:
   type: app_store
   name: tk-multi-breakdown
-  version: v1.5.0
+  version: v1.6.1
 
 # demo
 apps.tk-multi-demo.location:
@@ -54,13 +54,13 @@ apps.tk-multi-launchapp.location:
 apps.tk-multi-loader2.location:
   type: app_store
   name: tk-multi-loader2
-  version: v1.19.3
+  version: v1.19.4
 
 # publish2
 apps.tk-multi-publish2.location:
   type: app_store
   name: tk-multi-publish2
-  version: v2.3.4
+  version: v2.4.0
 
 # pythonconsole
 apps.tk-multi-pythonconsole.location:
@@ -78,7 +78,7 @@ apps.tk-multi-reviewsubmission.location:
 apps.tk-multi-screeningroom.location:
   type: app_store
   name: tk-multi-screeningroom
-  version: v0.3.3
+  version: v0.3.4
 
 # setframerange
 apps.tk-multi-setframerange.location:
@@ -101,7 +101,7 @@ apps.tk-multi-setframerange.location:
 apps.tk-multi-shotgunpanel.location:
   type: app_store
   name: tk-multi-shotgunpanel
-  version: v1.6.3
+  version: v1.6.4
 
 # snapshot
 apps.tk-multi-snapshot.location:
@@ -119,7 +119,7 @@ apps.tk-multi-workfiles.location:
 apps.tk-multi-workfiles2.location:
   type: app_store
   name: tk-multi-workfiles2
-  version: v0.11.11
+  version: v0.11.14
 
 # dev utils
 apps.tk-multi-devutils.location:
@@ -155,7 +155,7 @@ apps.tk-shotgun-launchfolder.location:
 apps.tk-shotgun-launchpublish.location:
   type: app_store
   name: tk-shotgun-launchpublish
-  version: v0.3.0
+  version: v0.3.1
 
 # ---- Hiero apps
 
@@ -247,13 +247,13 @@ apps.tk-flame-review.location:
 apps.tk-multi-ocio.location:
   name: tk-multi-ocio
   ### Toolkit Component Entity
-  # type: shotgun
-  # entity_type: *ToolkitComponent
-  # field: sg_uploaded_app
-  # version: ### #tk-multi-ocio-0.0.#
+  type: shotgun
+  entity_type: *ToolkitComponent
+  field: sg_uploaded_app
+  version: 82897 #tk-multi-ocio-1.0.0
   ## Dev
-  type: dev
-  path: R:\work\anthony.kramer\github\tk-multi-ocio
+  # type: dev
+  # path: R:\work\anthony.kramer\github\tk-multi-ocio
 
 
 # nuke tools app
