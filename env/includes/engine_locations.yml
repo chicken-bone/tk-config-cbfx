@@ -19,13 +19,13 @@ alias: &ToolkitComponent CustomNonProjectEntity03
 engines.tk-3dsmaxplus.location:
   type: app_store
   name: tk-3dsmaxplus
-  version: v0.5.7
+  version: v0.5.8
 
 # After Effects
 engines.tk-aftereffects.location:
   type: app_store
   name: tk-aftereffects
-  version: v0.1.2
+  version: v0.1.4
 
 # Desktop
 engines.tk-desktop.location:
@@ -37,19 +37,19 @@ engines.tk-desktop.location:
 engines.tk-desktop2.location:
   type: app_store
   name: tk-desktop2
-  version: v1.1.0
+  version: v1.2.5
 
 # Flame
 engines.tk-flame.location:
   type: app_store
   name: tk-flame
-  version: v1.15.2
+  version: v1.15.5
 
 # Houdini
 engines.tk-houdini.location:
   type: app_store
   name: tk-houdini
-  version: v1.6.1
+  version: v1.6.2
 
 # Mari
 engines.tk-mari.location:
@@ -61,7 +61,7 @@ engines.tk-mari.location:
 engines.tk-maya.location:
   type: app_store
   name: tk-maya
-  version: v0.9.7
+  version: v0.9.8
 
 # Motion Builder
 engines.tk-motionbuilder.location:
@@ -83,14 +83,14 @@ engines.tk-nuke.location:
   ### App Store
   type: app_store
   name: tk-nuke
-  version: v0.11.5
+  version: v0.12.4
 
 
 # Photoshop
 engines.tk-photoshopcc.location:
   type: app_store
   name: tk-photoshopcc
-  version: v1.7.2
+  version: v1.7.4
 
 # Shell
 engines.tk-shell.location:

@@ -16,10 +16,10 @@ to set environment variables or run scripts as part of the app initialization.
 """
 
 import os
-import tank
+import sgtk
 
 
-class BeforeAppLaunch(tank.Hook):
+class BeforeAppLaunch(sgtk.Hook):
     """
     Hook to set up the system prior to app launch.
     """
@@ -45,24 +45,17 @@ class BeforeAppLaunch(tank.Hook):
 
         # you can set environment variables like this:
         # os.environ["MY_SETTING"] = "foo bar"
+        cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
+        cbfx_utils = cbfx_fw.import_module("utils")
 
         self.logger.debug("[CBFX] engine name: %s" % engine_name)
 
         current_context = self.parent.context
         self.logger.debug("[CBFX] current context: %s" % current_context)
 
-
-        # if engine_name == "tk-nuke":
-        #     os.environ['NUKE_PATH'] = os.environ['NUKE_PATH'].replace('S:\\Tools\\Nuke;', 'P:\\_pipe\\nuke;')
-        #
-        # if engine_name == "tk-hiero":
-        #     env_vars = {
-        #         # "HIERO_PLUGIN_PATH": "R:\\code\\work\\anthony.kramer\\hiero\\cbfx-hiero-tools",
-        #         "HIERO_PLUGIN_PATH": "S:\\tools\\hiero\\cbfx\\current",
-        #     }
-        #     for k, v in env_vars.iteritems():
-        #         tank.util.append_path_to_env_var(k, v)
-        #         self.logger.debug("[CBFX] added environ %s=%s" % (k, v))
+        # get the details of the resolved color config from shotgun
+        ocio_config_path_template = self.sgtk.templates["ocio_config_path"]
+        os.environ["OCIO"] = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
 
         # Sets the current task to in progress
         if self.parent.context.task:
