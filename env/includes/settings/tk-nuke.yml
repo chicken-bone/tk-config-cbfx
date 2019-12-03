@@ -369,6 +369,8 @@ settings.tk-nuke.render.project:
     tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
+  automatic_context_switch: false
 
 # asset_step
 settings.tk-nuke.render.asset_step:
@@ -377,6 +379,8 @@ settings.tk-nuke.render.asset_step:
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-nuke-writenode: "@settings.tk-nuke-writenode.asset"
   location: "@engines.tk-nuke.location"
+  compatibility_dialog_min_version: 13
+  automatic_context_switch: false
 
 # shot_step
 settings.tk-nuke.render.shot_step:
@@ -385,3 +389,5 @@ settings.tk-nuke.render.shot_step:
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-nuke-writenode: "@settings.tk-nuke-writenode.shot"
   location: '@engines.tk-nuke.location'
+  compatibility_dialog_min_version: 13
+  automatic_context_switch: false
