@@ -45,8 +45,6 @@ class BeforeAppLaunch(sgtk.Hook):
 
         # you can set environment variables like this:
         # os.environ["MY_SETTING"] = "foo bar"
-        cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
-        cbfx_utils = cbfx_fw.import_module("utils")
 
         self.logger.debug("[CBFX] engine name: %s" % engine_name)
 
@@ -54,8 +52,11 @@ class BeforeAppLaunch(sgtk.Hook):
         self.logger.debug("[CBFX] current context: %s" % current_context)
 
         # get the details of the resolved color config from shotgun
+        cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
+        cbfx_utils = cbfx_fw.import_module("utils")
         ocio_config_path_template = self.sgtk.templates["ocio_config_path"]
-        os.environ["OCIO"] = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
+        if engine_name == "tk-nuke":
+            os.environ["OCIO"] = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
 
         # Sets the current task to in progress
         if self.parent.context.task:
