@@ -55,7 +55,7 @@ class BeforeAppLaunch(sgtk.Hook):
         cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
         cbfx_utils = cbfx_fw.import_module("utils")
         ocio_config_path_template = self.sgtk.templates["ocio_config_path"]
-        if engine_name == "tk-nuke":
+        if engine_name in ["tk-nuke", "tk-aftereffects"]:
             os.environ["OCIO"] = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
 
         # Sets the current task to in progress
