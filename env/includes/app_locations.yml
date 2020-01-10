@@ -210,10 +210,10 @@ apps.tk-nuke-writenode.location:
   entity_type: *ToolkitComponent
   name: tk-nuke-writenode
   field: sg_uploaded_app
-  version: 11930 #v1.4.1-cbfx.2
+  version: 91272 #v1.4.2-cbfx.1
   ### Dev
   # type: dev
-  # path: R:\code\work\anthony.kramer\shotgun\apps\tk-nuke-writenode
+  # path: R:\work\anthony.kramer\github\tk-nuke-writenode
   ### App Store
   # name: tk-nuke-writenode
   # type: app_store
@@ -263,7 +263,7 @@ apps.tk-nuke-tools.location:
   entity_type: *ToolkitComponent
   name: tk-nuke-tools
   field: sg_uploaded_app
-  version: 83055 #v0.0.7
+  version: 91271 #v0.0.9
   ## Dev
   # type: dev
   # path: R:\work\anthony.kramer\github\tk-nuke-tools
