@@ -72,18 +72,18 @@ engines.tk-motionbuilder.location:
 # Nuke
 engines.tk-nuke.location:
   ### Toolkit App Entity
-  # type: shotgun
-  # entity_type: *ToolkitComponent
-  # name: tk-nuke
-  # field: sg_uploaded_app
-  # version: 1725
+  type: shotgun
+  entity_type: *ToolkitComponent
+  name: tk-nuke
+  field: sg_uploaded_app
+  version: 91254 #v0.12.5-cbfx.1
   ### Dev
   # type: dev
-  # path: R:\code\work\anthony.kramer\shotgun\engines\tk-nuke
+  # path: R:\work\anthony.kramer\github\tk-nuke
   ### App Store
-  type: app_store
-  name: tk-nuke
-  version: v0.12.4
+  # type: app_store
+  # name: tk-nuke
+  # version: v0.12.4
 
 
 # Photoshop
