@@ -259,14 +259,14 @@ apps.tk-multi-ocio.location:
 # nuke tools app
 apps.tk-nuke-tools.location:
   ## Toolkit App Entity
-  type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-nuke-tools
-  field: sg_uploaded_app
-  version: 91271 #v0.0.9
+  # type: shotgun
+  # entity_type: *ToolkitComponent
+  # name: tk-nuke-tools
+  # field: sg_uploaded_app
+  # version: 91271 #v0.0.9
   ## Dev
-  # type: dev
-  # path: R:\work\anthony.kramer\github\tk-nuke-tools
+  type: dev
+  path: R:\work\anthony.kramer\github\tk-nuke-tools
 
 # ocio - DEPRECATED
 # apps.tk-nuke-ocio.location:
