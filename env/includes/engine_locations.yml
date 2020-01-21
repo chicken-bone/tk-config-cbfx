@@ -61,13 +61,13 @@ engines.tk-mari.location:
 engines.tk-maya.location:
   type: app_store
   name: tk-maya
-  version: v0.9.9
+  version: v0.9.10
 
 # Motion Builder
 engines.tk-motionbuilder.location:
   type: app_store
   name: tk-motionbuilder
-  version: v0.5.0
+  version: v0.5.1
 
 # Nuke
 engines.tk-nuke.location:
@@ -95,7 +95,7 @@ engines.tk-photoshopcc.location:
 engines.tk-shell.location:
   type: app_store
   name: tk-shell
-  version: v0.6.0
+  version: v0.7.0
 
 # Shotgun
 engines.tk-shotgun.location:
