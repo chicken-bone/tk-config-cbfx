@@ -17,14 +17,17 @@ includes:
 
 # settings
 settings.tk-nuke-tools:
-  gizmo_path_templates:
-  - nuke_tools_all_gizmos_cbfx
-  - nuke_tools_all_gizmos_nukepedia
-  - nuke_tools_project_gizmos
-  toolsets_path_templates:
-  - nuke_tools_all_toolsets
-  - nuke_tools_project_toolsets
-  plugin_path_templates:
-  - nuke_tools_all_plugins
-  - nuke_tools_project_plugins
+  tool_libraries:
+    - name: CBFX Gizmos
+      path_template: nuke_tools_global_gizmos
+      root_menus: ['Nodes']
+    - name: CBFX Toolsets
+      path_template: nuke_tools_global_toolsets
+      root_menus: ['Nodes']
+    - name: Project Gizmos
+      path_template: nuke_tools_project_gizmos
+      root_menus: ['Nodes']
+    - name: Project Toolsets
+      path_template: nuke_tools_project_toolsets
+      root_menus: ['Nodes']
   location: "@apps.tk-nuke-tools.location"

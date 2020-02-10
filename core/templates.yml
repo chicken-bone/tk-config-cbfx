@@ -180,50 +180,33 @@ paths:
     # Nuke Tools Paths
     #
 
-    nuke_tools_all_path:
-      definition: '../_all'
-      root_name: nuke_tools
+    nuke_tools_global_path:
+      definition: '../cfg/foundry/nuke'
+      root_name: pipeline
 
-    nuke_tools_all_gizmos_cbfx:
-      definition: '../_all/gizmos/cbfx'
-      root_name: nuke_tools
+    nuke_tools_global_gizmos:
+      definition: '../cfg/foundry/nuke/global_gizmos'
+      root_name: pipeline
 
-    nuke_tools_all_gizmos_nukepedia:
-      definition: '../_all/gizmos/nukepedia'
-      root_name: nuke_tools
+    nuke_tools_global_toolsets:
+      definition: '../cfg/foundry/nuke/global_toolsets'
+      root_name: pipeline
 
-    nuke_tools_all_toolsets:
-      definition: '../_all/toolsets'
-      root_name: nuke_tools
-
-    nuke_tools_all_plugins:
-      definition: '../_all/plugins'
-      root_name: nuke_tools
+    nuke_tools_global_python:
+      definition: '../cfg/foundry/nuke/python'
+      root_name: pipeline
 
     nuke_tools_project_path:
-      definition: './'
-      root_name: nuke_tools
+      definition: 'pipeline/nuke'
 
     nuke_tools_project_gizmos:
-      definition: './gizmos/project'
-      root_name: nuke_tools
+      definition: 'pipeline/nuke/project_gizmos'
 
     nuke_tools_project_toolsets:
-      definition: './toolsets'
-      root_name: nuke_tools
+      definition: 'pipeline/nuke/project_toolsets'
 
-    nuke_tools_project_plugins:
-      definition: './plugins'
-      root_name: nuke_tools
-
-    # nuke_tools_project_path:
-    #   definition: 'pipeline/nuke'
-    #
-    # nuke_tools_project_gizmos:
-    #   definition: 'pipeline/nuke/gizmos'
-    #
-    # nuke_tools_project_templates:
-    #   definition: 'pipeline/nuke/templates'
+    nuke_tools_project_python:
+      definition: 'pipeline/nuke/python'
 
     ##########################################################################################
     # Project level paths

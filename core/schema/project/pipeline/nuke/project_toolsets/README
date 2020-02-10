@@ -1,0 +1,3 @@
+This location is for project-specific nuke Toolsets. Any nuke script placed in
+this folder will be added to the project tools menu within nuke. You can
+organize your toolsets into folders to keep them tidy.
