@@ -180,30 +180,23 @@ paths:
     # Nuke Tools Paths
     #
 
-    nuke_tools_global_path:
-      definition: '../cfg/foundry/nuke'
-      root_name: pipeline
+    # nuke_tools_global_path:
+    #   definition: '../cfg/foundry/nuke'
+    #   root_name: pipeline
 
-    nuke_tools_global_gizmos:
-      definition: '../cfg/foundry/nuke/global_gizmos'
-      root_name: pipeline
-
-    nuke_tools_global_toolsets:
-      definition: '../cfg/foundry/nuke/global_toolsets'
+    nuke_tools_global_tools:
+      definition: '../etc/foundry/nuke/global_tools'
       root_name: pipeline
 
     nuke_tools_global_python:
-      definition: '../cfg/foundry/nuke/python'
+      definition: '../etc/foundry/nuke/python'
       root_name: pipeline
 
-    nuke_tools_project_path:
-      definition: 'pipeline/nuke'
+    # nuke_tools_project_path:
+    #   definition: 'pipeline/nuke'
 
-    nuke_tools_project_gizmos:
-      definition: 'pipeline/nuke/project_gizmos'
-
-    nuke_tools_project_toolsets:
-      definition: 'pipeline/nuke/project_toolsets'
+    nuke_tools_project_tools:
+      definition: 'pipeline/nuke/project_tools'
 
     nuke_tools_project_python:
       definition: 'pipeline/nuke/python'

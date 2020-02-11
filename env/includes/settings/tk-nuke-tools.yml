@@ -18,16 +18,10 @@ includes:
 # settings
 settings.tk-nuke-tools:
   tool_libraries:
-    - name: CBFX Gizmos
-      path_template: nuke_tools_global_gizmos
+    - name: CBFX Tools
+      path_template: nuke_tools_global_tools
       root_menus: ['Nodes']
-    - name: CBFX Toolsets
-      path_template: nuke_tools_global_toolsets
-      root_menus: ['Nodes']
-    - name: Project Gizmos
-      path_template: nuke_tools_project_gizmos
-      root_menus: ['Nodes']
-    - name: Project Toolsets
-      path_template: nuke_tools_project_toolsets
+    - name: Project Tools
+      path_template: nuke_tools_project_tools
       root_menus: ['Nodes']
   location: "@apps.tk-nuke-tools.location"

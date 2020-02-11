@@ -66,19 +66,30 @@ class BeforeAppLaunch(sgtk.Hook):
         env_dict = defaultdict(list)
 
         # get plugin env vars
-        plugins = self.__get_plugins(current_context, engine_name, version)
-        for plugin in plugins:
-            paths = plugins[plugin]
-            self.logger.debug("[CBFX] parsing plugin: {} = {}".format(plugin, plugins[plugin]))
-            for path in paths:
-                env_dict.setdefault(plugin, []).append(path)
+        if engine_name:
+            plugins = self.__get_plugins(current_context, engine_name, version)
+            for plugin in plugins:
+                paths = plugins[plugin]
+                self.logger.debug("[CBFX] parsing plugin: {} = {}".format(plugin, plugins[plugin]))
+                for path in paths:
+                    env_dict.setdefault(plugin, []).append(path)
 
         # set OCIO env var
-        if engine_name in ["tk-nuke", "tk-aftereffects"]:
+        if engine_name in ["tk-nuke", "tk-nuke-render", "tk-aftereffects"]:
             # get the details of the resolved color config from shotgun
             ocio_config_path_template = self.sgtk.templates["ocio_config_path"]
             ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
             env_dict.setdefault("OCIO", []).append(ocio_path)
+
+        if engine_name in ["tk-nuke", "tk-nuke-render"]:
+            # set global nuke path
+            nuke_path_template = self.sgtk.templates["nuke_tools_global_python"]
+            nuke_path = cbfx_utils.resolve_template(nuke_path_template, current_context)
+            env_dict.setdefault("NUKE_PATH", []).append(nuke_path)
+            # set project-level nuke path
+            nuke_path_template = self.sgtk.templates["nuke_tools_project_python"]
+            nuke_path = cbfx_utils.resolve_template(nuke_path_template, current_context)
+            env_dict.setdefault("NUKE_PATH", []).append(nuke_path)
 
         for k, vlist in env_dict.iteritems():
             for v in vlist:
@@ -122,7 +133,7 @@ class BeforeAppLaunch(sgtk.Hook):
                 self.__max_check(app_version, result.get('sg_host_max_version'))
             ):
                 try:
-                    self.logger.debug("[CBFX] Valid plugin found: {}".format(result.get('code')))
+                    self.logger.info("[CBFX] Valid plugin found: {}".format(result.get('code')))
                     env_list.extend(result.get(os_envs[sys.platform]).split('\n'))
                 except AttributeError as e:
                     self.logger.error('AttributeError on plugin \'{}\': {}'.format(result.get('code'), e))
