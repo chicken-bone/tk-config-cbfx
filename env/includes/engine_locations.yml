@@ -104,7 +104,7 @@ engines.tk-shell.location:
   # path: R:\work\anthony.kramer\github\tk-shell
   ### App Store
   # type: app_store
-  # version: v0.6.0
+  # version: v0.7.0
 
 # Shotgun
 engines.tk-shotgun.location:
