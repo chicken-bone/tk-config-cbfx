@@ -22,8 +22,8 @@ description: Apps and engines loaded when a Shot is loaded. Since std VFX config
 
 includes:
 - ./includes/frameworks.yml
-- ./includes/settings/tk-3dsmaxplus.yml
-- ./includes/settings/tk-flame.yml
+# - ./includes/settings/tk-3dsmaxplus.yml
+# - ./includes/settings/tk-flame.yml
 - ./includes/settings/tk-houdini.yml
 - ./includes/settings/tk-maya.yml
 - ./includes/settings/tk-motionbuilder.yml
@@ -37,8 +37,8 @@ includes:
 # configuration for all engines to load in a shot context
 
 engines:
-  tk-3dsmaxplus: "@settings.tk-3dsmaxplus.shot"
-  tk-flame: "@settings.tk-flame.shot"
+  # tk-3dsmaxplus: "@settings.tk-3dsmaxplus.shot"
+  # tk-flame: "@settings.tk-flame.shot"
   tk-houdini: "@settings.tk-houdini.shot"
   tk-maya: "@settings.tk-maya.shot"
   tk-motionbuilder: "@settings.tk-motionbuilder.shot"

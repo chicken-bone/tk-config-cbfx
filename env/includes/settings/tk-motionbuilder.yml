@@ -16,7 +16,7 @@ includes:
 - ../engine_locations.yml
 - ./tk-multi-loader2.yml
 - ./tk-multi-publish2.yml
-- ./tk-multi-screeningroom.yml
+# - ./tk-multi-screeningroom.yml
 - ./tk-multi-snapshot.yml
 - ./tk-multi-workfiles2.yml
 
@@ -29,7 +29,7 @@ settings.tk-motionbuilder.asset:
       location: '@apps.tk-multi-about.location'
     tk-multi-shotgunpanel:
       location: "@apps.tk-multi-shotgunpanel.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-workfiles2:
       location: '@apps.tk-multi-workfiles2.location'
   location: '@engines.tk-motionbuilder.location'
@@ -43,7 +43,7 @@ settings.tk-motionbuilder.asset_step:
       location: '@apps.tk-multi-about.location'
     tk-multi-loader2: '@settings.tk-multi-loader2.motionbuilder'
     tk-multi-publish2: '@settings.tk-multi-publish2.motion_builder.asset_step'
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-snapshot: '@settings.tk-multi-snapshot.motionbuilder.asset_step'
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.motionbuilder.asset_step'
     tk-multi-shotgunpanel:
@@ -62,7 +62,7 @@ settings.tk-motionbuilder.project:
       location: '@apps.tk-multi-about.location'
     tk-multi-shotgunpanel:
       location: '@apps.tk-multi-shotgunpanel.location'
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-workfiles2:
       location: '@apps.tk-multi-workfiles2.location'
   location: '@engines.tk-motionbuilder.location'
@@ -77,7 +77,7 @@ settings.tk-motionbuilder.sequence:
       location: '@apps.tk-multi-about.location'
     tk-multi-shotgunpanel:
       location: '@apps.tk-multi-shotgunpanel.location'
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-workfiles2:
       location: '@apps.tk-multi-workfiles2.location'
   location: '@engines.tk-motionbuilder.location'
@@ -89,9 +89,9 @@ settings.tk-motionbuilder.shot:
   apps:
     tk-multi-about:
       location: '@apps.tk-multi-about.location'
-    tk-multi-shotgunpanel: 
+    tk-multi-shotgunpanel:
       location: '@apps.tk-multi-shotgunpanel.location'
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-workfiles2:
       location: '@apps.tk-multi-workfiles2.location'
   location: '@engines.tk-motionbuilder.location'
@@ -105,7 +105,7 @@ settings.tk-motionbuilder.shot_step:
       location: '@apps.tk-multi-about.location'
     tk-multi-loader2: '@settings.tk-multi-loader2.motionbuilder'
     tk-multi-publish2: '@settings.tk-multi-publish2.motion_builder.shot_step'
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-setframerange:
       location: '@apps.tk-multi-setframerange.location'
     tk-multi-snapshot: '@settings.tk-multi-snapshot.motionbuilder.shot_step'

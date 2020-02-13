@@ -16,7 +16,7 @@ includes:
 - ../engine_locations.yml
 - ./tk-multi-loader2.yml
 - ./tk-multi-publish2.yml
-- ./tk-multi-screeningroom.yml
+# - ./tk-multi-screeningroom.yml
 - ./tk-multi-shotgunpanel.yml
 - ./tk-multi-snapshot.yml
 - ./tk-multi-workfiles2.yml
@@ -28,7 +28,7 @@ settings.tk-maya.asset:
   apps:
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
   menu_favourites:
@@ -45,7 +45,7 @@ settings.tk-maya.asset_step:
       location: "@apps.tk-multi-breakdown.location"
     tk-multi-loader2: "@settings.tk-multi-loader2.maya"
     tk-multi-publish2: "@settings.tk-multi-publish2.maya.asset_step"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.maya"
     tk-multi-snapshot: "@settings.tk-multi-snapshot.maya.asset_step"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.maya.asset_step"
@@ -62,7 +62,7 @@ settings.tk-maya.project:
   apps:
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
   menu_favourites:
@@ -74,7 +74,7 @@ settings.tk-maya.sequence:
   apps:
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
   menu_favourites:
@@ -86,7 +86,7 @@ settings.tk-maya.shot:
   apps:
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
   menu_favourites:
@@ -106,7 +106,7 @@ settings.tk-maya.shot_step:
       sg_out_frame_field: sg_tail_out
     tk-multi-loader2: "@settings.tk-multi-loader2.maya"
     tk-multi-publish2: "@settings.tk-multi-publish2.maya.shot_step"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.maya"
     tk-multi-snapshot: "@settings.tk-multi-snapshot.maya.shot_step"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.maya.shot_step"

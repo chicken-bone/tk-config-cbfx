@@ -39,7 +39,7 @@ frameworks:
   # qtwidgets - collection of Toolkit related QT Widgets
   tk-framework-qtwidgets_v2.x.x:
     location:
-      version: v2.8.6
+      version: v2.9.2
       type: app_store
       name: tk-framework-qtwidgets
   # shotgunutils v4 - Shotgun Related Utilities
@@ -52,13 +52,14 @@ frameworks:
   # shotgunutils v5 - Shotgun Related Utilities
   tk-framework-shotgunutils_v5.x.x:
     location:
-      version: v5.6.2
+      version: v5.7.3
       type: app_store
       name: tk-framework-shotgunutils
+
   # widget - QT Widget Framework for Tank Apps (qtwidgets fw predecessor)
   tk-framework-widget_v0.2.x:
     location:
-      version: v0.2.7
+      version: v0.2.8
       type: app_store
       name: tk-framework-widget
 
@@ -67,12 +68,11 @@ frameworks:
  # cbfx - CBFX Studio utilities
   tk-framework-cbfx_v1.0.x:
     location:
-      name: tk-framework-cbfx
-      ### Toolkit Component Entity
-      type: shotgun
-      entity_type: *ToolkitComponent
       field: sg_uploaded_app
-      version: 82893 #tk-framework-cbfx-1.0.0
+      version: 103961 #v1.0.1
+      type: shotgun
+      name: tk-framework-cbfx
+      entity_type: *ToolkitComponent
       ## Dev
       # type: dev
       # path: R:\work\anthony.kramer\github\tk-framework-cbfx
