@@ -188,9 +188,9 @@ paths:
       definition: '../etc/foundry/nuke/global_tools'
       root_name: pipeline
 
-    nuke_tools_global_python:
-      definition: '../etc/foundry/nuke/python'
-      root_name: pipeline
+    # nuke_tools_global_python:
+    #   definition: '../etc/foundry/nuke/python'
+    #   root_name: pipeline
 
     # nuke_tools_project_path:
     #   definition: 'pipeline/nuke'
@@ -202,6 +202,13 @@ paths:
       definition: 'pipeline/nuke/python'
 
     ##########################################################################################
+    # Houdini Tools Paths
+    #
+
+    houdini_tools:
+      definition: 'pipeline/houdini'
+
+    ##########################################################################################
     # Project level paths
     #
 
@@ -210,6 +217,9 @@ paths:
     #
     ocio_config_path:
       definition: 'pipeline/color/config.ocio'
+
+    ocio_config_path_rv:
+      definition: 'pipeline/color/config_rv.ocio'
 
     #
     # LUTs and Looks

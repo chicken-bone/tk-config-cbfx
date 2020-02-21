@@ -65,7 +65,11 @@ class AppLaunch(sgtk.Hook):
         elif system == "win32":
             # on windows, we run the start command in order to avoid
             # any command shells popping up as part of the application launch.
-            cmd = "start \"App\" \"%s\" %s" % (app_path, app_args)
+            if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
+                prompt_flag = ""
+            else:
+                prompt_flag = "/B "
+            cmd = "start {}\"{}\" \"{}\" {}".format(prompt_flag, engine_name, app_path, app_args)
 
         # run the command to launch the app
         exit_code = os.system(cmd)

@@ -54,6 +54,7 @@ class BeforeAppLaunch(sgtk.Hook):
         current_context = self.parent.context
         self.logger.debug("[CBFX] engine_name: {}".format(engine_name))
         self.logger.debug("[CBFX] current_context: {}".format(current_context))
+        self.logger.debug("[CBFX] user: {}".format(current_context.user))
         self.logger.debug("[CBFX] app_path: {}".format(app_path))
         self.logger.debug("[CBFX] app_args: {}".format(app_args))
         self.logger.debug("[CBFX] version: {}".format(version))
@@ -82,10 +83,6 @@ class BeforeAppLaunch(sgtk.Hook):
             env_dict.setdefault("OCIO", []).append(ocio_path)
 
         if engine_name in ["tk-nuke", "tk-nuke-render"]:
-            # set global nuke path
-            nuke_path_template = self.sgtk.templates["nuke_tools_global_python"]
-            nuke_path = cbfx_utils.resolve_template(nuke_path_template, current_context)
-            env_dict.setdefault("NUKE_PATH", []).append(nuke_path)
             # set project-level nuke path
             nuke_path_template = self.sgtk.templates["nuke_tools_project_python"]
             nuke_path = cbfx_utils.resolve_template(nuke_path_template, current_context)
@@ -118,6 +115,13 @@ class BeforeAppLaunch(sgtk.Hook):
                 'filters': [
                     ['sg_projects', 'in', context.project],
                     ['sg_projects', 'is', None],
+                ]
+            },
+            {
+                'filter_operator': 'any',
+                'filters': [
+                    ['sg_users', 'in', context.user],
+                    ['sg_users', 'is', None],
                 ]
             }
         ]
