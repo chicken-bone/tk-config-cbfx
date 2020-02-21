@@ -19,7 +19,7 @@ includes:
 - ./tk-multi-loader2.yml
 - ./tk-multi-publish2.yml
 # - ./tk-multi-reviewsubmission.yml
-- ./tk-multi-screeningroom.yml
+# - ./tk-multi-screeningroom.yml
 - ./tk-multi-shotgunpanel.yml
 - ./tk-multi-snapshot.yml
 - ./tk-multi-workfiles2.yml
@@ -86,11 +86,11 @@ settings.tk-nuke.asset:
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2"
-    tk-nuke-quickreview:
-      location: "@apps.tk-nuke-quickreview.location"
+    # tk-nuke-quickreview:
+    #   location: "@apps.tk-nuke-quickreview.location"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: "ctrl+o"}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
@@ -111,7 +111,7 @@ settings.tk-nuke.asset_step:
     tk-multi-loader2: "@settings.tk-multi-loader2.nuke"
     tk-multi-publish2: "@settings.tk-multi-publish2.nuke.asset_step"
     # tk-multi-reviewsubmission: "@settings.tk-multi-reviewsubmission.nuke.asset"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.nuke"
     tk-multi-snapshot: "@settings.tk-multi-snapshot.nuke.asset_step"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.nuke.asset_step"
@@ -136,7 +136,7 @@ settings.tk-nuke.project:
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2"
     # tk-nuke-quickreview:
@@ -154,7 +154,7 @@ settings.tk-nuke.sequence:
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2"
     # tk-nuke-quickreview:
@@ -172,7 +172,7 @@ settings.tk-nuke.shot:
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
       location: "@apps.tk-multi-about.location"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.launch_at_startup"
     # tk-nuke-quickreview:
@@ -202,7 +202,7 @@ settings.tk-nuke.shot_step:
     tk-multi-loader2: "@settings.tk-multi-loader2.nuke"
     # tk-multi-publish2: "@settings.tk-multi-publish2.nuke.shot_step"
     # tk-multi-: "@settings.tk-multi-reviewsubmission.nuke.shot"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.nuke"
     tk-multi-snapshot: "@settings.tk-multi-snapshot.nuke.shot_step"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.nuke.shot_step"
@@ -239,7 +239,7 @@ settings.tk-nuke.nukestudio.asset_step:
     tk-multi-loader2: "@settings.tk-multi-loader2.nukestudio"
     tk-multi-publish2: "@settings.tk-multi-publish2.nukestudio"
     # tk-multi-reviewsubmission: "@settings.tk-multi-reviewsubmission.nuke.asset"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.nukestudio"
     tk-multi-snapshot: "@settings.tk-multi-snapshot.hiero"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.hiero"
@@ -330,7 +330,7 @@ settings.tk-nuke.nukestudio.shot_step:
     tk-multi-loader2: "@settings.tk-multi-loader2.nukestudio"
     tk-multi-publish2: "@settings.tk-multi-publish2.nukestudio"
     # tk-multi-reviewsubmission: "@settings.tk-multi-reviewsubmission.nuke.shot"
-    tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.nukestudio"
     tk-multi-snapshot: "@settings.tk-multi-snapshot.hiero"
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.hiero"

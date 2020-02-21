@@ -30,7 +30,7 @@ alias: &ToolkitComponent CustomNonProjectEntity03
 apps.tk-multi-about.location:
   type: app_store
   name: tk-multi-about
-  version: v0.2.8
+  version: v0.3.0
 
 # breakdown
 apps.tk-multi-breakdown.location:
@@ -42,19 +42,19 @@ apps.tk-multi-breakdown.location:
 apps.tk-multi-demo.location:
   type: app_store
   name: tk-multi-demo
-  version: v1.1.0
+  version: v1.2.0
 
 # launchapp
 apps.tk-multi-launchapp.location:
   type: app_store
   name: tk-multi-launchapp
-  version: v0.10.3
+  version: v0.11.1
 
 # loader2
 apps.tk-multi-loader2.location:
   type: app_store
   name: tk-multi-loader2
-  version: v1.19.6
+  version: v1.20.0
 
 # publish2
 apps.tk-multi-publish2.location:
@@ -66,7 +66,7 @@ apps.tk-multi-publish2.location:
 apps.tk-multi-pythonconsole.location:
   type: app_store
   name: tk-multi-pythonconsole
-  version: v1.1.2
+  version: v1.2.0
 
 # reviewsubmission
 apps.tk-multi-reviewsubmission.location:
@@ -75,10 +75,10 @@ apps.tk-multi-reviewsubmission.location:
   version: v0.3.2
 
 # screeningroom
-apps.tk-multi-screeningroom.location:
-  type: app_store
-  name: tk-multi-screeningroom
-  version: v0.3.4
+# apps.tk-multi-screeningroom.location:
+#   type: app_store
+#   name: tk-multi-screeningroom
+#   version: v0.3.4
 
 # setframerange
 apps.tk-multi-setframerange.location:
@@ -87,7 +87,7 @@ apps.tk-multi-setframerange.location:
   entity_type: *ToolkitComponent
   name: tk-multi-setframerange
   field: sg_uploaded_app
-  version: 10339
+  version: 10339 #v0.3.0-cbfx
   ### App Store
   # type: app_store
   # name: tk-multi-setframerange
@@ -101,7 +101,7 @@ apps.tk-multi-setframerange.location:
 apps.tk-multi-shotgunpanel.location:
   type: app_store
   name: tk-multi-shotgunpanel
-  version: v1.6.4
+  version: v1.7.0
 
 # snapshot
 apps.tk-multi-snapshot.location:
@@ -110,16 +110,16 @@ apps.tk-multi-snapshot.location:
   version: v0.7.5
 
 # workfiles (required for Mari)
-apps.tk-multi-workfiles.location:
-  type: app_store
-  name: tk-multi-workfiles
-  version: v0.7.4
+# apps.tk-multi-workfiles.location:
+#   type: app_store
+#   name: tk-multi-workfiles
+#   version: v0.7.4
 
 # workfiles2
 apps.tk-multi-workfiles2.location:
   type: app_store
   name: tk-multi-workfiles2
-  version: v0.11.15
+  version: v0.12.0
 
 # dev utils
 apps.tk-multi-devutils.location:
@@ -136,7 +136,7 @@ apps.tk-shotgun-folders.location:
   entity_type: *ToolkitComponent
   name: tk-shotgun-folders
   field: sg_uploaded_app
-  version: 2011
+  version: 2011 #v0.1.6-cbfx
   ### Dev
   # type: dev
   # path: R:\code\work\anthony.kramer\shotgun\apps\tk-shotgun-folders
@@ -152,10 +152,10 @@ apps.tk-shotgun-launchfolder.location:
   version: v0.2.1
 
 # shotgun launchpublish
-apps.tk-shotgun-launchpublish.location:
-  type: app_store
-  name: tk-shotgun-launchpublish
-  version: v0.3.2
+# apps.tk-shotgun-launchpublish.location:
+#   type: app_store
+#   name: tk-shotgun-launchpublish
+#   version: v0.3.2
 
 # ---- Hiero apps
 
@@ -166,7 +166,7 @@ apps.tk-hiero-export.location:
   entity_type: *ToolkitComponent
   name: tk-hiero-export
   field: sg_uploaded_app
-  version: 35106
+  version: 35106 #v0.5.2-cbfx
   ### Dev
   # type: dev
   # path: R:\code\work\anthony.kramer\shotgun\apps\tk-hiero-export
@@ -198,10 +198,10 @@ apps.tk-houdini-mantranode.location:
 # ---- Nuke apps
 
 # quickreview
-apps.tk-nuke-quickreview.location:
-  type: app_store
-  name: tk-nuke-quickreview
-  version: v1.0.3
+# apps.tk-nuke-quickreview.location:
+#   type: app_store
+#   name: tk-nuke-quickreview
+#   version: v1.0.3
 
 # writenode
 apps.tk-nuke-writenode.location:
@@ -222,16 +222,16 @@ apps.tk-nuke-writenode.location:
 # ---- Flame apps
 
 # flame export
-apps.tk-flame-export.location:
-  name: tk-flame-export
-  type: app_store
-  version: v1.9.3
+# apps.tk-flame-export.location:
+#   name: tk-flame-export
+#   type: app_store
+#   version: v1.9.3
 
 # flame review
-apps.tk-flame-review.location:
-  name: tk-flame-review
-  type: app_store
-  version: v1.3.0
+# apps.tk-flame-review.location:
+#   name: tk-flame-review
+#   type: app_store
+#   version: v1.3.0
 
 # ---- Mari apps
 
