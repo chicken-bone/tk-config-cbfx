@@ -185,8 +185,8 @@ paths:
     #   root_name: pipeline
 
     nuke_tools_global_tools:
-      definition: '../etc/foundry/nuke/global_tools'
-      root_name: pipeline
+         definition: '../etc/foundry/nuke/global_tools'
+         root_name: pipeline
 
     # nuke_tools_global_python:
     #   definition: '../etc/foundry/nuke/python'
@@ -196,17 +196,24 @@ paths:
     #   definition: 'pipeline/nuke'
 
     nuke_tools_project_tools:
-      definition: 'pipeline/nuke/project_tools'
+        definition: 'pipeline/nuke/project_tools'
 
     nuke_tools_project_python:
-      definition: 'pipeline/nuke/python'
+        definition: 'pipeline/nuke/python'
 
     ##########################################################################################
     # Houdini Tools Paths
     #
 
     houdini_tools:
-      definition: 'pipeline/houdini'
+        definition: 'pipeline/houdini'
+
+    ##########################################################################################
+    # Maya Tools Paths
+    #
+
+    houdini_tools:
+        definition: 'pipeline/maya'
 
     ##########################################################################################
     # Project level paths
@@ -216,10 +223,10 @@ paths:
     # OCIO config path
     #
     ocio_config_path:
-      definition: 'pipeline/color/config.ocio'
+        definition: 'pipeline/color/config.ocio'
 
     ocio_config_path_rv:
-      definition: 'pipeline/color/config_rv.ocio'
+        definition: 'pipeline/color/config_rv.ocio'
 
     #
     # LUTs and Looks
@@ -227,13 +234,13 @@ paths:
 
     # The location of project LUTs
     lut_project_publish_area:
-      definition: 'pipeline/color/luts'
+        definition: 'pipeline/color/luts'
 
     # The location of look/cc files
     look_sequence_publish_area:
-      definition: '@sequence_root/luts'
+        definition: '@sequence_root/luts'
     look_shot_publish_area:
-      definition: '@shot_root/luts'
+        definition: '@shot_root/luts'
 
     #
     # Hiero

@@ -82,6 +82,25 @@ class BeforeAppLaunch(sgtk.Hook):
             ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
             env_dict.setdefault("OCIO", []).append(ocio_path)
 
+        if engine_name in ["tk-houdini"]:
+            # get the details of the resolved color config from shotgun
+            ocio_config_path_template = self.sgtk.templates["ocio_config_path_rv"]
+            ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
+            env_dict.setdefault("OCIO", []).append(ocio_path)
+
+        # set software tool paths
+        if engine_name == "tk-houdini":
+            # get project-level houdini path
+            houdini_tools_path_template = self.sgtk.templates["houdini_tools"]
+            houdini_tools_path = cbfx_utils.resolve_template(houdini_tools_path_template, current_context)
+            env_dict.setdefault("HOUDINI_PATH", []).append(houdini_tools_path)
+
+        if engine_name == "tk-maya":
+            # get project-level maya path
+            maya_tools_path_template = self.sgtk.templates["maya_tools"]
+            maya_tools_path = cbfx_utils.resolve_template(maya_tools_path_template, current_context)
+            env_dict.setdefault("MAYA_SCRIPT_PATH", []).append(maya_tools_path)
+
         if engine_name in ["tk-nuke", "tk-nuke-render"]:
             # set project-level nuke path
             nuke_path_template = self.sgtk.templates["nuke_tools_project_python"]
