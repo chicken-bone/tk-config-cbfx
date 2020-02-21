@@ -68,11 +68,13 @@ frameworks:
  # cbfx - CBFX Studio utilities
   tk-framework-cbfx_v1.0.x:
     location:
-      field: sg_uploaded_app
-      version: 103961 #v1.0.1
+      name: tk-framework-cbfx
+      ## Toolkit Component Entity
       type: shotgun
       name: tk-framework-cbfx
       entity_type: *ToolkitComponent
+      field: sg_uploaded_app
+      version: 103961 #tk-framework-cbfx-1.0.1
       ## Dev
       # type: dev
       # path: R:\work\anthony.kramer\github\tk-framework-cbfx
