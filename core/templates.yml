@@ -444,7 +444,7 @@ paths:
     # Write node locations
     # main output
     nuke_shot_main_filename:
-        definition: '{Shot}_{Step}_out_v{version}/{Shot}_{Step}_out_v{version}.{SEQ}.exr'
+        definition: '{Shot}_{Step}_out[-{nuke.output}]_v{version}/{Shot}_{Step}_out[-{nuke.output}]_v{version}.{SEQ}.exr'
     nuke_shot_main_work:
         definition: '@shot_work_area/images/@nuke_shot_main_filename'
     nuke_shot_main_publish:
@@ -472,7 +472,7 @@ paths:
         definition: '@shot_publish_area/images/@nuke_shot_matte_filename'
     # review output
     nuke_shot_review_filename:
-        definition: '{Shot}_{Step}_review[-{nuke.output}]_v{version}/{Shot}_{Step}_review[-{nuke.output}]_v{version}.{SEQ}.exr'
+        definition: '{Shot}_{Step}_review[-{nuke.output}]_v{version}/{Shot}_{Step}_review[-{nuke.output}]_v{version}.{SEQ}.jpg'
     nuke_shot_review_work:
         definition: '@shot_work_area/images/@nuke_shot_review_filename'
     nuke_shot_review_publish:
@@ -697,7 +697,7 @@ paths:
     # Write node locations
     # main output
     nuke_asset_main_filename:
-        definition: '{Asset}_{Step}_out_v{version}/Assett}_{Step}_out_v{version}.{SEQ}.exr'
+        definition: '{Asset}_{Step}_out[-{nuke.output}]_v{version}/Assett}_{Step}_out[-{nuke.output}]_v{version}.{SEQ}.exr'
     nuke_asset_main_work:
         definition: '@asset_work_area/images/@nuke_asset_main_filename'
     nuke_asset_main_publish:
@@ -725,7 +725,7 @@ paths:
         definition: '@asset_publish_area/images/@nuke_shot_matte_filename'
     # review output
     nuke_asset_review_filename:
-        definition: '{Asset}_{Step}_review[-{nuke.output}]_v{version}/{Asset}_{Step}_review[-{nuke.output}]_v{version}.{SEQ}.exr'
+        definition: '{Asset}_{Step}_review[-{nuke.output}]_v{version}/{Asset}_{Step}_review[-{nuke.output}]_v{version}.{SEQ}.jpg'
     nuke_asset_review_work:
         definition: '@asset_work_area/images/@nuke_asset_review_filename'
     nuke_asset_review_publish:
