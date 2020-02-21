@@ -68,11 +68,11 @@ frameworks:
   tk-framework-cbfx_v1.0.x:
     location:
       name: tk-framework-cbfx
-      ### Toolkit Component Entity
+      ## Toolkit Component Entity
       type: shotgun
       entity_type: *ToolkitComponent
       field: sg_uploaded_app
-      version: 82893 #tk-framework-cbfx-1.0.0
+      version: 103961 #tk-framework-cbfx-1.0.1
       ## Dev
       # type: dev
       # path: R:\work\anthony.kramer\github\tk-framework-cbfx

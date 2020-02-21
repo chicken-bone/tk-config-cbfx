@@ -73,6 +73,6 @@ primary:
     shotgun_storage_id: 3
     default: true
 
-nuke_tools:
-    description: nuke tools repository
-    shotgun_storage_id: 69
+pipeline:
+    description: Pipeline location
+    shotgun_storage_id: 104

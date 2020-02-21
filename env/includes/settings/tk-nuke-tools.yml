@@ -17,14 +17,32 @@ includes:
 
 # settings
 settings.tk-nuke-tools:
-  gizmo_path_templates:
-  - nuke_tools_all_gizmos_cbfx
-  - nuke_tools_all_gizmos_nukepedia
-  - nuke_tools_project_gizmos
-  toolsets_path_templates:
-  - nuke_tools_all_toolsets
-  - nuke_tools_project_toolsets
-  plugin_path_templates:
-  - nuke_tools_all_plugins
-  - nuke_tools_project_plugins
   location: "@apps.tk-nuke-tools.location"
+  tool_libraries:
+    - name: CBFX Tools
+      path_template: nuke_tools_global_tools
+      root_menus: ['Nodes']
+    - name: Project Tools
+      path_template: nuke_tools_project_tools
+      root_menus: ['Nodes']
+  knob_defaults:
+    EXPTool.mode: 0
+    Project3D.crop: false
+    Grain2.maskgrain: false
+    Viewer.frame_increment: 8
+    Transform.shutteroffset: centered
+    Tracker4.shutteroffset: centered
+    CornerPin2D.shutteroffset: centered
+    Tracker4.cornerPinOptions: Transform (match-move)
+    Reformat.resize: none
+    Reformat.pbb: true
+    Blur.channels: rgba
+    Defocus.channels: rgba
+    ZDefocus.channels: rgba
+    Sharpen.channels: rgba
+    Keylight.screenReplaceMethod: Source
+    Keylight.insideReplaceMethod: Source
+    Keylight.insideComponent: Alpha
+    Keylight.outsideComponent: Inverted Alpha
+    Write.channels: rgba
+    Write.create_directories: true
