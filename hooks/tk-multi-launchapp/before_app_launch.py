@@ -156,7 +156,7 @@ class BeforeAppLaunch(sgtk.Hook):
                 self.__max_check(app_version, result.get('sg_host_max_version'))
             ):
                 try:
-                    self.logger.info("[CBFX] Valid plugin found: {}".format(result.get('code')))
+                    self.logger.debug("[CBFX] Valid plugin found: {}".format(result.get('code')))
                     env_list.extend(result.get(os_envs[sys.platform]).split('\n'))
                 except AttributeError as e:
                     self.logger.error('AttributeError on plugin \'{}\': {}'.format(result.get('code'), e))
