@@ -185,7 +185,7 @@ paths:
     #   root_name: pipeline
 
     nuke_tools_global_tools:
-         definition: '../etc/foundry/nuke/global_tools'
+         definition: '../etc/nuke/global_tools'
          root_name: pipeline
 
     # nuke_tools_global_python:
