@@ -28,6 +28,16 @@ includes:
 - ./tk-nuke-tools.yml
 
 ################################################################################
+# executable match templates
+
+custom_exe_match_templates: &templates
+  linux2:
+    - "/mnt/pipe/opt/nuke/{version}/linux/Nuke{major_minor_version}"
+  win32:
+    - "\\\\cbone-file-07\\pipeline\\opt\\nuke\\{version}\\win64\\Nuke{major_minor_version}.exe"
+  darwin: []
+
+################################################################################
 # Hiero
 
 settings.tk-nuke.hiero.project:
@@ -96,6 +106,7 @@ settings.tk-nuke.asset:
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
+  custom_exe_match_templates: *templates
 
 # asset_step
 settings.tk-nuke.asset_step:
@@ -128,6 +139,7 @@ settings.tk-nuke.asset_step:
   # - {app_instance: tk-multi-render, name: Render Version..., hotkey: "F5"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
+  custom_exe_match_templates: *templates
 
 # project
 settings.tk-nuke.project:
@@ -146,6 +158,7 @@ settings.tk-nuke.project:
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
+  custom_exe_match_templates: *templates
 
 # sequence
 settings.tk-nuke.sequence:
@@ -164,6 +177,7 @@ settings.tk-nuke.sequence:
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
+  custom_exe_match_templates: *templates
 
 # shot
 settings.tk-nuke.shot:
@@ -182,6 +196,7 @@ settings.tk-nuke.shot:
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
+  custom_exe_match_templates: *templates
 
 # shot_step
 settings.tk-nuke.shot_step:
@@ -221,6 +236,7 @@ settings.tk-nuke.shot_step:
   - {app_instance: tk-multi-setframerange, name: Sync Frame Range with Shotgun, hotkey: "F8"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
+  custom_exe_match_templates: *templates
 
 ################################################################################
 # NukeStudio

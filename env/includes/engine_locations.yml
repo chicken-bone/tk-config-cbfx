@@ -76,7 +76,7 @@ engines.tk-nuke.location:
   entity_type: *ToolkitComponent
   name: tk-nuke
   field: sg_uploaded_app
-  version: 91254 #v0.12.5-cbfx.1
+  version: 110509 #v0.12.5-cbfx.3
   ### Dev
   # type: dev
   # path: R:\work\anthony.kramer\github\tk-nuke
