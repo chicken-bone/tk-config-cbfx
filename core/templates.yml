@@ -212,7 +212,7 @@ paths:
     # Maya Tools Paths
     #
 
-    houdini_tools:
+    maya_tools:
         definition: 'pipeline/maya'
 
     ##########################################################################################
