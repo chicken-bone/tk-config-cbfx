@@ -159,6 +159,14 @@ settings.tk-nuke.project:
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
   custom_exe_match_templates: *templates
+  project_favourite_name: ""
+  favourite_directories:
+  - display_name: "Current Project"
+    template_directory: "project_root"
+    icon: ""
+  - display_name: "Element Library"
+    template_directory: "elements_library"
+    icon: ""
 
 # sequence
 settings.tk-nuke.sequence:
@@ -178,6 +186,14 @@ settings.tk-nuke.sequence:
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
   custom_exe_match_templates: *templates
+  project_favourite_name: ""
+  favourite_directories:
+  - display_name: "Current Project"
+    template_directory: "project_root"
+    icon: ""
+  - display_name: "Element Library"
+    template_directory: "elements_library"
+    icon: ""
 
 # shot
 settings.tk-nuke.shot:
@@ -197,6 +213,17 @@ settings.tk-nuke.shot:
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
   custom_exe_match_templates: *templates
+  project_favourite_name: ""
+  favourite_directories:
+  - display_name: "Current Project"
+    template_directory: "project_root"
+    icon: ""
+  - display_name: "Element Library"
+    template_directory: "elements_library"
+    icon: ""
+  - display_name: "Current Shot"
+    template_directory: "shot_root"
+    icon: ""
 
 # shot_step
 settings.tk-nuke.shot_step:
@@ -237,6 +264,20 @@ settings.tk-nuke.shot_step:
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
   custom_exe_match_templates: *templates
+  project_favourite_name: ""
+  favourite_directories:
+  - display_name: "Current Project"
+    template_directory: "project_root"
+    icon: ""
+  - display_name: "Element Library"
+    template_directory: "elements_library"
+    icon: ""
+  - display_name: "Current Shot"
+    template_directory: "shot_root"
+    icon: ""
+  - display_name: "Current Work Area"
+    template_directory: "shot_work_area"
+    icon: ""
 
 ################################################################################
 # NukeStudio
