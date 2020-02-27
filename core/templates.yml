@@ -162,6 +162,8 @@ paths:
     #
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
+    project_root: ./
+
     sequence_root: shots/{Sequence}
 
     shot_root: shots/{Sequence}/{Shot}
@@ -175,6 +177,8 @@ paths:
 
     asset_work_area: assets/{Asset}/{Step}/work
     asset_publish_area: assets/{Asset}/{Step}/publish
+
+    elements_library: elements/library
 
     ##########################################################################################
     # Nuke Tools Paths
