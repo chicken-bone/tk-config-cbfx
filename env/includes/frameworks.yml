@@ -78,3 +78,19 @@ frameworks:
       ## Dev
       # type: dev
       # path: R:\work\anthony.kramer\github\tk-framework-cbfx
+
+ # deadline - Deadline Framework
+  tk-framework-deadline_v1.0.x:
+    location:
+      name: tk-framework-deadline
+      ## Toolkit Component Entity
+      # type: shotgun
+      # name: tk-framework-cbfx
+      # entity_type: *ToolkitComponent
+      # field: sg_uploaded_app
+      # version: 00000 #tk-framework-deadline-1.0.0
+      ## Dev
+      type: dev
+      path: R:\work\anthony.kramer\github\tk-framework-deadline
+    web_service_machine: "wiki"
+    web_service_port: 8082

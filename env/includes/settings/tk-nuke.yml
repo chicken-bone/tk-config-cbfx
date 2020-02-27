@@ -26,6 +26,7 @@ includes:
 - ./tk-nuke-writenode.yml
 - ./tk-multi-ocio.yml
 - ./tk-nuke-tools.yml
+- ./tk-multi-render.yml
 
 ################################################################################
 # executable match templates
@@ -144,6 +145,7 @@ settings.tk-nuke.asset_step:
 # project
 settings.tk-nuke.project:
   apps:
+    tk-multi-render: "@settings.tk-multi-render"
     tk-multi-ocio: "@settings.tk-multi-ocio"
     tk-nuke-tools: "@settings.tk-nuke-tools"
     tk-multi-about:
