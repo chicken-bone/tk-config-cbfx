@@ -76,15 +76,9 @@ class BeforeAppLaunch(sgtk.Hook):
                     env_dict.setdefault(plugin, []).append(path)
 
         # set OCIO env var
-        if engine_name in ["tk-nuke", "tk-nuke-render", "tk-aftereffects"]:
+        if engine_name in ["tk-nuke", "tk-nuke-render", "tk-aftereffects", "tk-hiero", "tk-houdini"]:
             # get the details of the resolved color config from shotgun
             ocio_config_path_template = self.sgtk.templates["ocio_config_path"]
-            ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
-            env_dict.setdefault("OCIO", []).append(ocio_path)
-
-        if engine_name in ["tk-houdini"]:
-            # get the details of the resolved color config from shotgun
-            ocio_config_path_template = self.sgtk.templates["ocio_config_path_rv"]
             ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
             env_dict.setdefault("OCIO", []).append(ocio_path)
 

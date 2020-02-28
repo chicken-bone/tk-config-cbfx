@@ -42,4 +42,7 @@ class BeforeRegisterCommand(HookBaseClass):
         if software_version.product == "NukeStudio":
             engine_instance_name = "tk-nukestudio"
 
+        if software_version.product == "Hiero":
+            engine_instance_name = "tk-hiero"
+
         return engine_instance_name
