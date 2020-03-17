@@ -381,7 +381,7 @@ paths:
 
     # Rendered images
     houdini_shot_render:
-        definition: '@shot_work_area/images/{Shot}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.exr'
+        definition: '@shot_work_area/images/{Shot}_{Step}_{name}_v{version}/{Shot}_{Step}_{name}_{node}/{width}x{height}/{Shot}_{Step}_{name}_{node}_v{version}.{SEQ}.exr'
 
     # Additional mantra outputs
     houdini_shot_ifd:
@@ -393,7 +393,7 @@ paths:
 
     # Redshift outputs
     houdini_shot_rs:
-        definition: '@shot_work_area/data/rs/{Shot}_{Step}_{houdini.node}/v{version}/{width}x{height}/{Shot}_{Step}_{houdini.node}_v{version}.{SEQ}.rs'
+        definition: '@shot_work_area/data/rs/tmp/{Shot}_{Step}_{name}_v{version}/{Shot}_{Step}_{name}_{node}/{Shot}_{Step}_{name}_{node}_v{version}.{SEQ}.rs'
 
 
     #
