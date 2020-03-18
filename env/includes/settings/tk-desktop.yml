@@ -57,6 +57,7 @@ settings.tk-desktop.project:
     - "*Max*"
     - "*Maya*"
     - "*Motion*"
+    - "*Blender*"
     name: 3D Apps
   - matches:
     - "*Hiero*"
