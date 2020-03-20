@@ -82,8 +82,8 @@ class BeforeAppLaunch(sgtk.Hook):
             ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
             env_dict.setdefault("OCIO", []).append(ocio_path)
 
-        # set OCIO env var
-        if engine_name in ["tk-houdini"]:
+        # set OCIO env var (old spec version)
+        if engine_name in ["tk-houdini", "tk-maya"]:
             # get the details of the resolved color config from shotgun
             ocio_config_path_template = self.sgtk.templates["ocio_config_path_rv"]
             ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
