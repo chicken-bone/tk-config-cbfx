@@ -34,6 +34,7 @@ settings.tk-nuke-writenode.asset:
       dw_compression_level: 20
       datatype: 16 bit half
       metadata: all metadata
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
   - file_type: exr
@@ -50,6 +51,7 @@ settings.tk-nuke-writenode.asset:
       compression: Zip (1 scanline)
       datatype: 16 bit half
       metadata: all metadata
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
     output_default: main
@@ -67,6 +69,7 @@ settings.tk-nuke-writenode.asset:
       compression: RLE
       datatype: 16 bit half
       metadata: all metadata
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
   - file_type: jpeg
@@ -94,7 +97,8 @@ settings.tk-nuke-writenode.asset:
       channels: all
       compression: Zip (1 scanline)
       datatype: 16 bit half
-      metadata: all metadata except input/*
+      metadata: all metadata
+      noprefix: True
       interleave: channels
       write_full_layer_names: True
     tank_type: Rendered Image
@@ -123,6 +127,7 @@ settings.tk-nuke-writenode.shot:
       dw_compression_level: 20
       datatype: 16 bit half
       metadata: all metadata
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
   - file_type: exr
@@ -139,6 +144,7 @@ settings.tk-nuke-writenode.shot:
       compression: Zip (1 scanline)
       datatype: 16 bit half
       metadata: all metadata
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
     output_default: main
@@ -156,6 +162,7 @@ settings.tk-nuke-writenode.shot:
       compression: RLE
       datatype: 16 bit half
       metadata: all metadata
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
   - file_type: jpeg
@@ -184,9 +191,10 @@ settings.tk-nuke-writenode.shot:
       channels: all
       compression: Zip (1 scanline)
       datatype: 16 bit half
-      metadata: all metadata except input/*
+      metadata: all metadata
       interleave: channels
       write_full_layer_names: True
+      noprefix: True
     tank_type: Rendered Image
     tile_color: []
     output_default: main
