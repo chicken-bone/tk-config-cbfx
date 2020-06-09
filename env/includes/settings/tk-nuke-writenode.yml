@@ -83,6 +83,20 @@ settings.tk-nuke-writenode.asset:
       channels: rgb
       _jpeg_quality: 0.9
       _jpeg_sub_sampling: "4:2:2"
+      raw: True
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: png
+    name: demo
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: nuke_asset_demo_work
+    publish_template: nuke_asset_demo_publish
+    settings:
+      channels: rgba
+      datatype: 8 bit
+      raw: True
     tank_type: Rendered Image
     tile_color: []
   - file_type: exr
@@ -176,6 +190,19 @@ settings.tk-nuke-writenode.shot:
       channels: rgb
       _jpeg_quality: 0.9
       _jpeg_sub_sampling: "4:2:2"
+      raw: True
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: png
+    name: demo
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: nuke_shot_demo_work
+    publish_template: nuke_shot_demo_publish
+    settings:
+      channels: rgba
+      datatype: 8 bit
       raw: True
     tank_type: Rendered Image
     tile_color: []

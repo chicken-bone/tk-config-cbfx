@@ -488,6 +488,13 @@ paths:
         definition: '@shot_work_area/images/@nuke_shot_review_filename'
     nuke_shot_review_publish:
         definition: '@shot_publish_area/images/@nuke_shot_review_filename'
+    # demo output
+    nuke_shot_demo_filename:
+        definition: '{Shot}_{Step}_demo[-{nuke.output}]_v{version}/{Shot}_{Step}_demo[-{nuke.output}]_v{version}.{SEQ}.png'
+    nuke_shot_demo_work:
+        definition: '@shot_work_area/images/@nuke_shot_demo_filename'
+    nuke_shot_demo_publish:
+        definition: '@shot_publish_area/images/@nuke_shot_demo_filename'
 
     # reviewsubmission
     nuke_shot_render_movie:
@@ -741,6 +748,13 @@ paths:
         definition: '@asset_work_area/images/@nuke_asset_review_filename'
     nuke_asset_review_publish:
         definition: '@asset_publish_area/images/@nuke_asset_review_filename'
+    # demo output
+    nuke_asset_demo_filename:
+        definition: '{Asset}_{Step}_demo[-{nuke.output}]_v{version}/{Asset}_{Step}_demo[-{nuke.output}]_v{version}.{SEQ}.png'
+    nuke_asset_demo_work:
+        definition: '@asset_work_area/images/@nuke_asset_demo_filename'
+    nuke_asset_demo_publish:
+        definition: '@asset_publish_area/images/@nuke_asset_demo_filename'
 
     # reviewsubmission
     nuke_asset_render_movie:
