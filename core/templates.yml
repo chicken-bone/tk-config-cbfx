@@ -460,6 +460,13 @@ paths:
         definition: '@shot_work_area/images/@nuke_shot_main_filename'
     nuke_shot_main_publish:
         definition: '@shot_publish_area/images/@nuke_shot_main_filename'
+    # dpx output
+    nuke_shot_dpx_filename:
+        definition: '{Shot}_{Step}_dpx[-{nuke.output}]_v{version}/{Shot}_{Step}_dpx[-{nuke.output}]_v{version}.{SEQ}.dpx'
+    nuke_shot_dpx_work:
+        definition: '@shot_work_area/images/@nuke_shot_dpx_filename'
+    nuke_shot_dpx_publish:
+        definition: '@shot_publish_area/images/@nuke_shot_dpx_filename'
     # precomp output
     nuke_shot_precomp_filename:
         definition: '{Shot}_{Step}_prc[-{nuke.output}]_v{version}/{Shot}_{Step}_prc[-{nuke.output}]_v{version}.{SEQ}.exr'

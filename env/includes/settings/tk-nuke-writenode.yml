@@ -144,6 +144,19 @@ settings.tk-nuke-writenode.shot:
       noprefix: True
     tank_type: Rendered Image
     tile_color: []
+  - file_type: dpx
+    name: dpx output
+    promote_write_knobs: [datatype]
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: nuke_shot_dpx_work
+    publish_template: nuke_shot_dpx_publish
+    settings:
+      channels: rgb
+      datatype: 16 bit
+      colorspace: Camera Raw
+    tank_type: Rendered Image
+    tile_color: []
   - file_type: exr
     name: precomp
     # promote_write_knobs: [autocrop, datatype, compression]
