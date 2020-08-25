@@ -131,6 +131,18 @@ class BeforeAppLaunch(sgtk.Hook):
             ['sg_host_engines', 'contains', engine_name],
             ['sg_status_list', 'is', 'act'],
             {
+                'filter_operator': 'all',
+                'filters': [
+                    ['sg_exclude_projects', 'not_in', context.project]
+                ]
+            },
+            {
+                'filter_operator': 'all',
+                'filters': [
+                    ['sg_exclude_users', 'not_in', context.user]
+                ]
+            },
+            {
                 'filter_operator': 'any',
                 'filters': [
                     ['sg_projects', 'in', context.project],
