@@ -17,26 +17,20 @@ includes:
 ################################################################################
 # location descriptors for apps used in this configuration
 
-alias: &ToolkitComponent CustomNonProjectEntity03
 
 # ---- Multi apps
-
-# render app
-# apps.tk-multi-render.location:
-#   type: dev
-#   path: R:\work\anthony.kramer\shotgun\apps\tk-multi-render
 
 # about
 apps.tk-multi-about.location:
   type: app_store
   name: tk-multi-about
-  version: v0.3.0
+  version: v0.3.3
 
 # breakdown
 apps.tk-multi-breakdown.location:
   type: app_store
   name: tk-multi-breakdown
-  version: v1.6.2
+  version: v1.7.3
 
 # demo
 apps.tk-multi-demo.location:
@@ -48,13 +42,13 @@ apps.tk-multi-demo.location:
 apps.tk-multi-launchapp.location:
   type: app_store
   name: tk-multi-launchapp
-  version: v0.11.1
+  version: v0.11.2
 
 # loader2
 apps.tk-multi-loader2.location:
   type: app_store
   name: tk-multi-loader2
-  version: v1.20.0
+  version: v1.20.2
 
 # publish2
 apps.tk-multi-publish2.location:
@@ -66,7 +60,7 @@ apps.tk-multi-publish2.location:
 apps.tk-multi-pythonconsole.location:
   type: app_store
   name: tk-multi-pythonconsole
-  version: v1.2.0
+  version: v1.2.5
 
 # reviewsubmission
 apps.tk-multi-reviewsubmission.location:
@@ -82,15 +76,14 @@ apps.tk-multi-reviewsubmission.location:
 
 # setframerange
 apps.tk-multi-setframerange.location:
+  name: tk-multi-setframerange
   ### Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-multi-setframerange
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 10339 #v0.3.0-cbfx
   ### App Store
   # type: app_store
-  # name: tk-multi-setframerange
   # version: v0.3.0
   ### Dev
   # type: dev
@@ -101,13 +94,13 @@ apps.tk-multi-setframerange.location:
 apps.tk-multi-shotgunpanel.location:
   type: app_store
   name: tk-multi-shotgunpanel
-  version: v1.7.0
+  version: v1.7.1
 
 # snapshot
 apps.tk-multi-snapshot.location:
   type: app_store
   name: tk-multi-snapshot
-  version: v0.7.5
+  version: v0.8.1
 
 # workfiles (required for Mari)
 # apps.tk-multi-workfiles.location:
@@ -131,10 +124,10 @@ apps.tk-multi-devutils.location:
 
 # shotgun folders
 apps.tk-shotgun-folders.location:
+  name: tk-shotgun-folders
   ### Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-shotgun-folders
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 2011 #v0.1.6-cbfx
   ### Dev
@@ -142,7 +135,6 @@ apps.tk-shotgun-folders.location:
   # path: R:\code\work\anthony.kramer\shotgun\apps\tk-shotgun-folders
   ### App Store
   # type: app_store
-  # name: tk-shotgun-folders
   # version: v0.1.6
 
 # shotgun launchfolder
@@ -161,10 +153,10 @@ apps.tk-shotgun-launchfolder.location:
 
 # hiero export
 apps.tk-hiero-export.location:
+  name: tk-hiero-export
   ### Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-hiero-export
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 35106 #v0.5.2-cbfx
   ### Dev
@@ -172,7 +164,6 @@ apps.tk-hiero-export.location:
   # path: R:\code\work\anthony.kramer\shotgun\apps\tk-hiero-export
   ### App Store
   # type: app_store
-  # name: tk-hiero-export
   # version: v0.5.1
 
 # hiero openinshotgun
@@ -187,13 +178,13 @@ apps.tk-hiero-openinshotgun.location:
 apps.tk-houdini-alembicnode.location:
   type: app_store
   name: tk-houdini-alembicnode
-  version: v0.3.1
+  version: v0.4.1
 
 # houdini mantranode
 apps.tk-houdini-mantranode.location:
   type: app_store
   name: tk-houdini-mantranode
-  version: v0.3.1
+  version: v0.4.1
 
 # ---- Nuke apps
 
@@ -205,17 +196,16 @@ apps.tk-houdini-mantranode.location:
 
 # writenode
 apps.tk-nuke-writenode.location:
+  name: tk-nuke-writenode
   ### Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-nuke-writenode
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 144654 #v1.4.2-cbfx.3
   ## Dev
   # type: dev
   # path: R:\work\anthony.kramer\github\tk-nuke-writenode
   ### App Store
-  # name: tk-nuke-writenode
   # type: app_store
   # version: v1.4.1
 
@@ -248,7 +238,7 @@ apps.tk-multi-ocio.location:
   name: tk-multi-ocio
   ### Toolkit Component Entity
   type: shotgun
-  entity_type: *ToolkitComponent
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 82897 #tk-multi-ocio-1.0.0
   ## Dev
@@ -258,11 +248,11 @@ apps.tk-multi-ocio.location:
 
 # nuke tools app
 apps.tk-nuke-tools.location:
+  name: tk-nuke-tools
   ## Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
-  name: tk-nuke-tools
   version: 133939 #v1.0.3
   ## Dev
   # type: dev
