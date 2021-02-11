@@ -13,7 +13,7 @@
 
 ################################################################################
 
-alias: &ToolkitComponent CustomNonProjectEntity03
+alias: CustomNonProjectEntity03
 
 # 3dsMax
 # engines.tk-3dsmaxplus.location:
@@ -31,13 +31,13 @@ engines.tk-aftereffects.location:
 engines.tk-desktop.location:
   type: app_store
   name: tk-desktop
-  version: v2.4.14
+  version: v2.5.13
 
 # Desktop2
 engines.tk-desktop2.location:
   type: app_store
   name: tk-desktop2
-  version: v1.3.1
+  version: v1.4.3
 
 # Flame
 # engines.tk-flame.location:
@@ -49,7 +49,7 @@ engines.tk-desktop2.location:
 engines.tk-houdini.location:
   type: app_store
   name: tk-houdini
-  version: v1.6.3
+  version: v1.7.2
 
 # Mari
 # engines.tk-mari.location:
@@ -71,10 +71,10 @@ engines.tk-motionbuilder.location:
 
 # Nuke
 engines.tk-nuke.location:
+  name: tk-nuke
   ### Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
-  name: tk-nuke
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 110509 #v0.12.5-cbfx.3
   ### Dev
@@ -82,7 +82,6 @@ engines.tk-nuke.location:
   # path: R:\work\anthony.kramer\github\tk-nuke
   ### App Store
   # type: app_store
-  # name: tk-nuke
   # version: v0.12.5
 
 # Photoshop
@@ -96,7 +95,7 @@ engines.tk-shell.location:
   name: tk-shell
   ### Toolkit App Entity
   type: shotgun
-  entity_type: *ToolkitComponent
+  entity_type: CustomNonProjectEntity03
   field: sg_uploaded_app
   version: 105905 #v0.8.0-cbfx
   ### Dev
