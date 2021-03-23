@@ -18,6 +18,7 @@ to set environment variables or run scripts as part of the app initialization.
 import sgtk
 import sys
 import re
+import os
 from collections import defaultdict
 
 
@@ -26,7 +27,7 @@ class BeforeAppLaunch(sgtk.Hook):
     Hook to set up the system prior to app launch.
     """
 
-    __software_plugin_entity = "CustomNonProjectEntity05"
+    __env_vars_entity = "CustomNonProjectEntity05"
     __version_regex = re.compile(r"(\d+)\.?(\d+)?(?:\.|v)?(\d+)?")
 
     def execute(self, app_path, app_args, version, engine_name, **kwargs):
@@ -63,55 +64,54 @@ class BeforeAppLaunch(sgtk.Hook):
         cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
         cbfx_utils = cbfx_fw.import_module("utils")
 
-        # make a dict to store env variables
-        env_dict = defaultdict(list)
+        # get all the pipe templates and set env vars
+        pipe_templates = {k: v for k, v in self.sgtk.templates.iteritems() if k.startswith("pipe_")}
+        for k, v in pipe_templates.iteritems():
+            v = cbfx_utils.resolve_template(v, current_context)
+            v = os.path.expandvars(v)
+            k = k.upper()
+            self.logger.debug("[CBFX] Setting EnvVars from templates.yml: {} = {}".format(k, v))
+            os.environ[k] = v
 
-        # get plugin env vars
-        if engine_name:
-            plugins = self.__get_plugins(current_context, engine_name, version)
-            for plugin in plugins:
-                paths = plugins[plugin]
-                self.logger.debug("[CBFX] parsing plugin: {} = {}".format(plugin, plugins[plugin]))
-                for path in paths:
-                    env_dict.setdefault(plugin, []).append(path)
+        # Get valid env var entities
+        env_dicts = self.__get_env_vars(current_context, engine_name, version)
 
-        # set OCIO env var
-        if engine_name in ["tk-nuke", "tk-nuke-render", "tk-aftereffects", "tk-hiero"]:
-            # get the details of the resolved color config from shotgun
-            ocio_config_path_template = self.sgtk.templates["ocio_config_path"]
-            ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
-            env_dict.setdefault("OCIO", []).append(ocio_path)
+        # sort them into lists
+        replace_envs = env_dicts["replace"]
+        prepend_envs = env_dicts["prepend"]
+        append_envs = env_dicts["append"]
 
-        # set OCIO env var (old spec version)
-        if engine_name in ["tk-houdini", "tk-maya"]:
-            # get the details of the resolved color config from shotgun
-            ocio_config_path_template = self.sgtk.templates["ocio_config_path_rv"]
-            ocio_path = cbfx_utils.resolve_template(ocio_config_path_template, current_context)
-            env_dict.setdefault("OCIO", []).append(ocio_path)
+        # make a list of all the keys store them in a SGTK_ENV_VARS var in case we want to
+        # use these inside the host app (like for farm submission env)
+        env_keys = list(set(replace_envs.keys() + prepend_envs.keys() + append_envs.keys()))
+        for key in env_keys:
+            sgtk.util.append_path_to_env_var("SGTK_ENV_VARS", os.path.expandvars(key))
+        if os.getenv("TK_DEBUG"):
+            sgtk.util.append_path_to_env_var("SGTK_ENV_VARS", "TK_DEBUG")
+        self.logger.debug("[CBFX] SGTK_ENV_VARS = {}".format(os.getenv("SGTK_ENV_VARS")))
 
-        # set software tool paths
-        if engine_name == "tk-houdini":
-            # get project-level houdini path
-            houdini_tools_path_template = self.sgtk.templates["houdini_tools"]
-            houdini_tools_path = cbfx_utils.resolve_template(houdini_tools_path_template, current_context)
-            env_dict.setdefault("HOUDINI_PATH", []).append(houdini_tools_path)
+        # first apply the replacements
+        for env_key, value_list in replace_envs.iteritems():
+            for env_value in value_list:
+                self.logger.debug("[CBFX] Setting env var: {} = {}".format(env_key, env_value))
+                os.environ[env_key] = os.path.expandvars(env_value)
 
-        if engine_name == "tk-maya":
-            # get project-level maya path
-            maya_tools_path_template = self.sgtk.templates["maya_tools"]
-            maya_tools_path = cbfx_utils.resolve_template(maya_tools_path_template, current_context)
-            env_dict.setdefault("MAYA_SCRIPT_PATH", []).append(maya_tools_path)
+        # then the prepends
+        for env_key, value_list in prepend_envs.iteritems():
+            for env_value in value_list:
+                self.logger.debug("[CBFX] Prepending env var: {} = {}".format(env_key, env_value))
+                sgtk.util.prepend_path_to_env_var(env_key, os.path.expandvars(env_value))
 
-        if engine_name in ["tk-nuke", "tk-nuke-render"]:
-            # set project-level nuke path
-            nuke_path_template = self.sgtk.templates["nuke_tools_project_python"]
-            nuke_path = cbfx_utils.resolve_template(nuke_path_template, current_context)
-            env_dict.setdefault("NUKE_PATH", []).append(nuke_path)
+        # then the appends
+        for env_key, value_list in append_envs.iteritems():
+            for env_value in value_list:
+                self.logger.debug("[CBFX] Appending env var: {} = {}".format(env_key, env_value))
+                sgtk.util.append_path_to_env_var(env_key, os.path.expandvars(env_value))
 
-        for k, vlist in env_dict.iteritems():
-            for v in vlist:
-                self.logger.debug("[CBFX] Appending env var: {}={}".format(k, v))
-                sgtk.util.append_path_to_env_var(k, v)
+        # now lets log them all for debugging
+        for method, env_dict in env_dicts.iteritems():
+            for env_key in env_dict.keys():
+                self.logger.debug("[CBFX] Resolved env var: {} = {}".format(env_key, os.getenv(env_key)))
 
         # Sets the current task to in progress
         if self.parent.context.task:
@@ -125,23 +125,14 @@ class BeforeAppLaunch(sgtk.Hook):
                 self.parent.shotgun.update("Task", task_id, data)
                 self.logger.debug("[CBFX] changed task status to 'ip'")
 
-    def __get_plugins(self, context, engine_name, app_version):
+    def __get_env_vars(self, context, engine_name, app_version):
 
+        # define filters for the SG query we're going to use to return all the
+        # valid env var entities.
         filters = [
-            ['sg_host_engines', 'contains', engine_name],
             ['sg_status_list', 'is', 'act'],
-            {
-                'filter_operator': 'all',
-                'filters': [
-                    ['sg_exclude_projects', 'not_in', context.project]
-                ]
-            },
-            {
-                'filter_operator': 'all',
-                'filters': [
-                    ['sg_exclude_users', 'not_in', context.user]
-                ]
-            },
+            ['sg_exclude_projects', 'not_in', context.project],
+            ['sg_exclude_users', 'not_in', context.user],
             {
                 'filter_operator': 'any',
                 'filters': [
@@ -157,40 +148,87 @@ class BeforeAppLaunch(sgtk.Hook):
                 ]
             }
         ]
-        os_envs = {'win32': 'sg_env_win', 'linux2': 'sg_env_linux', 'darwin': 'sg_env_mac'}
-        fields = ['code', 'sg_version', 'sg_host_min_version', 'sg_host_max_version']
-        fields.append(os_envs[sys.platform])
-        results = self.parent.shotgun.find(self.__software_plugin_entity, filters, fields)
 
-        env_list = []
+        if engine_name is None:
+
+            # if we do NOT have an engine, grab all the vars that dont specify an engine
+            no_engine_filter = ['sg_host_engines', 'is', None]
+            filters.append(no_engine_filter)
+
+        else:
+            # if we DO have and engine, grab all the vars for that engine AND
+            # all the entries that dont specify an engine.
+            with_engine_filter = {
+                'filter_operator': 'any',
+                'filters': [
+                    ['sg_host_engines', 'contains', engine_name],
+                    ['sg_host_engines', 'is', None],
+                ]
+            }
+            filters.append(with_engine_filter)
+
+        # map platform names to sg fields in the entity
+        os_envs = {'win32': 'sg_env_win',
+                   'linux2': 'sg_env_linux', 'darwin': 'sg_env_mac'}
+
+        # define the feilds we want returned from the query
+        fields = ['code', 'sg_version',
+                  'sg_host_min_version', 'sg_host_max_version', 'sg_default_method']
+
+        # add the platform field
+        fields.append(os_envs[sys.platform])
+
+        # RUN THAT QUERY
+        results = self.parent.shotgun.find(
+            self.__env_vars_entity, filters, fields)
+
+        env_lists = {"append": [], "prepend": [], "replace": []}
+
+        # loop thru each env var entity retuned
         for result in results:
-            if (
+            # if the field for this platform is blank, skip it
+            if not result.get(os_envs[sys.platform]):
+                pass
+            # check the host app against the min and max versions allowed
+            elif (
                 self.__min_check(app_version, result.get('sg_host_min_version')) and
                 self.__max_check(app_version, result.get('sg_host_max_version'))
             ):
                 try:
-                    self.logger.debug("[CBFX] Valid plugin found: {}".format(result.get('code')))
-                    env_list.extend(result.get(os_envs[sys.platform]).split('\n'))
+                    self.logger.debug(
+                        "[CBFX] Valid plugin found: {}".format(result.get('code')))
+                    # if the env var passes all the tests, add it to one of the env lists
+                    # either replace, append, prepend
+                    env_lists[result.get('sg_default_method')].extend(result.get(
+                        os_envs[sys.platform]).split('\n'))
                 except AttributeError as e:
-                    self.logger.error('AttributeError on plugin \'{}\': {}'.format(result.get('code'), e))
+                    self.logger.error(
+                        'AttributeError on plugin \'{}\': {}'.format(result.get('code'), e))
                     pass
 
-        env_dict = {}
-        for i in env_list:
-            try:
-                env_dict.setdefault(i.split('=')[0], []).append(i.split('=')[1])
-            except IndexError as e:
-                    self.logger.error('IndexError on plugin \'{}\': {}'.format(result.get('code'), e))
+        env_dicts = {"append": {}, "prepend": {}, "replace": {}}
+
+        # now lets consolidate those entries into dicts so we can use
+        # common keys
+        for key, env_list in env_lists.iteritems():
+            for i in env_list:
+                try:
+                    env_dicts[key].setdefault(
+                        i.split('=')[0], []).append(i.split('=')[1])
+                except IndexError as e:
+                    self.logger.error(
+                        'IndexError on plugin \'{}\': {}'.format(result.get('code'), e))
                     pass
 
-        return env_dict
+        return env_dicts
 
     def __min_check(self, curr_version, min_version):
         if min_version is None:
             return True
         else:
             min_version = re.match(self.__version_regex, min_version).groups()
-            curr_version = re.match(self.__version_regex, curr_version).groups()
+            curr_version = re.match(
+                self.__version_regex, curr_version).groups()
             return curr_version >= min_version
 
     def __max_check(self, curr_version, max_version):
@@ -198,5 +236,6 @@ class BeforeAppLaunch(sgtk.Hook):
             return True
         else:
             max_version = re.match(self.__version_regex, max_version).groups()
-            curr_version = re.match(self.__version_regex, curr_version).groups()
+            curr_version = re.match(
+                self.__version_regex, curr_version).groups()
             return curr_version <= max_version
