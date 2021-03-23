@@ -181,70 +181,44 @@ paths:
     elements_library: elements/library
 
     ##########################################################################################
-    # Nuke Tools Paths
+    #
+    # Pipeline paths
+    #
+    # Any path template starting with "pipe_" will get an environment variable automatically
+    # set before application launch by the before_app_launch.py hook.
     #
 
-    # nuke_tools_global_path:
-    #   definition: '../cfg/foundry/nuke'
-    #   root_name: pipeline
+    pipe_ocio_area:
+        definition: 'pipeline/color'
+    pipe_ocio_config:
+        definition: 'pipeline/color/config.ocio'
+    pipe_ocio_config_3d:
+        definition: 'pipeline/color/config_3d.ocio'
 
-    nuke_tools_global_tools:
-         definition: '../etc/nuke/global_tools'
-         root_name: pipeline
-
-    # nuke_tools_global_python:
-    #   definition: '../etc/foundry/nuke/python'
-    #   root_name: pipeline
-
-    # nuke_tools_project_path:
-    #   definition: 'pipeline/nuke'
-
-    nuke_tools_project_tools:
-        definition: 'pipeline/nuke/project_tools'
-
-    nuke_tools_project_python:
+    pipe_nuke_path:
         definition: 'pipeline/nuke/python'
+    pipe_nuke_tools_path:
+        definition: 'pipeline/nuke/tools'
 
-    ##########################################################################################
-    # Houdini Tools Paths
-    #
+    pipe_hiero_path:
+        definition: 'pipeline/hiero/python'
 
-    houdini_tools:
+    pipe_maya_path:
+        definition: 'pipeline/maya'
+    pipe_maya_script_path:
+        definition: 'pipeline/maya/scripts'
+    pipe_maya_module_path:
+        definition: 'pipeline/maya/modules'
+    pipe_maya_plugin_path:
+        definition: 'pipeline/maya/plugins'
+
+    pipe_houdini_path:
         definition: 'pipeline/houdini'
 
     ##########################################################################################
-    # Maya Tools Paths
     #
-
-    maya_tools:
-        definition: 'pipeline/maya'
-
-    ##########################################################################################
     # Project level paths
     #
-
-    #
-    # OCIO config path
-    #
-    ocio_config_path:
-        definition: 'pipeline/color/config.ocio'
-
-    ocio_config_path_rv:
-        definition: 'pipeline/color/config_rv.ocio'
-
-    #
-    # LUTs and Looks
-    #
-
-    # The location of project LUTs
-    lut_project_publish_area:
-        definition: 'pipeline/color/luts'
-
-    # The location of look/cc files
-    look_sequence_publish_area:
-        definition: '@sequence_root/luts'
-    look_shot_publish_area:
-        definition: '@shot_root/luts'
 
     #
     # Hiero
