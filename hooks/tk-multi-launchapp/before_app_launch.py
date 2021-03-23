@@ -111,7 +111,7 @@ class BeforeAppLaunch(sgtk.Hook):
         # now lets log them all for debugging
         for method, env_dict in env_dicts.iteritems():
             for env_key in env_dict.keys():
-                self.logger.debug("[CBFX] Env Var check: {} = {}".format(env_key, os.getenv(env_key)))
+                self.logger.debug("[CBFX] Resolved env var: {} = {}".format(env_key, os.getenv(env_key)))
 
         # Sets the current task to in progress
         if self.parent.context.task:

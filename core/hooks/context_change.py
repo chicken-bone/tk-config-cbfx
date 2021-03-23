@@ -14,9 +14,6 @@ This hook gets executed before and after the context changes in Toolkit.
 import os
 from tank import get_hook_baseclass
 
-color_config_entity = "CustomNonProjectEntity06"
-color_config_field = "sg_color_config"
-
 
 class ContextChange(get_hook_baseclass()):
     """
@@ -41,6 +38,19 @@ class ContextChange(get_hook_baseclass()):
        ``!=`` operator.
     """
 
+    __field_camera_raw = "sg_camera_raw"
+    __field_lut = "sg_lut"
+    __field_cut_in = "sg_cut_in"
+    __field_cut_out = "sg_cut_out"
+    __field_head_in = "sg_head_in"
+    __field_tail_out = "sg_tail_out"
+
+    __shot_fields = ['code', 'sg_sequence', __field_camera_raw,
+                     __field_lut, __field_cut_in, __field_cut_out,
+                     __field_head_in, __field_tail_out]
+    __seq_fields = ['code', __field_camera_raw, __field_lut]
+    __show_fields = ['code', __field_camera_raw, __field_lut]
+
     def pre_context_change(self, current_context, next_context):
         """
         Executed before the context has changed.
@@ -58,50 +68,91 @@ class ContextChange(get_hook_baseclass()):
                 "PROJECT": None,
                 "SEQ": None,
                 "SHOT": None,
-                "LUT": None,
-                "CAMERA_RAW": None
+                "LUT": "default.cube",
+                "CAMERA_RAW": "raw",
+                "EDIT_CUT_IN": None,
+                "EDIT_CUT_OUT": None,
+                "EDIT_HEAD_IN": None,
+                "EDIT_TAIL_OUT": None,
             }
 
-            seq_color_config = None
-            shot_color_config = None
-            project_color_config = None
-            current_color_config = None
-
-            # Sets the SEQ and SHOT env vars and color configs
             if next_context.entity:
+                self.logger.debug("Switching Context: {}".format(next_context))
                 type = next_context.entity['type']
                 id = next_context.entity['id']
-                entity = next_context.sgtk.shotgun.find_one(type, [['id', 'is', id]], ['code', 'sg_sequence', color_config_field])
-                if type == "Sequence":
-                    env_vars["SEQ"] = entity.get('sg_sequence').get('name')
-                    seq_color_config = entity.get(color_config_field)
                 if type == "Shot":
-                    seq_id = entity.get('sg_sequence').get('id')
-                    env_vars["SEQ"] = entity.get('sg_sequence').get('name')
-                    env_vars["SHOT"] = entity.get("code")
-                    shot_color_config = entity.get(color_config_field)
-                    seq_entity = next_context.sgtk.shotgun.find_one('Sequence', [['id', 'is', seq_id]], ['code', color_config_field])
-                    seq_color_config = seq_entity.get(color_config_field)
+                    shot_entity = next_context.sgtk.shotgun.find_one(type, [['id', 'is', id]], self.__shot_fields)
+                    shot_code = shot_entity.get('code')
 
-            # Get the PROJECT color config
-            if next_context.project:
-                id = next_context.project['id']
-                entity = next_context.sgtk.shotgun.find_one('Project', [['id', 'is', id]], ['code', color_config_field])
-                project_color_config = entity.get(color_config_field)
-                env_vars["PROJECT"] = entity.get("code")
+                    seq_id = shot_entity.get('sg_sequence').get('id')
+                    seq_entity = next_context.sgtk.shotgun.find_one('Sequence', [['id', 'is', seq_id]], self.__seq_fields)
+                    seq_code = seq_entity.get('code')
 
-            # each color config will override the previous if one exists
-            if project_color_config:
-                current_color_config = project_color_config
-            if seq_color_config:
-                current_color_config = seq_color_config
-            if shot_color_config:
-                current_color_config = shot_color_config
+                    show_id = next_context.project['id']
+                    show_entity = next_context.sgtk.shotgun.find_one('Project', [['id', 'is', show_id]], self.__show_fields)
+                    show_code = show_entity.get('code')
 
-            if current_color_config:
-                color = next_context.sgtk.shotgun.find_one(color_config_entity, [['id', 'is', current_color_config['id']]], ['code', 'sg_camera_raw', 'sg_project_lut'])
-                env_vars["LUT"] = color.get("sg_project_lut")
-                env_vars["CAMERA_RAW"] = color.get("sg_camera_raw")
+                    shot_camera_raw, shot_lut = shot_entity.get(self.__field_camera_raw), shot_entity.get(self.__field_lut)
+                    seq_camera_raw, seq_lut = seq_entity.get(self.__field_camera_raw), seq_entity.get(self.__field_lut)
+                    show_camera_raw, show_lut = show_entity.get(self.__field_camera_raw), show_entity.get(self.__field_lut)
+
+                    env_vars["PROJECT"] = show_code
+                    env_vars["SEQ"] = seq_code
+                    env_vars["SHOT"] = shot_code
+
+                    env_vars["EDIT_CUT_IN"] = shot_entity.get(self.__field_cut_in)
+                    env_vars["EDIT_CUT_OUT"] = shot_entity.get(self.__field_cut_out)
+                    env_vars["EDIT_HEAD_IN"] = shot_entity.get(self.__field_head_in)
+                    env_vars["EDIT_TAIL_OUT"] = shot_entity.get(self.__field_tail_out)
+
+                    if shot_camera_raw:
+                        env_vars["CAMERA_RAW"] = shot_camera_raw
+                    elif seq_camera_raw:
+                        env_vars["CAMERA_RAW"] = seq_camera_raw
+                    elif show_camera_raw:
+                        env_vars["CAMERA_RAW"] = show_camera_raw
+
+                    if shot_lut:
+                        env_vars["LUT"] = shot_lut
+                    elif seq_lut:
+                        env_vars["LUT"] = seq_lut
+                    elif show_lut:
+                        env_vars["LUT"] = show_lut
+
+                if type == "Sequence":
+                    seq_entity = next_context.sgtk.shotgun.find_one(type, [['id', 'is', id]], self.__seq_fields)
+                    seq_code = seq_entity.get('code')
+
+                    show_id = next_context.project['id']
+                    show_entity = next_context.sgtk.shotgun.find_one('Project', [['id', 'is', show_id]], self.__show_fields)
+                    show_code = show_entity.get('code')
+
+                    seq_camera_raw, seq_lut = seq_entity.get(self.__field_camera_raw), seq_entity.get(self.__field_lut)
+                    show_camera_raw, show_lut = show_entity.get(self.__field_camera_raw), show_entity.get(self.__field_lut)
+
+                    env_vars["PROJECT"] = show_code
+                    env_vars["SEQ"] = seq_code
+
+                    if seq_camera_raw:
+                        env_vars["CAMERA_RAW"] = seq_camera_raw
+                    elif show_camera_raw:
+                        env_vars["CAMERA_RAW"] = show_camera_raw
+
+                    if seq_lut:
+                        env_vars["LUT"] = seq_lut
+                    elif show_lut:
+                        env_vars["LUT"] = show_lut
+
+            elif next_context.project:
+                show_id = next_context.project['id']
+                show_entity = next_context.sgtk.shotgun.find_one('Project', [['id', 'is', show_id]], self.__show_fields)
+                show_code = show_entity.get('code')
+                show_camera_raw, show_lut = show_entity.get(self.__field_camera_raw), show_entity.get(self.__field_lut)
+                env_vars["PROJECT"] = show_code
+                if show_camera_raw:
+                    env_vars["CAMERA_RAW"] = show_camera_raw
+                if show_lut:
+                    env_vars["LUT"] = show_lut
 
             # set the env variables for OCIO to pick up
             for key, value in env_vars.iteritems():
@@ -111,7 +162,7 @@ class ContextChange(get_hook_baseclass()):
                         os.environ.pop(key)
                 else:
                     self.logger.debug("Setting ENV variable: {} = {}".format(key, value))
-                    os.environ[key] = value
+                    os.environ[key] = str(value)
 
     def post_context_change(self, previous_context, current_context):
         """

@@ -250,13 +250,13 @@ apps.tk-multi-ocio.location:
 apps.tk-nuke-tools.location:
   name: tk-nuke-tools
   ## Toolkit App Entity
-  type: shotgun
-  entity_type: CustomNonProjectEntity03
-  field: sg_uploaded_app
-  version: 133939 #v1.0.3
+  # type: shotgun
+  # entity_type: CustomNonProjectEntity03
+  # field: sg_uploaded_app
+  # version: 133939 #v1.0.3
   ## Dev
-  # type: dev
-  # path: R:\work\anthony.kramer\github\tk-nuke-tools
+  type: dev
+  path: ~/Documents/tk-nuke-tools
 
 # ocio - DEPRECATED
 # apps.tk-nuke-ocio.location:

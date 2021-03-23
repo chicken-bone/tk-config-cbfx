@@ -1,6 +1,6 @@
 ocio_profile_version: 1
 
-search_path: ./:${OCIO_CONFIGS}/aces_1.0.3/luts:${OCIO_CONFIGS}/nuke-default/luts:../../shots/$SEQ/luts:../../shots/$SEQ/$SHOT/luts:luts
+search_path: /${OCIO_CONFIGS}/aces_1.0.3/luts:/${OCIO_CONFIGS}/nuke-default/luts:../../shots/$SEQ/luts:../../shots/$SEQ/$SHOT/luts:luts
 strictparsing: true
 luma: [0.2126, 0.7152, 0.0722]
 
@@ -23,13 +23,14 @@ displays:
   Monitor:
     - !<View> {name: AutoLUT CC, colorspace: Show LUT, looks: "-neutral, +dailies"}
     - !<View> {name: AutoLUT, colorspace: Show LUT}
+    - !<View> {name: Rec2020, colorspace: Output - Rec.2020}
     - !<View> {name: Rec709, colorspace: Output - Rec.709}
     - !<View> {name: sRGB, colorspace: Output - sRGB}
     - !<View> {name: Camera Raw, colorspace: Camera Raw}
     - !<View> {name: None, colorspace: raw}
 
 active_displays: [Monitor]
-active_views: [AutoLUT CC, AutoLUT, Rec709, sRGB, Camera Raw, None]
+active_views: [Rec2020, Rec709, sRGB, AutoLUT CC, AutoLUT, Camera Raw, None]
 
 looks:
   - !<Look>
@@ -62,12 +63,12 @@ colorspaces:
     isdata: false
     allocation: uniform
     allocationvars: [0, 1]
-    # to_reference: !<ColorSpaceTransform> {src: '${CAMERA_RAW}', dst: ACES - ACES2065-1}
-  	# It may be required by some older OCIO-integrated apps that the CAMERA_RAW context
-  	# variable be hard-coded in this config.ocio because the 'ColorSpaceTransform'
+    to_reference: !<ColorSpaceTransform> {src: '${CAMERA_RAW}', dst: ACES - ACES2065-1}
+    # It may be required by some older OCIO-integrated apps that the CAMERA_RAW context
+    # variable be hard-coded in this config.ocio because the 'ColorSpaceTransform'
     # did not always support context variable. If so, you can comment out the
     # above line and uncomment the below line.
-    to_reference: !<ColorSpaceTransform> {src: logc3ei800_alexawide, dst: ACES - ACES2065-1}
+    #to_reference: !<ColorSpaceTransform> {src: logc3ei800_alexawide, dst: ACES - ACES2065-1}
 
   - !<ColorSpace>
     # This custom LUT convert the incoming image to the 'Camera Raw' format
