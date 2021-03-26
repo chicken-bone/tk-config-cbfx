@@ -242,7 +242,7 @@ settings.tk-nuke.shot_step:
       sg_out_frame_field: sg_tail_out
       always_lock_range: true
     tk-multi-loader2: "@settings.tk-multi-loader2.nuke"
-    # tk-multi-publish2: "@settings.tk-multi-publish2.nuke.shot_step"
+    tk-multi-publish2: "@settings.tk-multi-publish2.nuke.shot_step"
     # tk-multi-: "@settings.tk-multi-reviewsubmission.nuke.shot"
     # tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-multi-shotgunpanel: "@settings.tk-multi-shotgunpanel.nuke"
@@ -259,7 +259,7 @@ settings.tk-nuke.shot_step:
   - {app_instance: tk-multi-breakdown, name: Scene Breakdown..., hotkey: "F3"}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: "F4"}
   # - {app_instance: tk-multi-render, name: Render Version..., hotkey: "F5"}
-  # - {app_instance: tk-multi-publish2, name: Publish..., hotkey: "F6"}
+  - {app_instance: tk-multi-publish2, name: Publish..., hotkey: "F6"}
   - {app_instance: tk-multi-setframerange, name: Sync Frame Range with Shotgun, hotkey: "F8"}
   location: "@engines.tk-nuke.location"
   compatibility_dialog_min_version: 13
