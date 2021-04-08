@@ -152,13 +152,13 @@ apps.tk-shotgun-launchfolder.location:
 # ---- Hiero apps
 
 # hiero export
-apps.tk-hiero-export.location:
-  name: tk-hiero-export
+# apps.tk-hiero-export.location:
+  # name: tk-hiero-export
   ### Toolkit App Entity
-  type: shotgun
-  entity_type: CustomNonProjectEntity03
-  field: sg_uploaded_app
-  version: 35106 #v0.5.2-cbfx
+  # type: shotgun
+  # entity_type: CustomNonProjectEntity03
+  # field: sg_uploaded_app
+  # version: 35106 #v0.5.2-cbfx
   ### Dev
   # type: dev
   # path: R:\code\work\anthony.kramer\shotgun\apps\tk-hiero-export
