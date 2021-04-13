@@ -41,7 +41,10 @@ class AppLaunch(sgtk.Hook):
 
         if system == "linux2":
             # on linux, we just run the executable directly
-            cmd = "%s %s &" % (app_path, app_args)
+            if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
+                cmd = 'gnome-terminal -- bash -c "{} {}; exec bash"'.format(app_path, app_args)
+            else:
+                cmd = "{} {} &".format(app_path, app_args)
 
         elif system == "darwin":
             # If we're on OS X, then we have two possibilities: we can be asked
