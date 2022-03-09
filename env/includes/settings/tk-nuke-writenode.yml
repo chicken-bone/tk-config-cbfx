@@ -1,13 +1,3 @@
-# Copyright (c) 2017 Shotgun Software Inc.
-#
-# CONFIDENTIAL AND PROPRIETARY
-#
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
-# Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
-# not expressly granted therein are reserved by Shotgun Software Inc.
-
 ################################################################################
 
 includes:
@@ -15,227 +5,384 @@ includes:
 
 ################################################################################
 
+# common
+image_categories: &image_categories
+  - comp
+  - precomp
+  - mattes
+  - roto
+  - rotoreview
+  - paint
+  - demo
+  - animcomp
+  - autocomp
+  - cfxcomp
+  - conceptcomp
+  - dmpcomp
+  - fxcomp
+  - layoutcomp
+  - lookdevcomp
+  - lightcomp
+
+
 # asset
 settings.tk-nuke-writenode.asset:
-  template_script_work: nuke_asset_work
+  template_script_work: asset_nuke_work_file
   show_convert_actions: True
+  image_categories: *image_categories
   write_nodes:
   - file_type: exr
-    name: main output
-    promote_write_knobs: []
+    name: EXRs
+    promote_write_knobs: [compression, autocrop]
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_asset_main_work
-    publish_template: nuke_asset_main_publish
+    render_template: asset_nuke_work_render_seq
+    publish_template: asset_nuke_work_render_seq
     settings:
-      autocrop: False
-      channels: rgb
-      compression: DWAB
+      colorspace: ACES - ACEScg
+      autocrop: True
+      channels: rgba
+      compression: Zip (1 scanline)
       dw_compression_level: 20
       datatype: 16 bit half
       metadata: all metadata
-      noprefix: True
     tank_type: Rendered Image
     tile_color: []
-  - file_type: exr
-    name: precomp
-    # promote_write_knobs: [autocrop, datatype, compression]
-    promote_write_knobs: []
+  - file_type: mov
+    name: QuickTime Movie
+    promote_write_knobs: 
+      - mov64_fps
+      - mov64_codec
+      - mov_prores_codec_profile
+      - mov64_dnxhd_codec_profile
+      - mov64_dnxhr_codec_profile
+      - mov_h264_codec_profile
+      - mov64_quality
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_asset_precomp_work
-    publish_template: nuke_asset_precomp_publish
+    render_template: asset_nuke_work_render_mov
+    publish_template: asset_nuke_pub_render_mov
     settings:
-      autocrop: True
-      channels: all
-      compression: Zip (1 scanline)
-      datatype: 16 bit half
-      metadata: all metadata
-      noprefix: True
-    tank_type: Rendered Image
-    tile_color: []
-    output_default: main
-  - file_type: exr
-    name: matte
-    # promote_write_knobs: [autocrop]
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    render_template: nuke_asset_matte_work
-    publish_template: nuke_asset_matte_publish
-    settings:
-      autocrop: True
+      colorspace: Output - Rec.709
       channels: rgb
-      compression: RLE
-      datatype: 16 bit half
-      metadata: all metadata
-      noprefix: True
+    tank_type: Movie
+    tile_color: []
+  - file_type: dpx
+    name: DPXs
+    promote_write_knobs: [datatype]
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: asset_nuke_work_render_seq
+    publish_template: asset_nuke_pub_render_seq
+    settings:
+      channels: rgb
+      datatype: "16 bit"
+      colorspace: "Camera Raw"
     tank_type: Rendered Image
     tile_color: []
-  - file_type: jpeg
-    name: review
+  - file_type: jpg
+    name: JPGs
     promote_write_knobs: []
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_asset_review_work
-    publish_template: nuke_asset_review_publish
+    render_template: asset_nuke_work_render_seq
+    publish_template: asset_nuke_pub_render_seq
     settings:
+      colorspace: "Output - Rec.709"
       channels: rgb
       _jpeg_quality: 0.9
-      _jpeg_sub_sampling: "4:2:2"
-      raw: True
-    tank_type: Rendered Image
-    tile_color: []
-  - file_type: png
-    name: demo
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    render_template: nuke_asset_demo_work
-    publish_template: nuke_asset_demo_publish
-    settings:
-      channels: rgba
-      datatype: 8 bit
-      raw: True
+      _jpeg_sub_sampling: "4:4:4"
     tank_type: Rendered Image
     tile_color: []
   - file_type: exr
-    name: smartvectors
+    name: SmartVectors
     # promote_write_knobs: [autocrop, datatype, compression]
     promote_write_knobs: []
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_asset_smartvector_work
-    publish_template: nuke_asset_smartvector_publish
+    render_template: asset_nuke_work_render_seq
+    publish_template: asset_nuke_pub_render_seq
     settings:
+      colorspace: ACES - ACEScg
       channels: all
       compression: Zip (1 scanline)
       datatype: 16 bit half
-      metadata: all metadata
-      noprefix: True
+      metadata: all metadata except input/*
       interleave: channels
       write_full_layer_names: True
     tank_type: Rendered Image
     tile_color: []
-    output_default: main
+  location: "@apps.tk-nuke-writenode.location"
+
+# project
+## note that the options here are required fields, you cannot comment
+## entire lines or the write nodes will break
+settings.tk-nuke-writenode.project:
+  template_script_work: show_nuke_work_file
+  show_convert_actions: True
+  image_categories: *image_categories
+  write_nodes:
+  - file_type: exr
+    name: EXRs
+    promote_write_knobs: [compression, autocrop]
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: show_nuke_work_render_seq
+    publish_template: show_nuke_pub_render_seq
+    settings:
+      colorspace: ACES - ACEScg
+      autocrop: True
+      channels: rgb
+      compression: Zip (1 scanline)
+      dw_compression_level: 20
+      datatype: 16 bit half
+      metadata: all metadata
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: mov
+    name: QuickTime Movie
+    promote_write_knobs: 
+      - mov64_fps
+      - mov64_codec
+      - mov_prores_codec_profile
+      - mov64_dnxhd_codec_profile
+      - mov64_dnxhr_codec_profile
+      - mov_h264_codec_profile
+      - mov64_quality
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: show_nuke_work_render_mov
+    publish_template: show_nuke_pub_render_mov
+    settings:
+      colorspace: Output - Rec.709
+      channels: rgb
+    tank_type: Movie
+    tile_color: []
+  - file_type: dpx
+    name: DPXs
+    promote_write_knobs: [datatype]
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: show_nuke_work_render_seq
+    publish_template: show_nuke_pub_render_seq
+    settings:
+      channels: rgb
+      datatype: "16 bit"
+      colorspace: "Camera Raw"
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: jpg
+    name: JPGs
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: show_nuke_work_render_seq
+    publish_template: show_nuke_pub_render_seq
+    settings:
+      colorspace: "Output - Rec.709"
+      channels: rgb
+      _jpeg_quality: 0.9
+      _jpeg_sub_sampling: "4:4:4"
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: exr
+    name: SmartVectors
+    # promote_write_knobs: [autocrop, datatype, compression]
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: show_nuke_work_render_seq
+    publish_template: show_nuke_pub_render_seq
+    settings:
+      colorspace: ACES - ACEScg
+      channels: all
+      compression: Zip (1 scanline)
+      datatype: 16 bit half
+      metadata: all metadata except input/*
+      interleave: channels
+      write_full_layer_names: True
+    tank_type: Rendered Image
+    tile_color: []
+  location: "@apps.tk-nuke-writenode.location"
+
+# sequence
+## note that the options here are required fields, you cannot comment
+## entire lines or the write nodes will break
+settings.tk-nuke-writenode.seq:
+  template_script_work: seq_nuke_work_file
+  show_convert_actions: True
+  image_categories: *image_categories
+  write_nodes:
+  - file_type: exr
+    name: EXRs
+    promote_write_knobs: [compression, autocrop]
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: seq_nuke_work_render_seq
+    publish_template: seq_nuke_pub_render_seq
+    settings:
+      colorspace: ACES - ACEScg
+      autocrop: True
+      channels: rgb
+      compression: Zip (1 scanline)
+      dw_compression_level: 20
+      datatype: 16 bit half
+      metadata: all metadata
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: mov
+    name: QuickTime Movie
+    promote_write_knobs: 
+      - mov64_fps
+      - mov64_codec
+      - mov_prores_codec_profile
+      - mov64_dnxhd_codec_profile
+      - mov64_dnxhr_codec_profile
+      - mov_h264_codec_profile
+      - mov64_quality
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: seq_nuke_work_render_mov
+    publish_template: seq_nuke_pub_render_mov
+    settings:
+      colorspace: Output - Rec.709
+      channels: rgb
+    tank_type: Movie
+    tile_color: []
+  - file_type: dpx
+    name: DPXs
+    promote_write_knobs: [datatype]
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: seq_nuke_work_render_seq
+    publish_template: seq_nuke_pub_render_seq
+    settings:
+      channels: rgb
+      datatype: "16 bit"
+      colorspace: "Camera Raw"
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: jpg
+    name: JPGs
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: seq_nuke_work_render_seq
+    publish_template: seq_nuke_pub_render_seq
+    settings:
+      colorspace: "Output - Rec.709"
+      channels: rgb
+      _jpeg_quality: 0.9
+      _jpeg_sub_sampling: "4:4:4"
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: exr
+    name: SmartVectors
+    # promote_write_knobs: [autocrop, datatype, compression]
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: seq_nuke_work_render_seq
+    publish_template: seq_nuke_pub_render_seq
+    settings:
+      colorspace: ACES - ACEScg
+      channels: all
+      compression: Zip (1 scanline)
+      datatype: 16 bit half
+      metadata: all metadata except input/*
+      interleave: channels
+      write_full_layer_names: True
+    tank_type: Rendered Image
+    tile_color: []
   location: "@apps.tk-nuke-writenode.location"
 
 # shot
 ## note that the options here are required fields, you cannot comment
 ## entire lines or the write nodes will break
 settings.tk-nuke-writenode.shot:
-  template_script_work: nuke_shot_work
+  template_script_work: shot_nuke_work_file
   show_convert_actions: True
+  image_categories: *image_categories
   write_nodes:
   - file_type: exr
-    name: main output
-    promote_write_knobs: []
+    name: EXRs
+    promote_write_knobs: [compression, autocrop]
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_shot_main_work
-    publish_template: nuke_shot_main_publish
+    render_template: shot_nuke_work_render_seq
+    publish_template: shot_nuke_pub_render_seq
     settings:
-      autocrop: False
+      colorspace: ACES - ACEScg
+      autocrop: True
       channels: rgb
-      compression: DWAB
+      compression: Zip (1 scanline)
       dw_compression_level: 20
       datatype: 16 bit half
       metadata: all metadata
-      noprefix: True
     tank_type: Rendered Image
     tile_color: []
+  - file_type: mov
+    name: QuickTime Movie
+    promote_write_knobs: 
+      - mov64_fps
+      - mov64_codec
+      - mov_prores_codec_profile
+      - mov64_dnxhd_codec_profile
+      - mov64_dnxhr_codec_profile
+      - mov_h264_codec_profile
+      - mov64_quality
+    proxy_publish_template:
+    proxy_render_template:
+    render_template: shot_nuke_work_render_mov
+    publish_template: shot_nuke_pub_render_mov
+    settings:
+      colorspace: Output - Rec.709
+      channels: rgb
+    tank_type: Movie
+    tile_color: []
   - file_type: dpx
-    name: dpx output
+    name: DPXs
     promote_write_knobs: [datatype]
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_shot_dpx_work
-    publish_template: nuke_shot_dpx_publish
+    render_template: shot_nuke_work_render_seq
+    publish_template: shot_nuke_pub_render_seq
     settings:
       channels: rgb
-      datatype: 16 bit
-      colorspace: Camera Raw
-    tank_type: Rendered Image
-    tile_color: []
-  - file_type: exr
-    name: precomp
-    # promote_write_knobs: [autocrop, datatype, compression]
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    render_template: nuke_shot_precomp_work
-    publish_template: nuke_shot_precomp_publish
-    settings:
-      autocrop: True
-      channels: all
-      compression: Zip (1 scanline)
-      datatype: 16 bit half
-      metadata: all metadata
-      noprefix: True
-    tank_type: Rendered Image
-    tile_color: []
-    output_default: main
-  - file_type: exr
-    name: matte
-    # promote_write_knobs: [autocrop]
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    render_template: nuke_shot_matte_work
-    publish_template: nuke_shot_matte_publish
-    settings:
-      autocrop: True
-      channels: rgb
-      compression: RLE
-      datatype: 16 bit half
-      metadata: all metadata
-      noprefix: True
+      datatype: "16 bit"
+      colorspace: "Camera Raw"
     tank_type: Rendered Image
     tile_color: []
   - file_type: jpeg
-    name: review
+    name: JPGs
     promote_write_knobs: []
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_shot_review_work
-    publish_template: nuke_shot_review_publish
+    render_template: shot_nuke_work_render_seq
+    publish_template: shot_nuke_pub_render_seq
     settings:
+      colorspace: "Output - Rec.709"
       channels: rgb
       _jpeg_quality: 0.9
-      _jpeg_sub_sampling: "4:2:2"
-      raw: True
-    tank_type: Rendered Image
-    tile_color: []
-  - file_type: png
-    name: demo
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    render_template: nuke_shot_demo_work
-    publish_template: nuke_shot_demo_publish
-    settings:
-      channels: rgba
-      datatype: 8 bit
-      raw: True
+      _jpeg_sub_sampling: "4:4:4"
     tank_type: Rendered Image
     tile_color: []
   - file_type: exr
-    name: smartvectors
+    name: SmartVectors
     # promote_write_knobs: [autocrop, datatype, compression]
     promote_write_knobs: []
     proxy_publish_template:
     proxy_render_template:
-    render_template: nuke_shot_smartvector_work
-    publish_template: nuke_shot_smartvector_publish
+    render_template: shot_nuke_work_render_seq
+    publish_template: shot_nuke_pub_render_seq
     settings:
+      colorspace: ACES - ACEScg
       channels: all
       compression: Zip (1 scanline)
       datatype: 16 bit half
-      metadata: all metadata
+      metadata: all metadata except input/*
       interleave: channels
       write_full_layer_names: True
-      noprefix: True
     tank_type: Rendered Image
     tile_color: []
-    output_default: main
   location: "@apps.tk-nuke-writenode.location"

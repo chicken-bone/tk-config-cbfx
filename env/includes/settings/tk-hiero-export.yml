@@ -1,0 +1,16 @@
+################################################################################
+
+includes:
+- ../app_locations.yml
+
+################################################################################
+
+settings.tk-hiero-export:
+  default_task_filter: "[['step.Step.code', 'is', 'comp']]"
+  nuke_script_toolkit_write_nodes:
+  - {channel: '', name: 'main output'}
+  template_nuke_script_path: shot_nuke_work_file
+  template_plate_path: shot_hiero_elem
+  template_render_path: shot_nuke_work_file
+  template_version: hiero_version
+  location: "@apps.tk-hiero-export.location"

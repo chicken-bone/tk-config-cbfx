@@ -15,22 +15,36 @@ includes:
 
 ################################################################################
 
-settings.tk-houdini-alembicnode.asset_step:
-  work_file_template: houdini_asset_work
+# shot step
+settings.tk-houdini-alembicnode.shot_step:
+  work_file_template: shot_houdini_work_file
   default_node_name: sg_alembic_out
   output_profiles:
   - name: Shot Work Cache
     settings: {}
     color: []
-    output_cache_template: houdini_asset_work_alembic_cache
+    output_cache_template: shot_houdini_work_alembic_cache
   location: "@apps.tk-houdini-alembicnode.location"
 
-settings.tk-houdini-alembicnode.shot_step:
-  work_file_template: houdini_shot_work
+# seq step
+settings.tk-houdini-alembicnode.seq_step:
+  work_file_template: seq_houdini_work_file
   default_node_name: sg_alembic_out
   output_profiles:
-  - name: Shot Work Cache
+  - name: Sequence Work Cache
     settings: {}
     color: []
-    output_cache_template: houdini_shot_work_alembic_cache
+    output_cache_template: seq_houdini_work_alembic_cache
   location: "@apps.tk-houdini-alembicnode.location"
+
+# asset step
+settings.tk-houdini-alembicnode.asset_step:
+  work_file_template: asset_houdini_work_file
+  default_node_name: sg_alembic_out
+  output_profiles:
+  - name: Asset Work Cache
+    settings: {}
+    color: []
+    output_cache_template: asset_houdini_work_alembic_cache
+  location: "@apps.tk-houdini-alembicnode.location"
+

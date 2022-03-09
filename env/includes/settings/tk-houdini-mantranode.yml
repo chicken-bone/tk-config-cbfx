@@ -15,30 +15,45 @@ includes:
 
 ################################################################################
 
-# asset step
-settings.tk-houdini-mantranode.asset_step:
-  work_file_template: houdini_asset_work
-  default_node_name: sg_mantra_out
-  output_profiles:
-  - name: Default Render
-    settings: {}
-    color: []
-    output_render_template: houdini_asset_render
-    output_ifd_template: houdini_asset_ifd
-    output_dcm_template: houdini_asset_dcm
-    output_extra_plane_template: houdini_asset_extra_plane
-  location: "@apps.tk-houdini-mantranode.location"
-
 # shot step
 settings.tk-houdini-mantranode.shot_step:
-  work_file_template: houdini_shot_work
+  work_file_template: shot_houdini_work_file
   default_node_name: sg_mantra_out
   output_profiles:
   - name: Default Render
     settings: {}
     color: []
-    output_render_template: houdini_shot_render
-    output_ifd_template: houdini_shot_ifd
-    output_dcm_template: houdini_shot_dcm
-    output_extra_plane_template: houdini_shot_extra_plane
+    output_render_template: shot_houdini_work_render_seq
+    output_ifd_template: shot_houdini_work_ifd_seq
+    output_dcm_template: shot_houdini_work_dcm_seq
+    output_extra_plane_template: shot_houdini_work_aov_seq
   location: "@apps.tk-houdini-mantranode.location"
+
+# seq step
+settings.tk-houdini-mantranode.seq_step:
+  work_file_template: seq_houdini_work_file
+  default_node_name: sg_mantra_out
+  output_profiles:
+  - name: Default Render
+    settings: {}
+    color: []
+    output_render_template: seq_houdini_work_render_seq
+    output_ifd_template: seq_houdini_work_ifd_seq
+    output_dcm_template: seq_houdini_work_dcm_seq
+    output_extra_plane_template: seq_houdini_work_aov_seq
+  location: "@apps.tk-houdini-mantranode.location"
+
+# asset step
+settings.tk-houdini-mantranode.asset_step:
+  work_file_template: asset_houdini_work_file
+  default_node_name: sg_mantra_out
+  output_profiles:
+  - name: Default Render
+    settings: {}
+    color: []
+    output_render_template: asset_houdini_work_render_seq
+    output_ifd_template: asset_houdini_work_ifd_seq
+    output_dcm_template: asset_houdini_work_dcm_seq
+    output_extra_plane_template: asset_houdini_work_aov_seq
+  location: "@apps.tk-houdini-mantranode.location"
+

@@ -1,13 +1,3 @@
-# Copyright (c) 2013 Shotgun Software Inc.
-#
-# CONFIDENTIAL AND PROPRIETARY
-#
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
-# Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
-# not expressly granted therein are reserved by Shotgun Software Inc.
-
 """
 App Launch Hook
 
@@ -40,7 +30,7 @@ class AppLaunch(sgtk.Hook):
         system = sys.platform
 
         if system == "linux2":
-            # on linux, we just run the executable directly
+            # on linux, we launch a gnome terminal in debug mode
             if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
                 cmd = 'gnome-terminal -- bash -c "{} {}; exec bash"'.format(app_path, app_args)
             else:
@@ -66,11 +56,12 @@ class AppLaunch(sgtk.Hook):
                 cmd = "%s %s &" % (app_path, app_args)
 
         elif system == "win32":
-            # on windows, we run the start command in order to avoid
-            # any command shells popping up as part of the application launch.
+            # on windows, we run the start command.
             if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
                 prompt_flag = ""
             else:
+                # if we're NOT in debug mode we use the the /B flag which suppress
+                # the cmd window
                 prompt_flag = "/B "
             cmd = "start {}\"{}\" \"{}\" {}".format(prompt_flag, engine_name, app_path, app_args)
 
