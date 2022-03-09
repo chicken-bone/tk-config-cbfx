@@ -53,82 +53,84 @@ class BeforeAppLaunch(sgtk.Hook):
         # os.environ["MY_SETTING"] = "foo bar"
 
         current_context = self.parent.context
-        self.logger.debug("[CBFX] engine_name: {}".format(engine_name))
-        self.logger.debug("[CBFX] current_context: {}".format(current_context))
-        self.logger.debug("[CBFX] user: {}".format(current_context.user))
-        self.logger.debug("[CBFX] app_path: {}".format(app_path))
-        self.logger.debug("[CBFX] app_args: {}".format(app_args))
-        self.logger.debug("[CBFX] version: {}".format(version))
+        self.logger.debug("engine_name: {}".format(engine_name))
+        self.logger.debug("current_context: {}".format(current_context))
+        self.logger.debug("user: {}".format(current_context.user))
+        self.logger.debug("app_path: {}".format(app_path))
+        self.logger.debug("app_args: {}".format(app_args))
+        self.logger.debug("version: {}".format(version))
 
-        # load up the tk-framework-cbfx
-        cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
-        cbfx_utils = cbfx_fw.import_module("utils")
+        # load up the tk-framework-nx
+        nx_fw = self.load_framework("tk-framework-nx_v0.x.x")
+        nx_utils = nx_fw.import_module("utils")
 
         # get all the pipe templates and set env vars
         pipe_templates = {k: v for k, v in self.sgtk.templates.iteritems() if k.startswith("pipe_")}
         for k, v in pipe_templates.iteritems():
-            v = cbfx_utils.resolve_template(v, current_context)
+            v = nx_utils.resolve_template(v, current_context)
             v = os.path.expandvars(v)
             k = k.upper()
-            self.logger.debug("[CBFX] Setting EnvVars from templates.yml: {} = {}".format(k, v))
+            self.logger.debug("[NEXODUS] Setting env var: {} = {}".format(k, v))
             os.environ[k] = v
+            # if sys.platform == 'win32':
+            #     try:
+            #         import win32wnet
+            #         k_unc = k + "_UNC"
+            #         v_unc = win32wnet.WNetGetUniversalName(v)
+            #         self.logger.debug("[NEXODUS] Setting env var: {} = {}".format(k_unc, v_unc))
+            #         os.environ[k_unc] = v_unc
+            #     except:
+            #         pass
 
-        # Get valid env var entities
+        # Apply Environment Variable entities
         env_dicts = self.__get_env_vars(current_context, engine_name, version)
 
-        # sort them into lists
         replace_envs = env_dicts["replace"]
         prepend_envs = env_dicts["prepend"]
         append_envs = env_dicts["append"]
 
-        # make a list of all the keys store them in a SGTK_ENV_VARS var in case we want to
-        # use these inside the host app (like for farm submission env)
         env_keys = list(set(replace_envs.keys() + prepend_envs.keys() + append_envs.keys()))
         for key in env_keys:
             sgtk.util.append_path_to_env_var("SGTK_ENV_VARS", os.path.expandvars(key))
         if os.getenv("TK_DEBUG"):
             sgtk.util.append_path_to_env_var("SGTK_ENV_VARS", "TK_DEBUG")
-        self.logger.debug("[CBFX] SGTK_ENV_VARS = {}".format(os.getenv("SGTK_ENV_VARS")))
+        self.logger.debug("[NEXODUS] SGTK_ENV_VARS = {}".format(os.getenv("SGTK_ENV_VARS")))
 
-        # first apply the replacements
         for env_key, value_list in replace_envs.iteritems():
             for env_value in value_list:
-                self.logger.debug("[CBFX] Setting env var: {} = {}".format(env_key, env_value))
+                self.logger.debug("[NEXODUS] Setting env var: {} = {}".format(env_key, env_value))
                 os.environ[env_key] = os.path.expandvars(env_value)
 
-        # then the prepends
         for env_key, value_list in prepend_envs.iteritems():
             for env_value in value_list:
-                self.logger.debug("[CBFX] Prepending env var: {} = {}".format(env_key, env_value))
+                self.logger.debug("[NEXODUS] Prepending env var: {} = {}".format(env_key, env_value))
                 sgtk.util.prepend_path_to_env_var(env_key, os.path.expandvars(env_value))
 
-        # then the appends
         for env_key, value_list in append_envs.iteritems():
             for env_value in value_list:
-                self.logger.debug("[CBFX] Appending env var: {} = {}".format(env_key, env_value))
+                self.logger.debug("[NEXODUS] Appending env var: {} = {}".format(env_key, env_value))
                 sgtk.util.append_path_to_env_var(env_key, os.path.expandvars(env_value))
 
-        # now lets log them all for debugging
         for method, env_dict in env_dicts.iteritems():
             for env_key in env_dict.keys():
-                self.logger.debug("[CBFX] Resolved env var: {} = {}".format(env_key, os.getenv(env_key)))
+                self.logger.debug("[NEXODUS] Env Var check: {} = {}".format(env_key, os.getenv(env_key)))
 
         # Sets the current task to in progress
         if self.parent.context.task:
             task_id = self.parent.context.task['id']
-            task = self.parent.sgtk.shotgun.find_one("Task", filters=[["id", "is", task_id]], fields=["sg_status_list"])
-            self.logger.debug("[CBFX] task {} status is {}".format(task_id, task['sg_status_list']))
+            task = self.parent.sgtk.shotgun.find_one(
+                "Task", filters=[["id", "is", task_id]], fields=["sg_status_list"])
+            self.logger.debug("[NEXODUS] task {} status is {}".format(
+                task_id, task['sg_status_list']))
             if task['sg_status_list'] == 'rdy':
                 data = {
                     'sg_status_list': 'ip'
                 }
                 self.parent.shotgun.update("Task", task_id, data)
-                self.logger.debug("[CBFX] changed task status to 'ip'")
+                self.logger.debug("[NEXODUS] changed task status to 'ip'")
 
     def __get_env_vars(self, context, engine_name, app_version):
 
-        # define filters for the SG query we're going to use to return all the
-        # valid env var entities.
         filters = [
             ['sg_status_list', 'is', 'act'],
             ['sg_exclude_projects', 'not_in', context.project],
@@ -151,13 +153,11 @@ class BeforeAppLaunch(sgtk.Hook):
 
         if engine_name is None:
 
-            # if we do NOT have an engine, grab all the vars that dont specify an engine
             no_engine_filter = ['sg_host_engines', 'is', None]
             filters.append(no_engine_filter)
 
         else:
-            # if we DO have and engine, grab all the vars for that engine AND
-            # all the entries that dont specify an engine.
+
             with_engine_filter = {
                 'filter_operator': 'any',
                 'filters': [
@@ -167,38 +167,28 @@ class BeforeAppLaunch(sgtk.Hook):
             }
             filters.append(with_engine_filter)
 
-        # map platform names to sg fields in the entity
         os_envs = {'win32': 'sg_env_win',
                    'linux2': 'sg_env_linux', 'darwin': 'sg_env_mac'}
 
-        # define the feilds we want returned from the query
         fields = ['code', 'sg_version',
                   'sg_host_min_version', 'sg_host_max_version', 'sg_default_method']
 
-        # add the platform field
         fields.append(os_envs[sys.platform])
 
-        # RUN THAT QUERY
         results = self.parent.shotgun.find(
             self.__env_vars_entity, filters, fields)
 
         env_lists = {"append": [], "prepend": [], "replace": []}
-
-        # loop thru each env var entity retuned
         for result in results:
-            # if the field for this platform is blank, skip it
             if not result.get(os_envs[sys.platform]):
                 pass
-            # check the host app against the min and max versions allowed
             elif (
                 self.__min_check(app_version, result.get('sg_host_min_version')) and
                 self.__max_check(app_version, result.get('sg_host_max_version'))
             ):
                 try:
                     self.logger.debug(
-                        "[CBFX] Valid plugin found: {}".format(result.get('code')))
-                    # if the env var passes all the tests, add it to one of the env lists
-                    # either replace, append, prepend
+                        "[NEXODUS] Valid plugin found: {}".format(result.get('code')))
                     env_lists[result.get('sg_default_method')].extend(result.get(
                         os_envs[sys.platform]).split('\n'))
                 except AttributeError as e:
@@ -207,9 +197,6 @@ class BeforeAppLaunch(sgtk.Hook):
                     pass
 
         env_dicts = {"append": {}, "prepend": {}, "replace": {}}
-
-        # now lets consolidate those entries into dicts so we can use
-        # common keys
         for key, env_list in env_lists.iteritems():
             for i in env_list:
                 try:

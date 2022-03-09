@@ -1,13 +1,3 @@
-# Copyright (c) 2015 Shotgun Software Inc.
-#
-# CONFIDENTIAL AND PROPRIETARY
-#
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
-# Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
-# not expressly granted therein are reserved by Shotgun Software Inc.
-
 # ------------------------------------------------------------------------------
 # This file defines all the different disk locations that this config uses.
 #
@@ -41,19 +31,11 @@
 # core, this requirement has been lifted and the root can be named anything.
 # ------------------------------------------------------------------------------
 
-#primary:
-
- #   description: A top-level root folder for production data. Project folders
- #       will be created beneath this location.
-
-    # these paths will be populated by the associated local storage in Shotgun
-    # at setup time.
-    #mac_path:
-    #linux_path:
-    #windows_path:
-    #shotgun_storage_id:
-    # indicates that this is the default storage root
-    #default: true
+primary:
+    description: A top-level root folder for production data. Project folders
+        will be created beneath this location.
+    shotgun_storage_id: 3
+    default: true
 
 # ------------------------------------------------------------------------------
 # Below is an example of a second storage root. This root would require a local
@@ -67,12 +49,3 @@
 #     description: "High performance storage for fast/frequent texture access"
 #     shotgun_storage_id: 2
 #
-
-primary:
-    description: High speed storage for most projects
-    shotgun_storage_id: 3
-    default: true
-
-pipeline:
-    description: Pipeline location
-    shotgun_storage_id: 104

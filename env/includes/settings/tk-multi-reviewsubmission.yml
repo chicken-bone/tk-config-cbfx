@@ -1,13 +1,3 @@
-# Copyright (c) 2017 Shotgun Software Inc.
-#
-# CONFIDENTIAL AND PROPRIETARY
-#
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
-# Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
-# not expressly granted therein are reserved by Shotgun Software Inc.
-
 ################################################################################
 
 includes:
@@ -31,7 +21,14 @@ settings.tk-multi-reviewsubmission.nuke.shot:
 
 # Maya Playblast
 settings.tk-multi-reviewsubmission.maya:
-  display_name: Playblast to Shotgun
+  display_name: Playblast to Create
+  render_media_hook: '{self}/render_media.py:{self}/{engine_name}/render_media.py'
+  submitter_hook: '{self}/submitter_create.py'
+  location: "@apps.tk-multi-reviewsubmission.location"
+
+# Photoshop Submit for review
+settings.tk-multi-reviewsubmission.photoshop:
+  display_name: Send for review
   render_media_hook: '{self}/render_media.py:{self}/{engine_name}/render_media.py'
   submitter_hook: '{self}/submitter_create.py'
   location: "@apps.tk-multi-reviewsubmission.location"

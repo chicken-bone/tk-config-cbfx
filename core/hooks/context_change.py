@@ -62,14 +62,15 @@ class ContextChange(get_hook_baseclass()):
         :param next_context: The context the engine is switching to.
         :type next_context: :class:`~sgtk.Context`
         """
+
         if next_context != current_context and next_context is not None:
 
             env_vars = {
-                "PROJECT": None,
+                "SHOW": None,
                 "SEQ": None,
                 "SHOT": None,
                 "LUT": "default.cube",
-                "CAMERA_RAW": "raw",
+                "CAMERA_RAW": None,
                 "EDIT_CUT_IN": None,
                 "EDIT_CUT_OUT": None,
                 "EDIT_HEAD_IN": None,
@@ -96,7 +97,7 @@ class ContextChange(get_hook_baseclass()):
                     seq_camera_raw, seq_lut = seq_entity.get(self.__field_camera_raw), seq_entity.get(self.__field_lut)
                     show_camera_raw, show_lut = show_entity.get(self.__field_camera_raw), show_entity.get(self.__field_lut)
 
-                    env_vars["PROJECT"] = show_code
+                    env_vars["SHOW"] = show_code
                     env_vars["SEQ"] = seq_code
                     env_vars["SHOT"] = shot_code
 
@@ -130,7 +131,7 @@ class ContextChange(get_hook_baseclass()):
                     seq_camera_raw, seq_lut = seq_entity.get(self.__field_camera_raw), seq_entity.get(self.__field_lut)
                     show_camera_raw, show_lut = show_entity.get(self.__field_camera_raw), show_entity.get(self.__field_lut)
 
-                    env_vars["PROJECT"] = show_code
+                    env_vars["SHOW"] = show_code
                     env_vars["SEQ"] = seq_code
 
                     if seq_camera_raw:
@@ -148,7 +149,7 @@ class ContextChange(get_hook_baseclass()):
                 show_entity = next_context.sgtk.shotgun.find_one('Project', [['id', 'is', show_id]], self.__show_fields)
                 show_code = show_entity.get('code')
                 show_camera_raw, show_lut = show_entity.get(self.__field_camera_raw), show_entity.get(self.__field_lut)
-                env_vars["PROJECT"] = show_code
+                env_vars["SHOW"] = show_code
                 if show_camera_raw:
                     env_vars["CAMERA_RAW"] = show_camera_raw
                 if show_lut:
