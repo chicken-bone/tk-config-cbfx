@@ -226,9 +226,9 @@ class BeforeAppLaunch(sgtk.Hook):
 
     def __resolve_nested_vars(self, envs):
         ctx = self.parent.context
-        show, seq, asset, shot = None, None, None, None
+        proj, seq, asset, shot = None, None, None, None
         if ctx.entity["type"] == "Project":
-            show = ctx.get('code')
+            proj = ctx.get('code')
         if ctx.entity["type"] == "Asset":
             asset = ctx.get('code')
         if ctx.entity["type"] == "Shot":
@@ -238,10 +238,11 @@ class BeforeAppLaunch(sgtk.Hook):
 
         for key, env_list in envs.iteritems():
             for idx, item in enumerate(env_list):
-                envs[key][idx] = envs[key][idx].replace('$SEQ', seq)
-                envs[key][idx] = envs[key][idx].replace('$SHOT', shot)
-                envs[key][idx] = envs[key][idx].replace('$SHOW', show)
-                envs[key][idx] = envs[key][idx].replace('$ASSET', asset)
+                envs[key][idx] = item.replace('$SEQ', seq)
+                envs[key][idx] = item.replace('$SHOT', shot)
+                envs[key][idx] = item.replace('$SHOW', proj)
+                envs[key][idx] = item.replace('$PROJ', proj)
+                envs[key][idx] = item.replace('$ASSET', asset)
 
     def __min_check(self, curr_version, min_version):
         if min_version is None:
