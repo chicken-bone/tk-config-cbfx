@@ -61,13 +61,13 @@ class BeforeAppLaunch(sgtk.Hook):
         self.logger.debug("version: {}".format(version))
 
         # load up the tk-framework-cbfx
-        cbfx_fw = self.load_framework("tk-framework-cbfx_v1.0.x")
-        cbfx_utils = cbfx_fw.import_module("utils")
+        nx_fw = self.load_framework("tk-framework-nx_v0.x.x")
+        nx_utils = nx_fw.import_module("utils")
 
         # get all the pipe templates and set env vars
         pipe_templates = {k: v for k, v in self.sgtk.templates.iteritems() if k.startswith("pipe_")}
         for k, v in pipe_templates.iteritems():
-            v = cbfx_utils.resolve_template(v, current_context)
+            v = nx_utils.resolve_template(v, current_context)
             v = os.path.expandvars(v)
             k = k.upper()
             self.logger.debug("Setting EnvVars from templates.yml: {} = {}".format(k, v))
