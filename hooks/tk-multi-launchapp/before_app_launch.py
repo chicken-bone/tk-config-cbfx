@@ -226,23 +226,32 @@ class BeforeAppLaunch(sgtk.Hook):
 
     def __resolve_nested_vars(self, envs):
         ctx = self.parent.context
-        proj, seq, asset, shot = None, None, None, None
-        if ctx.entity["type"] == "Project":
-            proj = ctx.get('code')
-        if ctx.entity["type"] == "Asset":
-            asset = ctx.get('code')
-        if ctx.entity["type"] == "Shot":
-            shot = ctx.get('code')
-        if ctx.entity["type"] == "Sequence":
-            seq = ctx.get('code')
+        entity = ctx.entity
+        proj, seq, asset, shot = '', '', '', ''
+        if not entity:
+            proj_entity = self.parent.sgtk.shotgun.find_one(
+                'Project',
+                filters=[['id', 'is', self.parent.context.project['id']]],
+                fields=['code'])
+            proj = proj_entity.get('code')
+        else:
+            if ctx.entity["type"] == "Project":
+                proj = ctx.get('code')
+            if ctx.entity["type"] == "Asset":
+                asset = ctx.get('code')
+            if ctx.entity["type"] == "Shot":
+                shot = ctx.get('code')
+            if ctx.entity["type"] == "Sequence":
+                seq = ctx.get('code')
 
-        for key, env_list in envs.iteritems():
-            for idx, item in enumerate(env_list):
-                envs[key][idx] = item.replace('$SEQ', seq)
-                envs[key][idx] = item.replace('$SHOT', shot)
-                envs[key][idx] = item.replace('$SHOW', proj)
-                envs[key][idx] = item.replace('$PROJ', proj)
-                envs[key][idx] = item.replace('$ASSET', asset)
+        for method in envs:  # methods: replace, append, prepend
+            for key, env_list in envs[method].iteritems():
+                for idx, item in enumerate(env_list):
+                    envs[method][key][idx] = envs[method][key][idx].replace('$SEQ', seq)
+                    envs[method][key][idx] = envs[method][key][idx].replace('$SHOT', shot)
+                    envs[method][key][idx] = envs[method][key][idx].replace('$SHOW', proj)
+                    envs[method][key][idx] = envs[method][key][idx].replace('$PROJ', proj)
+                    envs[method][key][idx] = envs[method][key][idx].replace('$ASSET', asset)
 
     def __min_check(self, curr_version, min_version):
         if min_version is None:
