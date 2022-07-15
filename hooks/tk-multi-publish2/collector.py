@@ -132,6 +132,11 @@ class BasicSceneCollector(HookBaseClass):
                     "icon": self._get_icon_path("image.png"),
                     "item_type": "file.image",
                 },
+                "Image Proxy": {
+                    "extensions": ["jpeg", "jpg"],
+                    "icon": self._get_icon_path("image.png"),
+                    "item_type": "file.image_proxy",
+                },
                 "Video": {
                     "extensions": ["mov", "mp4", "m4v", "avi", "wmv", "flv", "webm"],
                     "icon": self._get_icon_path("video.png"),
