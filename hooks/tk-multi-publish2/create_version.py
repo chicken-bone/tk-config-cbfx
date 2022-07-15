@@ -277,9 +277,14 @@ class BasicVersionPlugin(HookBaseClass):
         if upload_thumb:
             # only upload thumb if we are not uploading the content. with
             # uploaded content, the thumb is automatically extracted.
-            self.logger.info("Uploading thumbnail...")
-            publisher.shotgun.upload_thumbnail("Version", version["id"], thumb)
-
+            if thumb:
+                if os.path.exists(thumb):
+                    self.logger.info("Uploading thumbnail...")
+                    publisher.shotgun.upload_thumbnail("Version", version["id"], thumb)
+                else:
+                    self.logger.info("No thumbnail found, skipping")
+            else:
+                self.logger.info("No thumbnail found, skipping")
 
     def _get_version_name(self, path):
         """
