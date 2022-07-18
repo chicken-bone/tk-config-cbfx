@@ -84,7 +84,7 @@ class AttachToVersionPlugin(HookBaseClass):
         accept() method. Strings can contain glob patters such as *, for example
         ["maya.*", "file.maya"]
         """
-        return ["file.image", "file.image.sequence", "file.video"]
+        return ["file.image", "file.image.sequence", "file.image_proxy", "file.image_proxy.sequence", "file.video"]
 
     ############################################################################
     # standard publish plugin methods
@@ -232,6 +232,9 @@ class AttachToVersionPlugin(HookBaseClass):
             path = item.properties.path
 
         if version_item:
+
+            if item.type_spec in ["file.image_proxy", "file.image_proxy.sequence"]:
+                version_item.properties.version_finalize["update"].update({"sg_path_to_proxy": path})
 
             if item.type_spec in ["file.image", "file.image.sequence"]:
                 version_item.properties.version_finalize["update"].update({"sg_path_to_frames": path})

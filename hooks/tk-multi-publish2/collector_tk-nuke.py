@@ -18,6 +18,7 @@ HookBaseClass = sgtk.get_hook_baseclass()
 _NUKE_OUTPUTS = {
     "Write": "file",
     "WriteGeo": "file",
+    "GROUP_NODE_CBFX_Write": "file",
 }
 
 
@@ -259,8 +260,15 @@ class NukeSessionCollector(HookBaseClass):
         # iterate over all the known output types
         for node_type in _NUKE_OUTPUTS:
 
+            self.logger.info("Processing %s" % node_type)
+
             # get all the instances of the node type
-            all_nodes_of_type = [n for n in nuke.allNodes() if n.Class() == node_type]
+            if node_type.startswith('GROUP_NODE_'):
+                # handle group nodes differently, match against their node name
+                node_name = node_type.replace('GROUP_NODE_', '')
+                all_nodes_of_type = [n for n in nuke.allNodes() if n.name().startswith(node_name)]
+            else:
+                all_nodes_of_type = [n for n in nuke.allNodes() if n.Class() == node_type]
 
             first_frame = int(nuke.root()["first_frame"].value())
             last_frame = int(nuke.root()["last_frame"].value())
