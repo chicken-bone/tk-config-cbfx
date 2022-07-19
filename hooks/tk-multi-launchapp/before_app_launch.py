@@ -235,23 +235,28 @@ class BeforeAppLaunch(sgtk.Hook):
                 fields=['code'])
             proj = proj_entity.get('code')
         else:
-            if ctx.entity["type"] == "Project":
-                proj = ctx.get('code')
-            if ctx.entity["type"] == "Asset":
-                asset = ctx.get('code')
-            if ctx.entity["type"] == "Shot":
-                shot = ctx.get('code')
-            if ctx.entity["type"] == "Sequence":
-                seq = ctx.get('code')
+            if entity["type"] == "Project":
+                proj = entity.get('code')
+            if entity["type"] == "Asset":
+                asset = entity.get('code')
+            if entity["type"] == "Shot":
+                shot = entity.get('code')
+            if entity["type"] == "Sequence":
+                seq = entity.get('code')
 
         for method in envs:  # methods: replace, append, prepend
             for key, env_list in envs[method].iteritems():
                 for idx, item in enumerate(env_list):
-                    envs[method][key][idx] = envs[method][key][idx].replace('$SEQ', seq)
-                    envs[method][key][idx] = envs[method][key][idx].replace('$SHOT', shot)
-                    envs[method][key][idx] = envs[method][key][idx].replace('$SHOW', proj)
-                    envs[method][key][idx] = envs[method][key][idx].replace('$PROJ', proj)
-                    envs[method][key][idx] = envs[method][key][idx].replace('$ASSET', asset)
+                    if seq:
+                        envs[method][key][idx] = envs[method][key][idx].replace('$SEQ', seq)
+                    if shot:
+                        envs[method][key][idx] = envs[method][key][idx].replace('$SHOT', shot)
+                    if proj:
+                        envs[method][key][idx] = envs[method][key][idx].replace('$SHOW', proj)
+                    if proj:
+                        envs[method][key][idx] = envs[method][key][idx].replace('$PROJ', proj)
+                    if asset:
+                        envs[method][key][idx] = envs[method][key][idx].replace('$ASSET', asset)
 
     def __min_check(self, curr_version, min_version):
         if min_version is None:
