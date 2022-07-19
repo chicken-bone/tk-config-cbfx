@@ -7,6 +7,9 @@ core/pipeline_configuration.yml
 core/shotgun.yml
 tk-metadata
 
+# DCC specific temp files
+*.nk~
+*.nk.autosave
 
 # compiled python files
 *.py[co]

@@ -1,0 +1,120 @@
+#! /usr/local/Nuke12.2v5/libnuke-12.2.5.so -nx
+#write_info Write1 file:"/shows/[value showacronym]/shots/[value shotname]/tasks/[value taskname]/images/[value taskname]/[value scriptname]/[value res]/[value scriptname].%04d.exr" format:"640 480 1" chans:":" framerange:"1 100" fps:"0" colorspace:"default (linear)" datatype:"16 bit half" transfer:"unknown" views:"main" colorManagement:"Nuke"
+version 12.2 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="597" stretch="1"/>
+            <splitter orientation="2">
+                <split size="487"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                    <page id="uk.co.thefoundry.scripteditor.2"/>
+                </dock>
+                <split size="343"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1259"/>
+            <dock id="" activePageId="DAG.1" focus="true">
+                <page id="DAG.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_write_v001.nk
+ title "BSD_101_001_0075 / cbfx_write_v001.nk"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x7fbaff
+ label "Add custom setups here, if\nneeded. \n\nCrops, reformats, for example"
+ note_font_size 36
+ xpos -217
+ ypos 25
+ appearance Border
+ border_width 5
+ bdwidth 532
+ bdheight 364
+}
+Read {
+ inputs 0
+ origset true
+ name Read1
+ xpos -173
+ ypos -147
+}
+Input {
+ inputs 0
+ name Input1
+ xpos 0
+ ypos -294
+}
+CopyMetaData {
+ inputs 2
+ mergeMode "Meta only"
+ name CopyMetaData1
+ xpos 0
+ ypos -124
+}
+Write {
+ file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value taskname]/\[value scriptname]/\[value res]/\[value scriptname].%04d.exr"
+ file_type exr
+ compression "PIZ Wavelet (32 scanlines)"
+ first_part rgba
+ create_directories true
+ checkHashOnRead false
+ name Write1
+ label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+ xpos 0
+ ypos 529
+ addUserKnob {20 User l "Custom Knobs"}
+ addUserKnob {1 scriptname}
+ scriptname "\[file rootname \[basename \[value root.name]]]"
+ addUserKnob {1 shotname}
+ shotname "\[join \[lrange \[split \[value scriptname] _] 0 end-2] _]"
+ addUserKnob {1 versionnumber}
+ versionnumber "\[lindex \[split \[lindex \[split \[value scriptname] _] end] v] end]"
+ addUserKnob {1 showacronym}
+ showacronym "\[string tolower \[lindex \[split \[value scriptname] _] 0]]"
+ addUserKnob {1 taskname}
+ taskname "\[lindex \[split \[value scriptname] _] end-1]"
+ addUserKnob {1 res l resolution}
+ res "\[value format.r]x\[value format.t]"
+}
+Output {
+ name Output1
+ xpos 0
+ ypos 691
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "When the cbfx write node is initially created, an attempt is made to find the plate, for use in copying metadata. \nIf multiple plates are found, the user is promped with a choice from a list. \n\nThis plate is then populated in the Read node connected to this CopyMetadata node.\n\nGenerally, you should leave these two nodes alone."
+ xpos 147
+ ypos -149
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "Modify your write node settings per your project's requirements!\nThings like the output format, compression, colorspace should all be changed as per the show specs.\n\nNOTE: This Write node has special knobs added to the \"Custom Knobs\" tab. These probably shouldn't be edited unless you know what you're doing.\nThey figure out pieces of the total file path, ultimately shortening the expression you'd normally see in the \"File\" knob. This way it's more human-readable."
+ xpos 246
+ ypos 534
+}

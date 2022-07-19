@@ -1,0 +1,238 @@
+#! /usr/local/Nuke12.2v5/libnuke-12.2.5.so -nx
+#write_info Write1 file:"/shows/[value showacronym]/shots/[value shotname]/tasks/[value taskname]/images/[value taskname]/[value scriptname]/[value res]/[value scriptname].mov" format:"3840 2160 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1001 1108" fps:"0" colorspace:"rec709" datatype:"unknown" transfer:"unknown" views:"main" colorManagement:"Nuke"
+version 12.2 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="597" stretch="1"/>
+            <splitter orientation="2">
+                <split size="487"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="uk.co.thefoundry.scripteditor.2"/>
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="343"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1259"/>
+            <dock id="" activePageId="DAG.1" focus="true">
+                <page id="DAG.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_publish_v001.nk
+ frame 1001
+ first_frame 1001
+ last_frame 1108
+ lock_range true
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x7fbaff
+ label "Add custom setups here, if\nneeded.\n\nCustom crops or reformats, for\nexample."
+ note_font_size 36
+ xpos -697
+ ypos 15
+ appearance Border
+ border_width 5
+ bdwidth 532
+ bdheight 442
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "The CBFX Color node will handle applying color automatically, based on the show's color template. \nGenerally, you shouldn't touch this node if at all possible. "
+ xpos -379
+ ypos -165
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ label "Do not change the name of this read node from \"Render\"\nThis is a requirement for the programming."
+ xpos -361
+ ypos -355
+}
+StickyNote {
+ inputs 0
+ name StickyNote5
+ label "Any Slate node found in this scene will have its text updated automatically during the submission."
+ xpos -361
+ ypos 632
+}
+Read {
+ inputs 0
+ file_type exr
+ format "3840 2160 0 0 3840 2160 1 UHD_4K"
+ origset true
+ raw true
+ name Render
+ xpos -488
+ ypos -368
+}
+Group {
+ name CBFX_Color
+ tile_color 0x635aff
+ xpos -488
+ ypos -160
+ addUserKnob {20 User l Settings}
+ addUserKnob {26 text l " " -STARTLINE T "Search Context"}
+ addUserKnob {4 search_context l " " M {"The Current Scene File" "The Connected Node"}}
+ addUserKnob {26 text_1 l "" +STARTLINE}
+ addUserKnob {22 show_in_filesystem l "<img height=10 src=\":qrc/images/File_Knob.png\"><b> Show in Filesystem</b>" T "import os\nfrom imp import reload\n\n\n\ndirectory = None\n\nwith nuke.thisNode():\n    for i in nuke.allNodes():\n        if i.name().lower().replace('_', '').startswith('shotlut'):\n            if 'file' in i.knobs():\n                directory = i\['file'].evaluate()\n\nif directory:\n    if os.path.isfile(directory):\n        directory = os.path.dirname(directory)\n\n    import utils\n    reload(utils)\n    utils.browse_directory(directory)" +STARTLINE}
+ addUserKnob {22 load_template l <br><b>Load<br>Template</b><br> t "Imports the color template for the current nuke scene" T "from imp import reload\nimport auto_lut\nreload(auto_lut)\nauto_lut.main()" +STARTLINE}
+ addUserKnob {22 set_viewer_input l "<br><b>Set as<br>Input Process</b><br>" t "Sets this node as the active viewer's \"Viewer Input\" process. Doing so forces Nuke to always look through this node, no matter what your viewer is currently connected to.\n\nUseful for previewing the full color process on specific parts of the node tree. " -STARTLINE T "v = nuke.activeViewer()\nv_node = v.node()\n\nv_node\['input_process_node'].setValue(nuke.thisNode().name())\nv_node\['input_process'].setValue(True)"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -660
+  ypos 60
+ }
+ Output {
+  name Output1
+  xpos -660
+  ypos 413
+ }
+end_group
+Dot {
+ name Dot1
+ xpos -454
+ ypos 216
+}
+Reformat {
+ type "to box"
+ format "1920 1080 0 0 1920 1080 1 hd"
+ box_width 1920
+ box_height 1080
+ box_fixed true
+ filter Mitchell
+ black_outside true
+ name REFORMAT_HD
+ xpos -488
+ ypos 311
+ disable true
+}
+Crop {
+ box {0 0 1920 1080}
+ name Crop5
+ xpos -488
+ ypos 356
+ disable true
+}
+Overlays_v01.gizmo {
+ name Overlays
+ xpos -488
+ ypos 589
+ text_ul CBFX
+ text_uc "\[lindex \[split \[value Render.file] /] 2]"
+ text_ur "\[clock format \[clock seconds] -format \"%Y\"]-\[date %m]-\[date %d]"
+ text_ll "\[value Slate_v02_1.content_line2]"
+ text_lc ""
+ text_lr "\[frame]"
+ slate_frame none
+ handle_head 8
+ handle_tail 8
+ font /shows/see2/pipe/fonts/rajdhani/rajdhani-medium.ttf
+ size 50
+ text_color 0.74
+ blur 7.85
+ distance 5
+ h_padding 0.004
+ v_padding 0.004
+ text_voffset -0.002
+ mask1_enable false
+ mask2_enable false
+ mask2_aspect 2.26
+ mask2_opacity 0.4
+ wm_text WATERMARK
+ font_1 /shows/see2/pipe/fonts/rajdhani/rajdhani-medium.ttf
+ file /path/to/logo/image.png
+}
+Slate_v02 {
+ name Slate_v02_1
+ note_font "Bitstream Vera Sans"
+ xpos -488
+ ypos 635
+ project_title ""
+ title_line1 SHOT:
+ content_line1 ""
+ title_line2 VERSION:
+ content_line2 ""
+ title_line3 DATE:
+ content_line3 "\[date %d/%m/%Y]"
+ title_line4 FRAMES:
+ content_line4 "\[expr \[value input0.first_frame] ] - \[value input0.last_frame]"
+ title_line5 "VFX SCOPE:"
+ content_line5 ""
+ title_line6 ARTIST:
+ content_line6 ""
+ title_line7 "SUBMISSION NOTE:"
+ content_line7 ""
+ title_line8 ""
+ content_line8 ""
+ custom_frames 0,20
+ project_font /pipe/common/fonts/rajdhani/rajdhani-bold.ttf
+ labels_font /pipe/common/fonts/rajdhani/rajdhani-bold.ttf
+ info_font /pipe/common/fonts/rajdhani/rajdhani-bold.ttf
+ file /shows/pre-pro/pipe/CBFX_Slate_2022_BG.exr
+ file_1 "/elementlibrary/Dirt/Copy of Dirt Water Damage.jpg"
+ font /pipe/common/fonts/Open_Sans/OpenSans-Light.ttf
+}
+Write {
+ file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value taskname]/\[value scriptname]/\[value res]/\[value scriptname].mov"
+ colorspace rec709
+ file_type mov
+ mov64_format "mov (QuickTime / MOV)"
+ mov64_codec AVdn
+ mov64_dnxhd_codec_profile "DNxHD 422 8-bit 36Mbit"
+ mov_h264_codec_profile "High 4:2:0 8-bit"
+ mov64_pixel_format {{0} "yuv420p\tYCbCr 4:2:0 8-bit"}
+ mov64_quality High
+ mov64_advanced 1
+ mov64_fast_start true
+ mov64_write_timecode true
+ mov64_gop_size 12
+ mov64_b_frames 0
+ mov64_bitrate 20000
+ mov64_bitrate_tolerance 4000000
+ mov64_quality_min 1
+ mov64_quality_max 3
+ create_directories true
+ checkHashOnRead false
+ name Write1
+ label "\[value file]"
+ xpos -488
+ ypos 795
+ addUserKnob {20 User l "Custom Knobs"}
+ addUserKnob {1 scriptname}
+ scriptname "\[file rootname \[basename \[value root.name]]]"
+ addUserKnob {1 shotname}
+ shotname "\[join \[lrange \[split \[value scriptname] _] 0 end-2] _]"
+ addUserKnob {1 versionnumber}
+ versionnumber "\[lindex \[split \[lindex \[split \[value scriptname] _] end] v] end]"
+ addUserKnob {1 showacronym}
+ showacronym "\[string tolower \[lindex \[split \[value scriptname] _] 0]]"
+ addUserKnob {1 taskname}
+ taskname "\[lindex \[split \[value scriptname] _] end-1]"
+ addUserKnob {1 res l resolution}
+ res "\[value format.r]x\[value format.t]"
+}
