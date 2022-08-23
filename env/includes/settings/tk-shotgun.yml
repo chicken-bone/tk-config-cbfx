@@ -8,7 +8,8 @@ includes:
 - ./tk-shotgun-folders.yml
 - ./tk-shotgun-launchfolder.yml
 - ./tk-shotgun-launchpublish.yml
-- ./tk-delivery.yml
+# - ./tk-delivery.yml
+- ./cbfx-delivery.yml
 
 ################################################################################
 
@@ -68,7 +69,8 @@ settings.tk-shotgun.publishedfile:
 # playlist
 settings.tk-shotgun.playlist:
   apps:
-    tk-delivery: "@settings.tk-delivery"
+    # tk-delivery: "@settings.tk-delivery"
+    cbfx-delivery: "@settings.cbfx-delivery"
   location: "@engines.tk-shotgun.location"
 
 # sequence

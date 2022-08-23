@@ -1,0 +1,11 @@
+################################################################################
+
+includes:
+- ../app_locations.yml
+
+################################################################################
+
+settings.cbfx-delivery:
+  deny_permissions: ['Artist']
+  deny_platforms: []
+  location: "@apps.cbfx-delivery.location"

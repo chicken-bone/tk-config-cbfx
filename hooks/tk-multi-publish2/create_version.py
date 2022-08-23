@@ -269,10 +269,12 @@ class BasicVersionPlugin(HookBaseClass):
                     else:
                         upload_path = path
 
-                    publisher.shotgun.upload(
-                        "Version", version["id"], upload_path, field
-                    )
-                    upload_thumb = False
+                    self.logger.info("Checking that content exists on disk...")
+                    if os.path.exists(upload_path):
+                        publisher.shotgun.upload(
+                            "Version", version["id"], upload_path, field
+                        )
+                        upload_thumb = False
 
         if upload_thumb:
             # only upload thumb if we are not uploading the content. with
