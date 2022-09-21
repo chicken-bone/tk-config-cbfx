@@ -1,27 +1,23 @@
 #! /usr/local/Nuke12.2v5/libnuke-12.2.5.so -nx
-#write_info Write1 file:"/shows/[value showacronym]/shots/[value shotname]/tasks/[value taskname]/images/[value taskname]/[value scriptname]/[value res]/[value scriptname].%04d.exr" format:"640 480 1" chans:":" framerange:"1 100" fps:"0" colorspace:"default (linear)" datatype:"16 bit half" transfer:"unknown" views:"main" colorManagement:"Nuke"
+#write_info Write1 file:"/shows/[value showacronym]/shots/[value shotname]/tasks/[value taskshortname]/images/[value taskshortname]/[value scriptname]/[value res]/[value scriptname].%04d.exr" format:"640 480 1" chans:":" framerange:"1 100" fps:"0" colorspace:"default (scene_linear)" datatype:"16 bit half" transfer:"unknown" views:"main" colorManagement:"OCIO"
 version 12.2 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
     <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
         <splitter orientation="1">
-            <split size="40"/>
-            <dock id="" hideTitles="1" activePageId="Toolbar.1">
-                <page id="Toolbar.1"/>
-            </dock>
-            <split size="597" stretch="1"/>
+            <split size="642" stretch="1"/>
             <splitter orientation="2">
-                <split size="487"/>
+                <split size="511"/>
                 <dock id="" activePageId="Viewer.1">
-                    <page id="Viewer.1"/>
                     <page id="uk.co.thefoundry.scripteditor.2"/>
+                    <page id="Viewer.1"/>
                 </dock>
-                <split size="343"/>
+                <split size="319"/>
                 <dock id="" activePageId="Properties.1">
                     <page id="Properties.1"/>
                 </dock>
             </splitter>
-            <split size="1259"/>
+            <split size="1258"/>
             <dock id="" activePageId="DAG.1" focus="true">
                 <page id="DAG.1"/>
             </dock>
@@ -31,15 +27,15 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_write_v001.nk
- title "BSD_101_001_0075 / cbfx_write_v001.nk"
- colorManagement Nuke
- workingSpaceLUT linear
+ name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_write_v000.nk
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT scene_linear
  monitorLut sRGB
- int8Lut sRGB
- int16Lut sRGB
- logLut Cineon
- floatLut linear
+ int8Lut matte_paint
+ int16Lut texture_paint
+ logLut compositing_log
+ floatLut scene_linear
 }
 BackdropNode {
  inputs 0
@@ -53,6 +49,20 @@ BackdropNode {
  border_width 5
  bdwidth 532
  bdheight 364
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "When the cbfx write node is initially created, an attempt is made to find the plate, for use in copying metadata. \nIf multiple plates are found, the user is promped with a choice from a list. \n\nThis plate is then populated in the Read node connected to this CopyMetadata node.\n\nGenerally, you should leave these two nodes alone."
+ xpos 147
+ ypos -149
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "Modify your write node settings per your project's requirements!\nThings like the output format, compression, colorspace should all be changed as per the show specs.\n\nNOTE: This Write node has special knobs added to the \"Custom Knobs\" tab. These probably shouldn't be edited unless you know what you're doing.\nThey figure out pieces of the total file path, ultimately shortening the expression you'd normally see in the \"File\" knob. This way it's more human-readable."
+ xpos 245
+ ypos 517
 }
 Read {
  inputs 0
@@ -75,27 +85,29 @@ CopyMetaData {
  ypos -124
 }
 Write {
- file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value taskname]/\[value scriptname]/\[value res]/\[value scriptname].%04d.exr"
+ file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskshortname]/images/\[value taskshortname]/\[value scriptname]/\[value res]/\[value scriptname].%04d.exr"
  file_type exr
- compression "PIZ Wavelet (32 scanlines)"
+ metadata "all metadata"
  first_part rgba
  create_directories true
  checkHashOnRead false
  name Write1
- label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+ label "\n\[value scriptname]\n\[value shotname]\n\[value versionnumber]\n\[value showacronym]\n\[value taskname]\n\[value taskshortname]\n\[value res]\n\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
  xpos 0
- ypos 529
+ ypos 448
  addUserKnob {20 User l "Custom Knobs"}
  addUserKnob {1 scriptname}
  scriptname "\[file rootname \[basename \[value root.name]]]"
  addUserKnob {1 shotname}
- shotname "\[join \[lrange \[split \[value scriptname] _] 0 end-2] _]"
+ shotname "\[join \[lrange \[split \[value scriptname] _] 0 3] _]"
  addUserKnob {1 versionnumber}
  versionnumber "\[lindex \[split \[lindex \[split \[value scriptname] _] end] v] end]"
  addUserKnob {1 showacronym}
  showacronym "\[string tolower \[lindex \[split \[value scriptname] _] 0]]"
  addUserKnob {1 taskname}
- taskname "\[lindex \[split \[value scriptname] _] end-1]"
+ taskname "\[join \[lrange \[split \[value scriptname] _] 4 end-1] _]"
+ addUserKnob {1 taskshortname}
+ taskshortname "\[lindex \[split \[value taskname] _] 0]"
  addUserKnob {1 res l resolution}
  res "\[value format.r]x\[value format.t]"
 }
@@ -103,18 +115,4 @@ Output {
  name Output1
  xpos 0
  ypos 691
-}
-StickyNote {
- inputs 0
- name StickyNote2
- label "When the cbfx write node is initially created, an attempt is made to find the plate, for use in copying metadata. \nIf multiple plates are found, the user is promped with a choice from a list. \n\nThis plate is then populated in the Read node connected to this CopyMetadata node.\n\nGenerally, you should leave these two nodes alone."
- xpos 147
- ypos -149
-}
-StickyNote {
- inputs 0
- name StickyNote1
- label "Modify your write node settings per your project's requirements!\nThings like the output format, compression, colorspace should all be changed as per the show specs.\n\nNOTE: This Write node has special knobs added to the \"Custom Knobs\" tab. These probably shouldn't be edited unless you know what you're doing.\nThey figure out pieces of the total file path, ultimately shortening the expression you'd normally see in the \"File\" knob. This way it's more human-readable."
- xpos 246
- ypos 534
 }
