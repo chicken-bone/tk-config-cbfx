@@ -218,19 +218,6 @@ apps.tk-nuke-tools.location:
   field: sg_uploaded_app
   version: 183555 #tk-nuke_tools-0.1.4
 
-# # delivery app
-# apps.tk-delivery.location:
-#   ### Toolkit Component Entity
-#   name: tk-delivery
-#   type: shotgun
-#   entity_type: CustomNonProjectEntity03
-#   field: sg_uploaded_app
-#   version: 186263 #tk-delivery-0.0.7
-#   ### Dev
-#   # name: tk-delivery
-#   # type: dev
-#   # path: ~/Documents/tk-delivery
-
 # ---- CBFX Custom apps
 
 # delivery app
