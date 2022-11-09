@@ -15,6 +15,7 @@ includes:
 - ./tk-multi-ocio.yml
 - ./tk-nuke-tools.yml
 # - ./tk-multi-deadline-render.yml
+- ./cbfx-timelogger.yml
 
 ################################################################################
 # Hiero
@@ -93,6 +94,7 @@ settings.tk-nuke.asset:
     tk-multi-screeningroom: '@settings.tk-multi-screeningroom.rv'
     tk-multi-shotgunpanel: '@settings.tk-multi-shotgunpanel'
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: Change Context...}
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
@@ -121,6 +123,7 @@ settings.tk-nuke.asset_step:
     tk-multi-snapshot: '@settings.tk-multi-snapshot.nuke.asset_step'
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.nuke.asset_step'
     tk-nuke-writenode: '@settings.tk-nuke-writenode.asset'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: Change Context...}
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
@@ -147,6 +150,7 @@ settings.tk-nuke.project:
     tk-multi-screeningroom: '@settings.tk-multi-screeningroom.rv'
     tk-multi-shotgunpanel: '@settings.tk-multi-shotgunpanel'
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.launch_at_startup'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: Change Context...}
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
@@ -175,6 +179,7 @@ settings.tk-nuke.project_step:
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.nuke.project_step'
     tk-multi-publish2: '@settings.tk-multi-publish2.nuke.project_step'
     tk-nuke-writenode: '@settings.tk-nuke-writenode.project'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
   - {app_instance: tk-multi-workfiles2, name: File Save..., hotkey: ctrl+shift+s}
@@ -206,6 +211,7 @@ settings.tk-nuke.sequence:
     tk-multi-screeningroom: '@settings.tk-multi-screeningroom.rv'
     tk-multi-shotgunpanel: '@settings.tk-multi-shotgunpanel'
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: F4}
@@ -232,6 +238,7 @@ settings.tk-nuke.shot:
     tk-multi-screeningroom: '@settings.tk-multi-screeningroom.rv'
     tk-multi-shotgunpanel: '@settings.tk-multi-shotgunpanel'
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.launch_at_startup'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: F4}
@@ -264,6 +271,7 @@ settings.tk-nuke.seq_step:
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.nuke.seq_step'
     tk-multi-publish2: '@settings.tk-multi-publish2.nuke.seq_step'
     tk-nuke-writenode: '@settings.tk-nuke-writenode.seq'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
   - {app_instance: tk-multi-workfiles2, name: File Save..., hotkey: ctrl+shift+s}
@@ -308,6 +316,7 @@ settings.tk-nuke.shot_step:
     tk-multi-workfiles2: '@settings.tk-multi-workfiles2.nuke.shot_step'
     tk-multi-publish2: '@settings.tk-multi-publish2.nuke.shot_step'
     tk-nuke-writenode: '@settings.tk-nuke-writenode.shot'
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open..., hotkey: ctrl+o}
   - {app_instance: tk-multi-workfiles2, name: File Save..., hotkey: ctrl+shift+s}
@@ -317,7 +326,6 @@ settings.tk-nuke.shot_step:
   - {app_instance: tk-multi-shotgunpanel, name: Shotgun Panel..., hotkey: F4}
   - {app_instance: tk-multi-setframerange, name: Sync Editorial Data from Shotgun,
     hotkey: F8}
-  - {app_instance: tk-multi-publish2, name: Publish..., hotkey: F12}
   location: '@engines.tk-nuke.location'
   project_favourite_name: ""
   favourite_directories:

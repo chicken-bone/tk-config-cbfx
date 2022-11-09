@@ -1,0 +1,11 @@
+################################################################################
+
+includes:
+- ../app_locations.yml
+
+################################################################################
+
+settings.cbfx-timelogger:
+  deny_permissions: []
+  deny_platforms: []
+  location: "@apps.cbfx-timelogger.location"

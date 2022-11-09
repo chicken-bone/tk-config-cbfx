@@ -236,6 +236,14 @@ apps.cbfx-deleter.location:
   linux_path: /pipe/etc/sgtk/cbfx-deleter
   mac_path: /Volumes/pipe/etc/sgtk/cbfx-deleter
 
+# timelogger app
+apps.cbfx-timelogger.location:
+  name: cbfx-timelogger
+  type: path
+  windows_path: P:\pipe\etc\sgtk\cbfx-timelogger
+  linux_path: /pipe/etc/sgtk/cbfx-timelogger
+  mac_path: /Volumes/pipe/etc/sgtk/cbfx-timelogger
+
 ################################################################################
 # reference all of the common frameworks
 frameworks: '@frameworks'

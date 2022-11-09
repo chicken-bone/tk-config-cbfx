@@ -7,6 +7,7 @@ includes:
 - ./tk-multi-publish2.yml
 - ./tk-multi-demo.yml
 - ./tk-multi-screeningroom.yml
+- ./cbfx-timelogger.yml
 
 ################################################################################
 
@@ -26,6 +27,7 @@ settings.tk-desktop.project:
     tk-multi-launchapp: "@settings.tk-multi-launchapp"
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   show_recents: false
   groups:
   - matches:
@@ -44,6 +46,10 @@ settings.tk-desktop.project:
     - "*Motion*"
     - "*Blender*"
     - "*Substance*"
+    - "*SynthEyes*"
+    - "*SpeedTree*"
+    - "*PTGui*"
+    - "*3dequalizer*"
     name: 3D Apps
   - matches:
     - "*Hiero*"

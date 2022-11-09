@@ -10,6 +10,7 @@ includes:
 - ./tk-shotgun-launchpublish.yml
 - ./cbfx-delivery.yml
 - ./cbfx-deleter.yml
+- ./cbfx-timelogger.yml
 
 ################################################################################
 
@@ -21,6 +22,7 @@ settings.tk-shotgun.asset:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # asset_step
@@ -30,6 +32,7 @@ settings.tk-shotgun.asset_step:
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # project
@@ -40,6 +43,7 @@ settings.tk-shotgun.project:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # project_step
@@ -50,6 +54,7 @@ settings.tk-shotgun.project_step:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # publishedfile_version
@@ -71,6 +76,7 @@ settings.tk-shotgun.publishedfile:
 settings.tk-shotgun.playlist:
   apps:
     cbfx-delivery: "@settings.cbfx-delivery"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # sequence
@@ -81,6 +87,7 @@ settings.tk-shotgun.sequence:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # shot
@@ -91,6 +98,7 @@ settings.tk-shotgun.shot:
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # seq_step
@@ -100,6 +108,7 @@ settings.tk-shotgun.seq_step:
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
 
 # shot_step
@@ -109,4 +118,5 @@ settings.tk-shotgun.shot_step:
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
+    cbfx-timelogger: "@settings.cbfx-timelogger"
   location: "@engines.tk-shotgun.location"
