@@ -224,7 +224,7 @@ apps.tk-nuke-tools.location:
 apps.cbfx-delivery.location:
   name: cbfx-delivery
   type: path
-  windows_path: P:\pipe\etc\sgtk\cbfx-delivery
+  windows_path: S:\etc\sgtk\cbfx-delivery
   linux_path: /pipe/etc/sgtk/cbfx-delivery
   mac_path: /Volumes/pipe/etc/sgtk/cbfx-delivery
 
@@ -232,7 +232,7 @@ apps.cbfx-delivery.location:
 apps.cbfx-deleter.location:
   name: cbfx-deleter
   type: path
-  windows_path: P:\pipe\etc\sgtk\cbfx-deleter
+  windows_path: S:\etc\sgtk\cbfx-deleter
   linux_path: /pipe/etc/sgtk/cbfx-deleter
   mac_path: /Volumes/pipe/etc/sgtk/cbfx-deleter
 
@@ -240,7 +240,7 @@ apps.cbfx-deleter.location:
 apps.cbfx-timelogger.location:
   name: cbfx-timelogger
   type: path
-  windows_path: P:\pipe\etc\sgtk\cbfx-timelogger
+  windows_path: S:\etc\sgtk\cbfx-timelogger
   linux_path: /pipe/etc/sgtk/cbfx-timelogger
   mac_path: /Volumes/pipe/etc/sgtk/cbfx-timelogger
 
