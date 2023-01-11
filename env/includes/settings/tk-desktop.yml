@@ -8,6 +8,7 @@ includes:
 - ./tk-multi-demo.yml
 - ./tk-multi-screeningroom.yml
 - ./cbfx-timelogger.yml
+- ./cbfx-delivery.yml
 
 ################################################################################
 
@@ -28,6 +29,7 @@ settings.tk-desktop.project:
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
     cbfx-timelogger: "@settings.cbfx-timelogger"
+    cbfx-delivery: "@settings.cbfx-delivery"
   show_recents: false
   groups:
   - matches:

@@ -6,6 +6,7 @@ includes:
 - ./tk-multi-launchapp.yml
 - ./tk-multi-publish2.yml
 - ./cbfx-timelogger.yml
+- ./cbfx-delivery.yml
 
 ################################################################################
 
@@ -21,4 +22,5 @@ settings.tk-desktop2.all:
     tk-multi-launchapp: "@settings.tk-multi-launchapp"
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     cbfx-timelogger: "@settings.cbfx-timelogger"
+    cbfx-delivery: "@settings.cbfx-delivery"
   location: "@engines.tk-desktop2.location"
