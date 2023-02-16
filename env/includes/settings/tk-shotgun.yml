@@ -11,6 +11,7 @@ includes:
 - ./cbfx-delivery.yml
 - ./cbfx-deleter.yml
 - ./cbfx-timelogger.yml
+- ./cbfx-ingest.yml
 
 ################################################################################
 
@@ -44,6 +45,7 @@ settings.tk-shotgun.project:
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
     cbfx-timelogger: "@settings.cbfx-timelogger"
+    cbfx-ingest: "@settings.cbfx-ingest"
   location: "@engines.tk-shotgun.location"
 
 # project_step
@@ -55,6 +57,7 @@ settings.tk-shotgun.project_step:
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
     cbfx-timelogger: "@settings.cbfx-timelogger"
+    cbfx-ingest: "@settings.cbfx-ingest"
   location: "@engines.tk-shotgun.location"
 
 # publishedfile_version

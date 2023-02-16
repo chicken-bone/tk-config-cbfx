@@ -244,6 +244,14 @@ apps.cbfx-timelogger.location:
   linux_path: /pipe/etc/sgtk/cbfx-timelogger
   mac_path: /Volumes/pipe/etc/sgtk/cbfx-timelogger
 
+# ingest app
+apps.cbfx-ingest.location:
+  name: cbfx-ingest
+  type: path
+  windows_path: S:\etc\sgtk\cbfx-ingest
+  linux_path: /pipe/etc/sgtk/cbfx-ingest
+  mac_path: /Volumes/pipe/etc/sgtk/cbfx-ingest
+
 ################################################################################
 # reference all of the common frameworks
 frameworks: '@frameworks'
