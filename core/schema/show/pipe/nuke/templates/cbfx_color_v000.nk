@@ -2,25 +2,21 @@
 version 12.2 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+    <window x="0" y="28" w="1920" h="881" maximized="1" screen="0">
         <splitter orientation="1">
-            <split size="40"/>
-            <dock id="" hideTitles="1" activePageId="Toolbar.1">
-                <page id="Toolbar.1"/>
-            </dock>
-            <split size="597" stretch="1"/>
+            <split size="658" stretch="1"/>
             <splitter orientation="2">
-                <split size="487"/>
+                <split size="516"/>
                 <dock id="" activePageId="Viewer.1">
-                    <page id="Viewer.1"/>
                     <page id="uk.co.thefoundry.scripteditor.2"/>
+                    <page id="Viewer.1"/>
                 </dock>
-                <split size="343"/>
+                <split size="322"/>
                 <dock id="" activePageId="Properties.1">
                     <page id="Properties.1"/>
                 </dock>
             </splitter>
-            <split size="1259"/>
+            <split size="1258"/>
             <dock id="" activePageId="DAG.1" focus="true">
                 <page id="DAG.1"/>
             </dock>
@@ -30,7 +26,7 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_color_v001.nk
+ name /shows/OBL/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_color_v000.nk
  frame 1025
  first_frame 1025
  last_frame 1084
@@ -38,20 +34,14 @@ Root {
  format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
  proxy_type scale
  proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
- colorManagement Nuke
- workingSpaceLUT linear
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT scene_linear
  monitorLut sRGB
- int8Lut sRGB
- int16Lut sRGB
- logLut Cineon
- floatLut linear
-}
-StickyNote {
- inputs 0
- name StickyNote1
- label "<span align=\"left\">\nIf this script contains \"Show_LUT\" and/or \"Shot_LUT\" nodes, then a file search\nis performed for the luts corresponding to our particular context. These nodes,\nby extension, are then updated automatically to reflect our findings. If this\nscript doesn't contain one/both nodes, it simply skips over the search process.\nFor the \"Show LUT\" in particular, a search is only performed if the file path is\nleft blank on the node.\n\nAside from lut nodes, you can add any number of colorspace transforms as\nnecessary for your given project specs.\n</span>\n\n<span align=\"right\">\nSupported Shot LUT and Show LUT nodes are:\n<b>OCIOCDL_Transform</b>\n<b>OCIOFile_Transform</b>\n\nLuts are searched for here:                                                                                            \nShot LUTs:     <b>/shows/\{show name\}/shots/\{shot name\}/luts/\{shot name\}_v###.ccc</b>\nShow LUTs:   <b>/shows/\{show name\}/shots/\{shot name\}/luts/show_lut_v###.ccc</b>\n</span>\n"
- xpos -394
- ypos -226
+ int8Lut matte_paint
+ int16Lut texture_paint
+ logLut compositing_log
+ floatLut scene_linear
 }
 Input {
  inputs 0
@@ -90,4 +80,12 @@ Output {
  name Output1
  xpos -497
  ypos 311
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "<span>\nIf this script contains OCIOFileTransform and/or OCIOCDLTransform nodes named\n<b>\"Show_LUT\"</b> and/or <b>\"Shot_LUT\"</b>, then a file search is performed for the LUTs\ncorresponding to our particular context. These nodes, by extension, are then\nupdated automatically to reflect our findings. If this script doesn't contain\none/both nodes, it simply skips the search process.\n\nFor the \"Show LUT\" in particular, a search is only performed if the file path is\nleft blank on the node. This allows you to \"hard-code\" a show lut that applies\nto everything, no matter what.\n\nAside from lut nodes, you can add any number of colorspace transforms as\nnecessary for your given project specs.\n</span>\n\n<span>\nSupported Shot LUT and Show LUT nodes are:\n<b>OCIOCDL_Transform</b>\n<b>OCIOFile_Transform</b>\n\nLuts are searched for here:                                                                                            \nShot LUTs:     <b>/shows/\{show name\}/shots/\{shot name\}/luts/\{shot name\}_v###.ccc</b>\nShow LUTs:   <b>/shows/\{show name\}/shots/\{shot name\}/luts/show_lut_v###.ccc</b>\n</span>\n\n\nTo learn more, <b>see the full README on the studio wiki</b> here:\nhttp://wiki.cbfx.com/en/pipe/Nuke/Gizmos/cbfx_color\n\n\n"
+ selected true
+ xpos -344
+ ypos -276
 }

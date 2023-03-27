@@ -3,28 +3,23 @@
 version 12.2 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+    <window x="0" y="28" w="1920" h="881" maximized="1" screen="0">
         <splitter orientation="1">
-            <split size="40"/>
-            <dock id="" hideTitles="1" activePageId="Toolbar.1">
-                <page id="Toolbar.1"/>
-            </dock>
-            <split size="597" stretch="1"/>
+            <split size="658" stretch="1"/>
             <splitter orientation="2">
-                <split size="487"/>
+                <split size="516"/>
                 <dock id="" activePageId="Viewer.1">
-                    <page id="Viewer.1"/>
                     <page id="uk.co.thefoundry.scripteditor.2"/>
+                    <page id="Viewer.1"/>
                 </dock>
-                <split size="343"/>
+                <split size="322"/>
                 <dock id="" activePageId="Properties.1">
                     <page id="Properties.1"/>
                 </dock>
             </splitter>
-            <split size="1259"/>
+            <split size="1258"/>
             <dock id="" activePageId="DAG.1" focus="true">
                 <page id="DAG.1"/>
-                <page id="DAG.2"/>
             </dock>
         </splitter>
     </window>
@@ -32,7 +27,7 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name /shows/omn2/pipe/nuke/templates/cbfx_final_v001.nk
+ name /shows/OBL/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_delivery_finals_v000.nk
  frame 1002
  first_frame 1001
  last_frame 1108
@@ -40,7 +35,7 @@ Root {
  colorManagement OCIO
  defaultViewerLUT "OCIO LUTs"
  workingSpaceLUT scene_linear
- monitorLut Monitor/sRGB
+ monitorLut sRGB
  int8Lut matte_paint
  int16Lut texture_paint
  logLut compositing_log
@@ -59,27 +54,6 @@ BackdropNode {
  bdwidth 532
  bdheight 442
 }
-StickyNote {
- inputs 0
- name StickyNote4
- label "Do not change the name of this read node from \"Render\"\nThis is a requirement for the programming."
- xpos -361
- ypos -355
-}
-StickyNote {
- inputs 0
- name StickyNote5
- label "The slate node will be populated with text from the submission itself.\nNo need to manually adjust."
- xpos -361
- ypos 632
-}
-StickyNote {
- inputs 0
- name StickyNote2
- label "Any write node in this template whose name starts with \"Output\" will have\nits file path procedurally updated during submission. \nRender specs will be left alone, so edit accordingly."
- xpos -351
- ypos 800
-}
 Read {
  inputs 0
  file_type exr
@@ -95,7 +69,7 @@ Group {
  knobChanged "\n\nn = nuke.thisNode()\nk = nuke.thisKnob() \n\nif k == n\[\"slate_frame\"]: \n    show = bool(int(k.getValue()==2))\n    n.knobs()\[\"custom_frames\"].setVisible(show)\n\n"
  note_font "Bitstream Vera Sans"
  xpos -488
- ypos 642
+ ypos 634
  addUserKnob {20 CBFX_Slate l "CBFX Slate"}
  addUserKnob {1 project_title l project}
  addUserKnob {26 ""}
@@ -130,7 +104,7 @@ Group {
  addUserKnob {1 title_line6 l "line 6"}
  title_line6 "SOURCE TIMECODE:"
  addUserKnob {1 content_line6 l "" -STARTLINE}
- content_line6 "\[metadata input/timecode]"
+ content_line6 "\[metadata exr/nuke/input/timecode]"
  addUserKnob {22 up_6 l @arrow_up -STARTLINE T "def SwapKnobValues(knobA, knobB):\n    aValue = knobA.toScript()\n    bValue = knobB.toScript()\n    knobA.fromScript(bValue)\n    knobB.fromScript(aValue)\n\nsplit = nuke.thisKnob().name().split(\"_\")\nn = nuke.thisNode()\na = n\[\"title_line%s\" % (int(split\[1]) - 1,)]\nb = n\[\"title_line%s\" % split\[1]]\nSwapKnobValues(a, b)\na = n\[\"content_line%s\" % (int(split\[1]) - 1,)]\nb = n\[\"content_line%s\" % split\[1]]\nSwapKnobValues(a, b)"}
  addUserKnob {22 down_6 l @arrow_down -STARTLINE T "def SwapKnobValues(knobA, knobB):\n    aValue = knobA.toScript()\n    bValue = knobB.toScript()\n    knobA.fromScript(bValue)\n    knobB.fromScript(aValue)\n\nsplit = nuke.thisKnob().name().split(\"_\")\nn = nuke.thisNode()\na = n\[\"title_line%s\" % (int(split\[1]) + 1,)]\nb = n\[\"title_line%s\" % split\[1]]\nSwapKnobValues(a, b)\na = n\[\"content_line%s\" % (int(split\[1]) + 1,)]\nb = n\[\"content_line%s\" % split\[1]]\nSwapKnobValues(a, b)"}
  addUserKnob {1 title_line7 l "line 7"}
@@ -204,13 +178,13 @@ Group {
   xpos -6
   ypos -2127
  }
-set Nac743200 [stack 0]
+set Nf556e400 [stack 0]
  Dot {
   name Dot12
   xpos -6
   ypos 444
  }
-set Nac742b00 [stack 0]
+set Nf556c800 [stack 0]
  Dot {
   name Dot14
   xpos -127
@@ -221,7 +195,7 @@ set Nac742b00 [stack 0]
   xpos -127
   ypos 730
  }
-push $Nac742b00
+push $Nf556c800
  Rectangle {
   inputs 0
   area {0 0 10 10}
@@ -414,13 +388,13 @@ push 0
   xpos 1134
   ypos -283
  }
-set Nac6a5d00 [stack 0]
+set Nd4170f00 [stack 0]
  Dot {
   name Dot5
   xpos 1134
   ypos -50
  }
-push $Nac6a5d00
+push $Nd4170f00
  Transform {
   translate {{"parent.shadow_offset_x * (InputFrame.width / InputFrame.height)"} {"shadow_offset_y * (InputFrame.width / InputFrame.height) * -1"}}
   shutteroffset centred
@@ -446,7 +420,7 @@ push $Nac6a5d00
   xpos 1024
   ypos -136
  }
-push $Nac743200
+push $Nf556e400
  Dot {
   name Dot4
   xpos 752
@@ -457,7 +431,7 @@ push $Nac743200
   xpos 752
   ypos -1853
  }
-set Nac68a400 [stack 0]
+set Na62a5600 [stack 0]
  FrameHold {
   first_frame {{input.last_frame}}
   name FrameHold1
@@ -470,7 +444,7 @@ set Nac68a400 [stack 0]
   xpos 959
   ypos -1617
  }
-push $Nac68a400
+push $Na62a5600
  FrameHold {
   first_frame {{int((input.last_frame-input.first_frame)/2)+input.first_frame}}
   name FrameHold3
@@ -483,7 +457,7 @@ push $Nac68a400
   xpos 842
   ypos -1617
  }
-push $Nac68a400
+push $Na62a5600
  FrameHold {
   first_frame {{int((input.last_frame-input.first_frame)/3)+input.first_frame}}
   name FrameHold4
@@ -495,7 +469,7 @@ push $Nac68a400
   xpos 718
   ypos -1618
  }
-push $Nac68a400
+push $Na62a5600
  FrameHold {
   first_frame {{int((input.last_frame-input.first_frame)/4)+input.first_frame}}
   name FrameHold5
@@ -508,7 +482,7 @@ push $Nac68a400
   xpos 601
   ypos -1619
  }
-push $Nac68a400
+push $Na62a5600
  FrameHold {
   first_frame {{input.first_frame}}
   name FrameHold2
@@ -5006,13 +4980,13 @@ push $Nac68a400
   xpos 548
   ypos -609
  }
-set Nc8596400 [stack 0]
+set Na611d600 [stack 0]
  Dot {
   name Dot8
   xpos 548
   ypos -353
  }
-push $Nc8596400
+push $Na611d600
  Dot {
   name Dot7
   xpos 438
@@ -5116,7 +5090,7 @@ push $Nc8596400
   xpos 199
   ypos 388
  }
-set Nc8522400 [stack 0]
+set Na60b1600 [stack 0]
  CopyMetaData {
   inputs 2
   mergeMode "Meta only"
@@ -5132,7 +5106,7 @@ set Nc8522400 [stack 0]
   xpos 107
   ypos 466
  }
-push $Nc8522400
+push $Na60b1600
  AddTimeCode {
   name AddTimeCode2
   xpos 227
@@ -5158,7 +5132,7 @@ push $Nc8522400
   xpos 193
   ypos 730
  }
-push $Nac742b00
+push $Nf556c800
  Switch {
   inputs 2
   which {{"parent.slate_frame == 0 && frame == \[value input0.first_frame] ? 1 :\nparent.slate_frame == 1 && frame == \[value input0.last_frame] ? 1 : \nparent.slate_frame == 2 && \[lsearch \[split \[value parent.custom_frames] ,] \[value frame]] >= 0 ? 1 : \nparent.slate_frame == 3 && frame < \[value input0.first_frame] ? 1 : \n0"}}
@@ -5191,7 +5165,8 @@ Write {
  file .%04d.exr
  raw true
  file_type exr
- compression "PIZ Wavelet (32 scanlines)"
+ compression "Zip (16 scanlines)"
+ metadata "all metadata"
  first_part rgba
  create_directories true
  checkHashOnRead false
@@ -5212,4 +5187,32 @@ Write {
  taskname "\[lindex \[split \[value scriptname] _] end-1]"
  addUserKnob {1 res l resolution}
  res "\[value format.r]x\[value format.t]"
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "To learn more, <b>see the full README on the studio wiki</b> here:\nhttp://wiki.cbfx.com/en/Apps/DeliveryApp\n"
+ xpos -341
+ ypos 934
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label "<b>Any write node</b> in this template whose name starts with <b>\"Output\"</b> will have\nits file path procedurally updated during submission. \nRender specs will be left alone, so edit accordingly."
+ xpos -341
+ ypos 800
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ label "The slate node will be populated with text from the submission itself.\nNo need to manually adjust."
+ xpos -334
+ ypos 626
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "<b>Do not change the name</b> of this read node from <b>\"Input\"</b>\nThis is a <b>requirement</b> for the Delivery App's programming."
+ xpos -346
+ ypos -356
 }

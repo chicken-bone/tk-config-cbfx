@@ -1,18 +1,18 @@
 #! /usr/local/Nuke12.2v5/libnuke-12.2.5.so -nx
-#write_info output file:".mov" format:"1920 1080 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1001 1108" fps:"0" colorspace:"default (rec709)" datatype:"unknown" transfer:"unknown" views:"main" colorManagement:"OCIO"
+#write_info output file:".mov" format:"1920 1080 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1001 1108" fps:"0" colorspace:"reference	reference (rec709)" datatype:"unknown" transfer:"unknown" views:"main" colorManagement:"OCIO"
 version 12.2 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+    <window x="0" y="28" w="1920" h="881" maximized="1" screen="0">
         <splitter orientation="1">
-            <split size="642" stretch="1"/>
+            <split size="658" stretch="1"/>
             <splitter orientation="2">
-                <split size="511"/>
+                <split size="516"/>
                 <dock id="" activePageId="Viewer.1">
                     <page id="uk.co.thefoundry.scripteditor.2"/>
                     <page id="Viewer.1"/>
                 </dock>
-                <split size="319"/>
+                <split size="322"/>
                 <dock id="" activePageId="Properties.1">
                     <page id="Properties.1"/>
                 </dock>
@@ -27,11 +27,12 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name /shows/omn2/pipe/nuke/templates/cbfx_review_v004.nk
+ name /shows/OBL/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_delivery_reviews_v000.nk
+ frame 1025
  first_frame 1001
  last_frame 1108
  lock_range true
- fps 25
+ fps 23.976
  colorManagement OCIO
  defaultViewerLUT "OCIO LUTs"
  workingSpaceLUT scene_linear
@@ -54,27 +55,6 @@ BackdropNode {
  bdwidth 532
  bdheight 442
 }
-StickyNote {
- inputs 0
- name StickyNote5
- label "The slate node will be populated with text from the submission itself.\nNo need to manually adjust."
- xpos -361
- ypos 632
-}
-StickyNote {
- inputs 0
- name StickyNote1
- label "The CBFX Color node will handle applying color automatically, based on the show's color template. \nGenerally, you shouldn't touch this node if at all possible. "
- xpos -379
- ypos -165
-}
-StickyNote {
- inputs 0
- name StickyNote4
- label "Do not change the name of this read node from \"Render\"\nThis is a requirement for the programming."
- xpos -361
- ypos -355
-}
 Read {
  inputs 0
  file_type exr
@@ -83,7 +63,7 @@ Read {
  raw true
  name Input
  xpos -488
- ypos -368
+ ypos -364
 }
 Group {
  name CBFX_Color
@@ -111,26 +91,56 @@ Group {
   ypos 413
  }
 end_group
-Crop {
- box {0 275 3840 1883}
- name Crop1
- xpos -488
- ypos 236
+Dot {
+ name Dot2
+ xpos -454
+ ypos 122
 }
-Reformat {
- format "1920 1080 0 0 1920 1080 1 HD_1080"
- filter Rifman
- black_outside true
- name REFORMAT_HD1
+Group {
+ name CBFX_Repo
+ tile_color 0x8c0076ff
+ label "\nContext: \[value search_context]\n"
  xpos -488
- ypos 276
+ ypos 266
+ addUserKnob {20 User l Settings}
+ addUserKnob {26 text l " " -STARTLINE T "Search Context"}
+ addUserKnob {4 search_context l " " M {"The Current Scene File" "The Connected Node"}}
+ search_context "The Connected Node"
+ addUserKnob {26 text_1 l "" +STARTLINE}
+ addUserKnob {22 reload_all l "<b>Reload All</b>" t "Hits the \"Load Template\" button on all CBFX_Repo nodes in your scene" T "from imp import reload\n\nimport auto_repo\nreload(auto_repo)\nauto_repo.refresh_nodes()" +STARTLINE}
+ addUserKnob {22 wiki l <p><b>?</b></p> -STARTLINE T "url = \"http://wiki.cbfx.com/en/pipe/Nuke/Gizmos/cbfx_repo\"\n\nimport webbrowser\nwebbrowser.open(url)"}
+ addUserKnob {22 load_template l "<br><img src=\":qrc/images/arrow_down.png\"><b>Load<br>&nbsp;&nbsp;&nbsp;&nbsp;Template</b><br>" t "Imports the repo template for the current nuke scene" T "from imp import reload\nimport auto_repo\nreload(auto_repo)\nauto_repo.main()" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 1280
+  ypos 2678
+ }
+ Output {
+  name Output1
+  xpos 1280
+  ypos 2826
+ }
+end_group
+Reformat {
+ type "to box"
+ format "1920 1080 0 0 1920 1080 1 hd"
+ box_width 1920
+ box_height 1080
+ box_fixed true
+ filter Mitchell
+ black_outside true
+ name REFORMAT_HD
+ xpos -488
+ ypos 340
 }
 Dot {
  name Dot1
  xpos -454
  ypos 426
 }
-set N706d6400 [stack 0]
+set Nf556dd00 [stack 0]
 Group {
  name Slate
  knobChanged "\n\nn = nuke.thisNode()\nk = nuke.thisKnob() \n\nif k == n\[\"slate_frame\"]: \n    show = bool(int(k.getValue()==2))\n    n.knobs()\[\"custom_frames\"].setVisible(show)\n\n"
@@ -234,13 +244,13 @@ Group {
   xpos -6
   ypos -2127
  }
-set N706d4f00 [stack 0]
+set Nf5527900 [stack 0]
  Dot {
   name Dot12
   xpos -6
   ypos 426
  }
-set N706d4800 [stack 0]
+set Nf5527200 [stack 0]
  Rectangle {
   inputs 0
   area {0 0 10 10}
@@ -433,13 +443,13 @@ push 0
   xpos 1134
   ypos -283
  }
-set N70640800 [stack 0]
+set Na62a3200 [stack 0]
  Dot {
   name Dot5
   xpos 1134
   ypos -50
  }
-push $N70640800
+push $Na62a3200
  Transform {
   translate {{"parent.shadow_offset_x * (InputFrame.width / InputFrame.height)"} {"shadow_offset_y * (InputFrame.width / InputFrame.height) * -1"}}
   shutteroffset centred
@@ -465,7 +475,7 @@ push $N70640800
   xpos 1024
   ypos -136
  }
-push $N706d4f00
+push $Nf5527900
  Dot {
   name Dot4
   xpos 752
@@ -476,7 +486,7 @@ push $N706d4f00
   xpos 752
   ypos -1853
  }
-set N70614f00 [stack 0]
+set Nf545b900 [stack 0]
  FrameHold {
   first_frame {{input.last_frame}}
   name FrameHold1
@@ -489,7 +499,7 @@ set N70614f00 [stack 0]
   xpos 959
   ypos -1617
  }
-push $N70614f00
+push $Nf545b900
  FrameHold {
   first_frame {{int((input.last_frame-input.first_frame)/2)+input.first_frame}}
   name FrameHold3
@@ -502,7 +512,7 @@ push $N70614f00
   xpos 842
   ypos -1617
  }
-push $N70614f00
+push $Nf545b900
  FrameHold {
   first_frame {{int((input.last_frame-input.first_frame)/3)+input.first_frame}}
   name FrameHold4
@@ -514,7 +524,7 @@ push $N70614f00
   xpos 718
   ypos -1618
  }
-push $N70614f00
+push $Nf545b900
  FrameHold {
   first_frame {{int((input.last_frame-input.first_frame)/4)+input.first_frame}}
   name FrameHold5
@@ -527,7 +537,7 @@ push $N70614f00
   xpos 601
   ypos -1619
  }
-push $N70614f00
+push $Nf545b900
  FrameHold {
   first_frame {{input.first_frame}}
   name FrameHold2
@@ -5025,13 +5035,13 @@ push $N70614f00
   xpos 548
   ypos -609
  }
-set N60568f00 [stack 0]
+set Na6307900 [stack 0]
  Dot {
   name Dot8
   xpos 548
   ypos -353
  }
-push $N60568f00
+push $Na6307900
  Dot {
   name Dot7
   xpos 438
@@ -5152,7 +5162,7 @@ push $N60568f00
   xpos 199
   ypos 730
  }
-push $N706d4800
+push $Nf5527200
  Switch {
   inputs 2
   which {{"parent.slate_frame == 0 && frame == \[value input0.first_frame] ? 1 :\nparent.slate_frame == 1 && frame == \[value input0.last_frame] ? 1 : \nparent.slate_frame == 2 && \[lsearch \[split \[value parent.custom_frames] ,] \[value frame]] >= 0 ? 1 : \nparent.slate_frame == 3 && frame < \[value input0.first_frame] ? 1 : \n0"}}
@@ -5166,11 +5176,11 @@ push $N706d4800
   ypos 1046
  }
 end_group
-push $N706d6400
+push $Nf556dd00
 Group {
  name Overlays
  xpos -488
- ypos 566
+ ypos 564
  addUserKnob {20 Overlays}
  addUserKnob {1 text_ul l "" -STARTLINE}
  text_ul CBFX
@@ -5179,6 +5189,7 @@ Group {
  addUserKnob {1 text_ur l "" -STARTLINE}
  text_ur "\[date %x]"
  addUserKnob {1 text_ll l "" +STARTLINE}
+ text_ll "\[value Slate.content_line2]"
  addUserKnob {1 text_lc l "" -STARTLINE}
  addUserKnob {1 text_lr l "" -STARTLINE}
  text_lr "\[frame]"
@@ -5302,7 +5313,7 @@ Group {
   addUserKnob {6 handle_frame +STARTLINE}
   handle_frame {{(frame<(SOURCE.first_frame+handle_head+(slate_frame==0?1:0)))||(frame>(SOURCE.last_frame-handle_tail-(slate_frame==1?1:0)))}}
  }
-set N606b2400 [stack 0]
+set Na6220f00 [stack 0]
  Text {
   replace true
   opacity 0.14
@@ -5321,7 +5332,7 @@ set N606b2400 [stack 0]
   ypos -369
   disable {{1-parent.wm_enable}}
  }
-push $N606b2400
+push $Na6220f00
  Shuffle {
   red black
   green black
@@ -5351,11 +5362,12 @@ push $N606b2400
   ypos -369
   disable {{1-parent.mask2_enable}}
  }
-push $N606b2400
+push $Na6220f00
  Text {
   replace true
   message "\[value parent.text_ul]"
   font /pipe/common/fonts/rajdhani/rajdhani-medium.ttf
+  size 30
   yjustify top
   Transform 1
   box {{parent.h_padding*input.width+(parent.text_hoffset*input.width)} {parent.v_padding*input.height+(parent.text_voffset*input.height)} {input.width-(parent.h_padding*input.width)+(parent.text_hoffset*input.width)} {input.height-(parent.v_padding*input.height)+(parent.text_voffset*input.height)}}
@@ -5449,7 +5461,7 @@ push $N606b2400
   xpos 510
   ypos -374
  }
-set N6064eb00 [stack 0]
+set Na61c9600 [stack 0]
  Shuffle {
   red black
   green black
@@ -5471,7 +5483,7 @@ set N6064eb00 [stack 0]
   xpos 620
   ypos -297
  }
-push $N6064eb00
+push $Na61c9600
  Merge2 {
   inputs 2
   operation under
@@ -5502,7 +5514,7 @@ push $N6064eb00
   ypos -273
   disable {{1-parent.logo_enable}}
  }
-push $N606b2400
+push $Na6220f00
  Merge2 {
   inputs 2
   bbox B
@@ -5521,10 +5533,11 @@ Switch {
  which {{"frame < Input.first"}}
  name Switch1
  xpos -488
- ypos 662
+ ypos 660
 }
 Write {
  file .mov
+ colorspace reference
  file_type mov
  mov64_format "mov (QuickTime / MOV)"
  mov64_codec AVdn
@@ -5537,8 +5550,8 @@ Write {
  mov64_write_timecode true
  mov64_gop_size 12
  mov64_b_frames 0
- mov64_bitrate 20000
- mov64_bitrate_tolerance 4000000
+ mov64_bitrate 28000
+ mov64_bitrate_tolerance 0
  mov64_quality_min 1
  mov64_quality_max 3
  create_directories true
@@ -5546,7 +5559,7 @@ Write {
  name output
  label "\[value file]\nDNXHD"
  xpos -488
- ypos 788
+ ypos 787
  addUserKnob {20 User l "Custom Knobs"}
  addUserKnob {1 scriptname}
  scriptname "\[file rootname \[basename \[value root.name]]]"
@@ -5560,4 +5573,46 @@ Write {
  taskname "\[lindex \[split \[value scriptname] _] end-1]"
  addUserKnob {1 res l resolution}
  res "\[value format.r]x\[value format.t]"
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label "<b>Any write node</b> in this template whose name starts with <b>\"Output\"</b> will have\nits file path procedurally updated during submission. \nRender specs will be left alone, so edit accordingly."
+ xpos -160
+ ypos 819
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ label "To learn more, <b>see the full README on the studio wiki</b> here:\nhttp://wiki.cbfx.com/en/Apps/DeliveryApp\n"
+ xpos -153
+ ypos 1011
+}
+StickyNote {
+ inputs 0
+ name StickyNote9
+ label "<b>Do not change the name</b> of this read node from <b>\"Input\"</b>\nThis is a <b>requirement</b> for the Delivery App's programming."
+ xpos -214
+ ypos -327
+}
+StickyNote {
+ inputs 0
+ name StickyNote7
+ label "The CBFX Color node will handle applying color automatically, based on the show's color template. \nGenerally, you shouldn't touch this node if at all possible. \n\nRead more about the CBFX_Color node here:\nhttp://wiki.cbfx.com/en/pipe/Nuke/Gizmos/cbfx_color"
+ xpos -217
+ ypos -178
+}
+StickyNote {
+ inputs 0
+ name StickyNote8
+ label "The CBFX Repo node will handle contextual transformations and repositioning automatically, based on that shot's repo template. \nGenerally, you shouldn't touch this node if at all possible. \n\nRead more about the CBFX_Color node here:\nhttp://wiki.cbfx.com/en/pipe/Nuke/Gizmos/cbfx_color"
+ xpos -107
+ ypos 242
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "The slate node will be populated with text from the submission itself.\nNo need to manually adjust."
+ xpos -122
+ ypos 560
 }
