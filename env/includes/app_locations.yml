@@ -252,6 +252,14 @@ apps.cbfx-ingest.location:
   linux_path: /pipe/etc/sgtk/cbfx-ingest
   mac_path: /Volumes/pipe/etc/sgtk/cbfx-ingest
 
+# archiver app
+apps.cbfx-archiver.location:
+  name: cbfx-archiver
+  type: path
+  windows_path: S:\etc\sgtk\cbfx-archiver
+  linux_path: /pipe/etc/sgtk/cbfx-archiver
+  mac_path: /Volumes/pipe/etc/sgtk/cbfx-archiver
+
 ################################################################################
 # reference all of the common frameworks
 frameworks: '@frameworks'

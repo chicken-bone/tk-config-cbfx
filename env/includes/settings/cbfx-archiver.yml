@@ -1,0 +1,11 @@
+################################################################################
+
+includes:
+- ../app_locations.yml
+
+################################################################################
+
+settings.cbfx-archiver:
+  deny_permissions: []
+  deny_platforms: []
+  location: "@apps.cbfx-archiver.location"
