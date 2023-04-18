@@ -2,76 +2,64 @@
 
 ################################################################################
 
-# Desktop
 engines.tk-desktop.location:
   type: app_store
   name: tk-desktop
-  version: v2.5.13
-
-# Desktop2
+  version: v2.6.7
 engines.tk-desktop2.location:
   type: app_store
   name: tk-desktop2
-  version: v1.4.3
-
-# Flame
+  version: v1.5.1
 engines.tk-flame.location:
   type: app_store
   name: tk-flame
   version: v1.15.4
-
-# Houdini
 engines.tk-houdini.location:
   type: app_store
   name: tk-houdini
-  version: v1.7.2
-
-# Mari
+  version: v1.8.4
 engines.tk-mari.location:
   type: app_store
   name: tk-mari
   version: v1.2.2
-
-# Maya
 engines.tk-maya.location:
   type: app_store
   name: tk-maya
-  version: v0.10.4
-
-# Photoshop
+  version: v0.11.4
+engines.tk-nuke.location:
+  type: app_store
+  name: tk-nuke
+  version: v0.14.5
 engines.tk-photoshopcc.location:
   type: app_store
   name: tk-photoshopcc
-  version: v1.8.2
-
-# Shell
+  version: v1.9.4
 engines.tk-shell.location:
   type: app_store
   name: tk-shell
-  version: v0.8.1
-
-# Shotgun
+  version: v0.9.2
 engines.tk-shotgun.location:
   type: app_store
   name: tk-shotgun
-  version: v0.9.0
+  version: v0.10.2
 
-# ---- SHOTGUN ENGINE TAKEOVERS
 
-# Nuke
-engines.tk-nuke.location:
-  ### App Store
-  # name: tk-nuke
-  # type: app_store
-  # version: v0.12.10
-  ### Github Release
-  # type: github_release
-  # organization: nimbleheroes
-  # repository: tk-nuke
-  # version: v0.12.10.3
-  ### Toolkit App Entity
-  name: tk-nuke
-  type: shotgun
-  entity_type: CustomNonProjectEntity03
-  field: sg_uploaded_app
-  version: 185591 #tk-nuke-0.12.10.3
+# # ---- SHOTGUN ENGINE TAKEOVERS
+
+# # Nuke
+# engines.tk-nuke.location:
+#   ### App Store
+#   # name: tk-nuke
+#   # type: app_store
+#   # version: v0.12.10
+#   ### Github Release
+#   # type: github_release
+#   # organization: nimbleheroes
+#   # repository: tk-nuke
+#   # version: v0.12.10.3
+#   ### Toolkit App Entity
+#   name: tk-nuke
+#   type: shotgun
+#   entity_type: CustomNonProjectEntity03
+#   field: sg_uploaded_app
+#   version: 185591 #tk-nuke-0.12.10.3
