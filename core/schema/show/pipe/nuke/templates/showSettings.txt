@@ -1,0 +1,5 @@
+OCIOColorSpace1,True,scene_linear,AlexaV3LogC
+Show_Lut,TRUE,
+Shot_Lut,TRUE,
+OCIOColorSpace2,True,rec709,scene_linear
+handles,8

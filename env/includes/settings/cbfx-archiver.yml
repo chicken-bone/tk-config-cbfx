@@ -1,0 +1,17 @@
+################################################################################
+
+includes:
+- ../app_locations.yml
+
+################################################################################
+
+settings.cbfx-archiver:
+  deny_permissions:
+  - Vendor
+  - Artist
+  - Artist ClientReviewAccess
+  - Lead Artist
+  - Coordinator
+  - HR
+  deny_platforms: []
+  location: "@apps.cbfx-archiver.location"

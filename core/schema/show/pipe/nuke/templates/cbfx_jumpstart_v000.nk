@@ -2,23 +2,29 @@
 version 12.2 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+    <window x="0" y="28" w="3840" h="2057" maximized="1" screen="0">
         <splitter orientation="1">
-            <split size="642" stretch="1"/>
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="3177" stretch="1"/>
             <splitter orientation="2">
-                <split size="511"/>
+                <split size="1182"/>
                 <dock id="" activePageId="Viewer.1">
-                    <page id="uk.co.thefoundry.scripteditor.2"/>
                     <page id="Viewer.1"/>
                 </dock>
-                <split size="319"/>
-                <dock id="" activePageId="Properties.1">
-                    <page id="Properties.1"/>
+                <split size="832"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
                 </dock>
             </splitter>
-            <split size="1258"/>
-            <dock id="" activePageId="DAG.1" focus="true">
-                <page id="DAG.1"/>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
             </dock>
         </splitter>
     </window>
@@ -26,17 +32,18 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_jumpstart_v000.nk
+ name /shows/BRB/pipe/nuke/templates/cbfx_jumpstart_v000.nk
  title "omn2_203_026_0410 / omn2_comp_temp.nk"
- frame 1001
+ frame 1022
  first_frame 1001
  last_frame 1082
  lock_range true
  fps 25
+ format "3532 1766 0 0 3532 1766 1 BRB_Delivery"
  colorManagement OCIO
  defaultViewerLUT "OCIO LUTs"
  workingSpaceLUT scene_linear
- monitorLut Monitor/sRGB
+ monitorLut sRGB
  int8Lut matte_paint
  int16Lut texture_paint
  logLut compositing_log
@@ -45,7 +52,7 @@ Root {
 BackdropNode {
  inputs 0
  name BackdropNode1
- tile_color 0x1f1f1fff
+ tile_color 0xff84b3ff
  label "Color Reference"
  note_font "Bitstream Vera Sans Bold"
  note_font_size 50
@@ -57,7 +64,7 @@ BackdropNode {
 BackdropNode {
  inputs 0
  name BackdropNode12
- tile_color 0x1f1f1fff
+ tile_color 0xff84b3ff
  label PLATES
  note_font "Bitstream Vera Sans Bold"
  note_font_size 50
@@ -69,7 +76,7 @@ BackdropNode {
 BackdropNode {
  inputs 0
  name BackdropNode4
- tile_color 0x1f1f1fff
+ tile_color 0xff84b3ff
  label References
  note_font "Bitstream Vera Sans Bold"
  note_font_size 50
@@ -80,26 +87,53 @@ BackdropNode {
 }
 BackdropNode {
  inputs 0
+ name CREATE_vZERO1
+ tile_color 0xff11ff
+ label "           VERSION ZERO CREATION"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 42
+ note_font_color 0xff
+ xpos 13003
+ ypos 3966
+ appearance Border
+ border_width 10
+ bdwidth 832
+ bdheight 604
+}
+BackdropNode {
+ inputs 0
  name REGRAIN1
- tile_color 0x6c3147ff
+ tile_color 0xff3d87ff
  label REGRAIN
  note_font "Bitstream Vera Sans Bold"
  note_font_size 50
  xpos 12859
- ypos 3817
+ ypos 3463
  bdwidth 1115
  bdheight 354
 }
 BackdropNode {
  inputs 0
+ name REPO_or_RETIME1
+ tile_color 0x1f1f1fff
+ label "APPLY REPO / RETIME (IF ANY)"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 20
+ xpos 13148
+ ypos 2815
+ bdwidth 757
+ bdheight 413
+}
+BackdropNode {
+ inputs 0
  name BackdropNode11
- tile_color 0x388e8e00
+ tile_color 0xba36ffff
  label "Degrain Setup"
  note_font_size 42
  xpos 13271
- ypos -454
- bdwidth 298
- bdheight 236
+ ypos -453
+ bdwidth 303
+ bdheight 269
  z_order 1
 }
 BackdropNode {
@@ -110,9 +144,9 @@ BackdropNode {
  note_font "Bitstream Vera Sans Bold"
  note_font_size 20
  xpos 12796
- ypos 4339
- bdwidth 278
- bdheight 316
+ ypos 4682
+ bdwidth 286
+ bdheight 361
  z_order 1
 }
 StickyNote {
@@ -120,14 +154,14 @@ StickyNote {
  name StickyNote18
  label "  It is also preferred that you plug a MATTE to it and regrain ONLY THE AREA that you worked on. \nRemember to toggle on 'REPLACE MASK' under the 'Replace' tab to use the mask input!"
  xpos 12896
- ypos 4121
+ ypos 3767
 }
 StickyNote {
  inputs 0
  name StickyNote19
  label "Check for any grain artifacts.\nIf artifacts are present, you may toggle on the scatter under REPLACE tab. \nMOVE THE ANALYZE SAMPLE BOX OVER AN AREA WITH NO DETAIL TO ANALYZE THE GRAIN\n(or else you will get artifacts with scatter)."
  xpos 12908
- ypos 4056
+ ypos 3702
 }
 StickyNote {
  inputs 0
@@ -136,16 +170,7 @@ StickyNote {
  note_font "Bitstream Vera Sans Bold"
  note_font_size 14
  xpos 12958
- ypos 4021
-}
-StickyNote {
- inputs 0
- name StickyNote21
- label "IF THERE IS REPO or RETIME,\nYOU MAY NEED TO USE THE SCATTER FEATURE! \nMAKE SURE TO MOVE AROUND THE RE-SAMPLE \nREGION TO GET THE PROPER GRAIN!\n\n* NEVER ADD REPO or RETIME AFTER GRAIN! *\n* NEVER SCALE GRAIN *\n"
- note_font "Bitstream Vera Sans Bold"
- note_font_size 16
- xpos 13541
- ypos 4008
+ ypos 3667
 }
 Group {
  inputs 0
@@ -173,23 +198,484 @@ end_group
 Read {
  inputs 0
  origset true
+ colorspace reference
+ name VFX_Ref
+ xpos 12940
+ ypos -759
+}
+TimeOffset {
+ time_offset 1008
+ time ""
+ name TimeOffset2
+ xpos 12940
+ ypos -651
+}
+Dot {
+ name Dot39
+ xpos 12974
+ ypos -538
+}
+Read {
+ inputs 0
+ origset true
+ colorspace reference
+ name Ref
+ xpos 12720
+ ypos -760
+}
+TimeOffset {
+ time_offset 1008
+ time ""
+ name TimeOffset4
+ xpos 12720
+ ypos -651
+}
+Dot {
+ name Dot41
+ xpos 12754
+ ypos -538
+}
+Switch {
+ inputs 2
+ which 1
+ name Switch2
+ xpos 12834
+ ypos -542
+}
+Dot {
+ name Dot42
+ xpos 12868
+ ypos -390
+}
+PostageStamp {
+ name REFORMATTED_PLATE2
+ label "REFERENCE CHECK"
+ note_font "Bitstream Vera Sans Bold"
+ xpos 12830
+ ypos 4736
+ hide_input true
+ postage_stamp true
+}
+Reformat {
+ format "3840 2160 0 0 3840 2160 1 UHD_4K"
+ name Reformat1
+ xpos 12830
+ ypos 4843
+}
+Dot {
+ name Dot62
+ xpos 12864
+ ypos 4992
+}
+Read {
+ inputs 0
+ file_type exr
+ origset true
+ colorspace scene_linear
+ name Degrain_Plate
+ xpos 13380
+ ypos -89
+}
+Dot {
+ name Dot45
+ label " DEGRAINED"
+ note_font_size 20
+ xpos 13414
+ ypos 90
+}
+set N3c532400 [stack 0]
+PostageStamp {
+ name DEGRAINED_PLATE
+ xpos 13600
+ ypos 3549
+ hide_input true
+ postage_stamp true
+}
+Read {
+ inputs 0
+ origset true
  colorspace scene_linear
  name Plate
  xpos 13380
- ypos -759
+ ypos -790
 }
+Group {
+ name BRB_REFORMAT
+ tile_color 0xb5ffff
+ xpos 13380
+ ypos -583
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 1469
+  ypos -436
+ }
+ Reformat {
+  format "3532 1766 0 0 3532 1766 1 BRB_Delivery"
+  filter Lanczos6
+  black_outside true
+  name Reformat_BRB1
+  xpos 1469
+  ypos -343
+ }
+ Transform {
+  scale 1.009
+  center {1766 883}
+  filter Lanczos6
+  black_outside false
+  shutteroffset centred
+  name Transform3
+  xpos 1469
+  ypos -305
+ }
+ Crop {
+  box {0 41 3532 1725.97998}
+  name Crop5
+  xpos 1469
+  ypos -279
+ }
+ Crop {
+  box {0 0 3532 1766}
+  reformat true
+  crop false
+  name Crop6
+  selected true
+  xpos 1469
+  ypos -253
+ }
+ Output {
+  name Output1
+  xpos 1469
+  ypos -127
+ }
+end_group
 Dot {
  name Dot32
  label " PLATE"
  note_font_size 20
  xpos 13414
- ypos -578
+ ypos -506
 }
-set Nbe383900 [stack 0]
+set N3c501600 [stack 0]
+PostageStamp {
+ name PLATE1
+ xpos 13160
+ ypos 3549
+ hide_input true
+ postage_stamp true
+}
+push $N3c532400
+Crop {
+ box {0 0 3532 1766}
+ name Crop2
+ xpos 13380
+ ypos 2727
+}
+Dot {
+ name Dot72
+ xpos 13414
+ ypos 2922
+}
+set N3c500100 [stack 0]
+Kronos {
+ input.first {{parent.OFlow.input.first}}
+ input.last {{parent.OFlow.input.last}}
+ retimedChannels all
+ timing2 Frame
+ timingFrame2 {{parent.OFlow.timingFrame2}}
+ showLegacyMode false
+ motionEstimation Regularized
+ legacyModeNuke9 false
+ name Kronos
+ xpos 13380
+ ypos 3019
+ disable true
+}
+set C3c4d3900 [stack 0]
+push $N3c500100
+Dot {
+ name Dot4
+ xpos 13567
+ ypos 2922
+}
+OFlow2 {
+ input.first 1001
+ input.last 1058
+ timing2 Frame
+ timingFrame2 1009
+ name OFlow
+ xpos 13533
+ ypos 3026
+ disable true
+}
+set C3c4d2400 [stack 0]
+Dot {
+ name Dot5
+ xpos 13567
+ ypos 3110
+}
+Switch {
+ inputs 2
+ which 1
+ name Switch
+ xpos 13380
+ ypos 3106
+ disable {{"\$gui"}}
+}
+set C3c4d0f00 [stack 0]
+Transform {
+ center {1766 883}
+ filter Mitchell
+ shutteroffset centred
+ name REPO
+ xpos 13380
+ ypos 3166
+ disable true
+}
+set C3c4d0800 [stack 0]
+Dot {
+ name Dot63
+ label "  DEGRAINED COMP OUTPUT\n  PRECOMP HERE FOR ANY PAINT WORK ASSIST TASKS"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 16
+ note_font_color 0x7a01ff
+ xpos 13414
+ ypos 3280
+}
+Crop {
+ box {0 0 3532 1766}
+ name Crop3
+ xpos 13380
+ ypos 3368
+}
+DasGrain_v1.7.gizmo {
+ inputs 3
+ name DasGrain2
+ xpos 13380
+ ypos 3566
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ maskChannelMask1 -rgba.red
+ additional_frames ""
+ maskChannelMask -rgba.green
+ lut {master {}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ box {100 100 612 588}
+ sample_frame 1018
+ concealer 0
+ maskChannelMask_1 -rgba.alpha
+}
+push $N3c501600
+PostageStamp {
+ name PLATE
+ xpos 13117
+ ypos 4127
+ hide_input true
+ postage_stamp true
+}
+Dot {
+ name Dot3
+ xpos 13151
+ ypos 4225
+}
+set N4080e400 [stack 0]
+clone $C3c4d3900 {
+ xpos 13117
+ ypos 4275
+ selected false
+}
+push $N4080e400
+Dot {
+ name Dot6
+ xpos 13304
+ ypos 4225
+}
+clone $C3c4d2400 {
+ xpos 13270
+ ypos 4282
+ selected false
+}
+Dot {
+ name Dot2
+ xpos 13304
+ ypos 4340
+}
+clone $C3c4d0f00 {
+ inputs 2
+ xpos 13117
+ ypos 4336
+ selected false
+}
+clone $C3c4d0800 {
+ xpos 13117
+ ypos 4409
+ selected false
+}
+Dot {
+ name Dot1
+ xpos 13151
+ ypos 4458
+}
+Switch {
+ inputs 2
+ name Switch1
+ xpos 13380
+ ypos 4454
+}
+Group {
+ name BRB_REFORMAT1
+ tile_color 0xb5ffff
+ xpos 13380
+ ypos 4634
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 1469
+  ypos -436
+ }
+ Reformat {
+  format "3532 1766 0 0 3532 1766 1 BRB_Delivery"
+  filter Lanczos6
+  black_outside true
+  name Reformat_BRB1
+  xpos 1469
+  ypos -343
+ }
+ Crop {
+  box {0 41 3532 1725.97998}
+  name Crop5
+  xpos 1469
+  ypos -279
+ }
+ Crop {
+  box {0 0 3532 1766}
+  reformat true
+  crop false
+  name Crop6
+  selected true
+  xpos 1469
+  ypos -253
+ }
+ Output {
+  name Output1
+  xpos 1469
+  ypos -127
+ }
+end_group
+Dot {
+ name Dot66
+ xpos 13414
+ ypos 4738
+}
+set N409beb00 [stack 0]
+Dot {
+ name Dot67
+ xpos 12974
+ ypos 4738
+}
+Group {
+ name Ref_Check_REFORMAT
+ tile_color 0x6cffff
+ xpos 12940
+ ypos 4816
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 1469
+  ypos 336
+ }
+ Crop {
+  box {0 0 3532 1725.3}
+  crop false
+  name Crop4
+  xpos 1469
+  ypos 376
+ }
+ Reformat {
+  type "to box"
+  format "1920 1080 0 0 1920 1080 1 hd"
+  box_width 3840
+  box_height 2160
+  box_fixed true
+  filter Lanczos6
+  name REFORMAT_UHD
+  xpos 1469
+  ypos 402
+ }
+ Transform {
+  scale 1.104
+  center {1920 1080}
+  filter Lanczos6
+  black_outside false
+  shutteroffset centred
+  name Transform3
+  xpos 1469
+  ypos 428
+ }
+ Crop {
+  box {0 0 3840 2090.840088}
+  name Crop5
+  xpos 1469
+  ypos 454
+ }
+ Reformat {
+  type "to box"
+  format "1920 1080 0 0 1920 1080 1 hd"
+  box_width 3840
+  box_height 2160
+  box_fixed true
+  filter Lanczos6
+  black_outside true
+  name REFORMAT_UHD1
+  xpos 1469
+  ypos 480
+ }
+ Output {
+  name Output1
+  xpos 1469
+  ypos 580
+ }
+end_group
+Group {
+ name CBFX_Color1
+ tile_color 0x635aff
+ xpos 12940
+ ypos 4892
+ addUserKnob {20 User l Settings}
+ addUserKnob {26 text l " " -STARTLINE T "Search Context"}
+ addUserKnob {4 search_context l " " M {"The Current Scene File" "The Connected Node"}}
+ addUserKnob {26 text_1 l "" +STARTLINE}
+ addUserKnob {22 reload_all l "<img src=\":qrc/images/Roto/Color.png\"> <b>Reload All</b>" t "Hits the \"Load Template\" button on all CBFX_Color nodes in your scene" T "from imp import reload\n\nimport auto_lut\nreload(auto_lut)\nauto_lut.refresh_nodes()" +STARTLINE}
+ addUserKnob {22 show_in_filesystem l "<img height=10 src=\":qrc/images/FolderIcon.png\"><b> Show in Filesystem</b>" -STARTLINE +INVISIBLE T "import os\nfrom imp import reload\n\n\n\ndirectory = None\n\nwith nuke.thisNode():\n    for i in nuke.allNodes():\n        if i.name().lower().replace('_', '').startswith('shotlut'):\n            if 'file' in i.knobs():\n                directory = i\['file'].evaluate()\n\nif directory:\n    if os.path.isfile(directory):\n        directory = os.path.dirname(directory)\n\n    import utils\n    reload(utils)\n    utils.browse_directory(directory)"}
+ addUserKnob {22 load_template l "<br><img src=\":qrc/images/arrow_down.png\"><b>Load<br>&nbsp;&nbsp;&nbsp;&nbsp;Template</b><br>" t "Imports the color template for the current nuke scene" T "from imp import reload\nimport auto_lut\nreload(auto_lut)\nauto_lut.main()" +STARTLINE}
+ addUserKnob {22 set_viewer_input l "<br><img src=\":qrc/images/View.png\"><b> Set as<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input Process</b><br>" t "Sets this node as the active viewer's \"Viewer Input\" process. Doing so forces Nuke to always look through this node, no matter what your viewer is currently connected to.\n\nUseful for previewing the full color process on specific parts of the node tree. " -STARTLINE +INVISIBLE T "from imp import reload\n\nimport auto_lut\nreload(auto_lut)\nauto_lut.set_input_process()"}
+}
+ Input {
+  inputs 0
+  name Input
+ }
+ Output {
+  name Output1
+ }
+end_group
+Merge2 {
+ inputs 2
+ operation difference
+ name Merge8
+ xpos 12940
+ ypos 4988
+}
+push $N3c501600
 Group {
  name Clipping_Degrainer
  xpos 13380
- ypos -337
+ ypos -350
  addUserKnob {20 settings l Settings}
  addUserKnob {22 reduce_noise_prepare l "Prepare Noise Profile" T "with nuke.thisNode():\n    for node in nuke.allNodes():\n         if node.Class().startswith('OFXcom.absoft.neatvideo'):\n            node\['Prepare_Profile...'].execute()" +STARTLINE}
  addUserKnob {22 reduce_noise_adjust l "Adjust Filter Settings" T "with nuke.thisNode():\n    for node in nuke.allNodes():\n         if node.Class().startswith('OFXcom.absoft.neatvideo'):\n            node\['Adjust_Spatial...'].execute()" +STARTLINE}
@@ -206,7 +692,7 @@ Group {
   xpos 734
   ypos -774
  }
-set Nbe382b00 [stack 0]
+set N40998100 [stack 0]
  Grade {
   white {{"parent.double + 1"}}
   black_clamp false
@@ -221,7 +707,7 @@ set Nbe382b00 [stack 0]
   ypos -636
   disable {{parent.clipping}}
  }
-push $Nbe382b00
+push $N40998100
  Grade {
   black {{parent.double}}
   black_clamp false
@@ -255,7 +741,7 @@ push $Nbe382b00
   xpos 732
   ypos -490
  }
-set Nbe360100 [stack 0]
+set N40959600 [stack 0]
  Grade {
   white {{parent.gain.white}}
   reverse true
@@ -264,7 +750,7 @@ set Nbe360100 [stack 0]
   xpos 799
   ypos -410
  }
-push $Nbe360100
+push $N40959600
  Grade {
   black {{parent.Lift.black}}
   reverse true
@@ -286,139 +772,447 @@ push $Nbe360100
   ypos -233
  }
 end_group
-WriteTank { name DegrainWRITE1
- note_font Verdana
+Group {
+ name CBFX_Element_Write
+ tile_color 0xbf5c00ff
+ label "Channels: \[value Output_Switch.input\[value Output_Switch.which].channels] | \[value Output_Switch.input\[value Output_Switch.which].colorspace] | \[value Output_Switch.input\[value Output_Switch.which].metadata]\n\[value shotname] | \[value taskname] | \[value versionnumber]\n\n\[join \[lrange \[split \[value file] /] 0 8] /]/\n\[join \[lrange \[split \[value file] /] 9 end] /]\n"
  xpos 13380
- ypos -276
- tank_channel degrain
- tank_pass ""
- tank_view ""
- profile_name EXRs
- image_category precomp
- render_template shot_nuke_work_render_seq
- publish_template shot_nuke_pub_render_seq
- cached_path /shows/omn2/shots/omn2_201_016_0030/tasks/comp/images/precomp/omn2_201_016_0030_comp_v000/degrain_4kaxlffa_exr/omn2_201_016_0030_comp_v000.%04d.exr
- proxy_render_template ""
- proxy_publish_template ""
- tk_cached_proxy_path /shows/omn2/shots/omn2_201_016_0030/tasks/comp/images/precomp/omn2_201_016_0030_comp_v000/degrain_4kaxlffa_exr/omn2_201_016_0030_comp_v000.%04d.exr
- tk_last_known_script /shows/omn2/shots/omn2_201_016_0030/tasks/comp/workfiles/nuke/omn2_201_016_0030_comp_v000.nk
- tk_file_type exr
- tk_file_type_settings "(dp0\nS'compression'\np1\nS'DWAA'\np2\nsS'autocrop'\np3\nI01\nsS'datatype'\np4\nS'16 bit half'\np5\nsS'colorspace'\np6\nS'ACES - ACEScg'\np7\nsS'channels'\np8\nS'rgba'\np9\nsS'dw_compression_level'\np10\nI20\nsS'metadata'\np11\nS'all metadata'\np12\ns."
- tk_write_node_settings UydcbmZpbGUgL3Nob3dzL29tbjIvc2hvdHMvb21uMl8yMDFfMDE2XzAwMzAvdGFza3MvY29tcC9pbWFnZXMvcHJlY29tcC9vbW4yXzIwMV8wMTZfMDAzMF9jb21wX3YwMDAvZGVncmFpbl80a2F4bGZmYV9leHIvb21uMl8yMDFfMDE2XzAwMzBfY29tcF92MDAwLjEwMDEuZXhyXG5wcm94eSAvc2hvd3Mvb21uMi9zaG90cy9vbW4yXzIwMV8wMTZfMDAzMC90YXNrcy9jb21wL2ltYWdlcy9wcmVjb21wL29tbjJfMjAxXzAxNl8wMDMwX2NvbXBfdjAwMC9kZWdyYWluXzRrYXhsZmZhX2V4ci9vbW4yXzIwMV8wMTZfMDAzMF9jb21wX3YwMDAuMTAwMS5leHJcbmZpbGVfdHlwZSBleHJcbmF1dG9jcm9wIHRydWVcbmNvbXByZXNzaW9uICJQSVogV2F2ZWxldCAoMzIgc2NhbmxpbmVzKSJcbmR3X2NvbXByZXNzaW9uX2xldmVsIDIwXG5tZXRhZGF0YSAiYWxsIG1ldGFkYXRhIlxuZmlyc3RfcGFydCByZ2JhXG5iZWZvcmVSZW5kZXIgImltcG9ydCBudWtlXFxuaWYgaGFzYXR0cihudWtlLCBcXCJfc2hvdGd1bl93cml0ZV9ub2RlX2hhbmRsZXJcXCIpOlxcbiAgICBudWtlLl9zaG90Z3VuX3dyaXRlX25vZGVfaGFuZGxlci5vbl9iZWZvcmVfcmVuZGVyX2dpem1vX2NhbGxiYWNrKCkiXG5hZnRlclJlbmRlciAiaW1wb3J0IG51a2VcXG5pZiBoYXNhdHRyKG51a2UsIFxcIl9zaG90Z3VuX3dyaXRlX25vZGVfaGFuZGxlclxcIik6XFxuICAgIG51a2UuX3Nob3RndW5fd3JpdGVfbm9kZV9oYW5kbGVyLm9uX2FmdGVyX3JlbmRlcl9naXptb19jYWxsYmFjaygpIicKcDAKLg==
- channels rgb
- frame ""
- views {main}
- _promoted_0 "PIZ Wavelet (32 scanlines)"
- _promoted_1 true
- _promoted_2 {}
- _promoted_3 {}
- _promoted_4 {}
- _promoted_5 {}
- _promoted_6 {}
- _promoted_7 {}
- _promoted_8 {}
- _promoted_9 {}
- _promoted_10 {}
- _promoted_11 {}
- _promoted_12 {}
- _promoted_13 {}
- _promoted_14 {}
- _promoted_15 {}
- _promoted_16 {}
- _promoted_17 {}
- _promoted_18 {}
- _promoted_19 {}
- tk_before_render ""
- beforeFrameRender ""
- afterFrameRender ""
- tk_after_render ""
- renderProgress ""
-
- xpos 13380
- ypos -276
- selected false
- disable false
+ ypos -311
+ addUserKnob {20 User l Options}
+ addUserKnob {1 file +INVISIBLE}
+ file "\[value Output_Switch.input\[value Output_Switch.which].file]"
+ addUserKnob {4 output l Preset: M {precomp denoise mattes roto dmp cg_proxy SmartVectors}}
+ output denoise
+ addUserKnob {1 tag l " Label:" t "The optional name of your element. By default, if nothing is provided, the name of the element will be the name of the preset.\n\nIf you're rendering multiple precomps, for example, this can be useful to differentiate between them."}
+ addUserKnob {26 suffix l "" -STARTLINE T "<i style=\"color:#666\">(Optional)</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}
+ addUserKnob {26 text_1 l "" +STARTLINE}
+ addUserKnob {26 render_label l " " T "Render Options"}
+ addUserKnob {22 farm_submit l "<br>Send to Farm<br>" T "from imp import reload\n\n\nnuke.thisNode().setSelected(True)\nwith nuke.Root():\n    import farm_submission\n    reload(farm_submission)\n    farm_submission.main()" +STARTLINE}
+ addUserKnob {22 local_submit l "<br>Render Local<br>" -STARTLINE T "write_name = nuke.thisNode()\['output'].value().lower()\nwrite_node = None\n\nwith nuke.thisNode():\n    for i in nuke.allNodes(\"Write\"):\n        if i.name().lower().startswith(write_name):\n            write_node  = i\n            break\n\nif write_node:\n    print(write_node.name())\n    write_node\['Render'].execute()\nelse:\n    nuke.message(\"It looks like we don't have a write node in this show's setup. Talk to a supervisor or a pipeline person.\")"}
+ addUserKnob {26 ""}
+ addUserKnob {26 options_label l " " T "Misc Options"}
+ addUserKnob {22 initialize l "<p>Reload Template</p>" T "from imp import reload\n\nimport auto_write_element\nreload(auto_write_element)\nauto_write_element.main()" +STARTLINE}
+ addUserKnob {22 show_filesystem l "<p>Show in Filesystem</p>" -STARTLINE T "from imp import reload\n\nimport utils\nreload(utils)\nutils.browse_directory(nuke.thisNode()\['file'].value())"}
+ addUserKnob {22 view_farm l "<p>View Render Farm</p>" t "Launch our render farm's monitor" T "import os\nfrom platform import system\nfrom subprocess import Popen\n\ndef main():\n    bin_path = os.environ.get('DEADLINE_PATH')\n    if not os.path.exists(bin_path):\n        nuke.message(\"I can't seem to find Deadline. Is it installed?\")\n        return\n\n    if system() == 'Linux':\n        Popen('pgrep deadlinemonitor && killall deadlinemonitor.exe && killall deadlinelauncher.exe', shell=True)\n        Popen('%s/deadlinemonitor.exe' % bin_path, shell=True)\n    elif system() == 'Windows':\n        # Popen(r'C:\\Program Files\\Thinkbox\\Deadline10\\bin\\deadlinemonitor.exe', shell=True)\n        Popen('%s\\deadlinemonitor.exe' % bin_path, shell=True)\n\nmain()" +STARTLINE}
+ addUserKnob {22 read_in l "<p>Read Back In</p>" t "Bring the rendered frames back in as a Read node" -STARTLINE T "from imp import reload\n\nimport utils\nreload(utils)\n\nnuke.thisNode().parent().setSelected(True)\nwith nuke.root():\n    utils.read_from_write()"}
+ addUserKnob {22 wiki l <p>?</p> -STARTLINE T "url = \"http://wiki.cbfx.com/pipe/Nuke/Gizmos/CBFX_Element_Write\"\n\nimport webbrowser\nwebbrowser.open(url)"}
+ addUserKnob {26 text l "" +STARTLINE}
+ addUserKnob {20 tab l "Path Components"}
+ addUserKnob {26 info l "" +STARTLINE T "The renderable file path, broken down into corresponding\npieces, based on our current Nuke script. These pieces can\nbe assembled by the template's write nodes like legos.\n\nFor example:\n/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value name]/\[value scriptname]/\[value res]/\[value scriptname].%04d.exr\n\nOr, on a write node that's inside of this template group:\n/shows/\[value parent.showacronym]/shots/\[value parent.shotname]/tasks/\[value parent.taskname]/images/\[value parent.name]/\[value parent.scriptname]/\[value parent.res]/\[value parent.scriptname].%04d.exr\n"}
+ addUserKnob {1 scriptname}
+ scriptname "\[file rootname \[basename \[value root.name]]]"
+ addUserKnob {1 shotname}
+ shotname "\[join \[lrange \[split \[value scriptname] _] 0 end-2] _]"
+ addUserKnob {1 versionnumber}
+ versionnumber "\[lindex \[split \[lindex \[split \[value scriptname] _] end] v] end]"
+ addUserKnob {1 showacronym}
+ showacronym "\[string tolower \[lindex \[split \[value scriptname] _] 0]]"
+ addUserKnob {1 taskname}
+ taskname "\[lindex \[split \[value scriptname] _] end-1]"
+ addUserKnob {1 resolution}
+ resolution "\[value format.r]x\[value format.t]"
+ addUserKnob {1 element}
+ element "\[if \{\[string equal \[value tag] \"\"]\} \{return \[string tolower \[value output]]\} else \{return \[string map \{\" \" \"\" \"-\" \"\" \"_\" \"\"\} \[string tolower \[value tag]]]\} ]"
+ addUserKnob {1 scriptelement}
+ scriptelement "\[value shotname]_\[value element]_\[value versionnumber]"
 }
-Read {
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x7fbaff
+  label "Add custom setups here, if needed. \n\nCrops, reformats, for example.\n\nFor matte write-outs, you could include custom shuffles, or\nchannel-combination setups."
+  note_font_size 30
+  selected true
+  xpos -418
+  ypos -287
+  appearance Border
+  border_width 5
+  bdwidth 1230
+  bdheight 409
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x7fbaff
+  label "Modify your write node settings per your project's requirements!\nThings like the output format, compression, colorspace should all be changed as per the show specs.\nEach of these nodes will have their names added to the parent Gizmo's list of outputs. Don't need\none? Simply delete it! Need a new one? Copy and paste one of the write nodes below, modify the\nname and settings accordingly, and connect it up to the Switch node! The name of the new write\nshould get added to the Gizmo's output list.\n\nGenerally, you can leave the file path alone unless you need to add extra text descriptors to the\nfilename. By default, it'll throw it in the current shot's location on the server.\n\nNOTE: This Write node has special knobs added to the \"Custom Knobs\" tab. These probably\nshouldn't be edited unless you know what you're doing.\nThey figure out pieces of the total file path, ultimately shortening the expression you'd\nnormally see in the \"File\" knob. This way it's more human-readable, and reusable.\n\nThe Gizmo which ultimately imports this Nuke template will have a knob called \"output\".\nThe items in that \"output\" list correspond to the names of the write nodes found here.\nIf you'd like to add a new preset, simply add a new write node, name it, and add that name to\nthe Gizmo's list of \"outputs\".\n\nSimilarly, rendering is based on the Gizmo's chosen output."
+  note_font_size 26
+  selected true
+  xpos -419
+  ypos 144
+  appearance Border
+  border_width 5
+  bdwidth 1232
+  bdheight 1030
+ }
+ Input {
+  inputs 0
+  name Input
+  selected true
+  xpos -40
+  ypos -634
+ }
+ Dot {
+  name Dot1
+  selected true
+  xpos -6
+  ypos -438
+ }
+set N4091ab00 [stack 0]
+ Dot {
+  name Dot3
+  selected true
+  xpos 214
+  ypos -438
+ }
+set N4091a400 [stack 0]
+ Dot {
+  name Dot4
+  selected true
+  xpos 434
+  ypos -438
+ }
+set N40919d00 [stack 0]
+ Dot {
+  name Dot5
+  selected true
+  xpos 654
+  ypos -438
+ }
+set N40919600 [stack 0]
+ Dot {
+  name Dot6
+  selected true
+  xpos 818
+  ypos -438
+ }
+set N40918f00 [stack 0]
+ Dot {
+  name Dot7
+  selected true
+  xpos 1028
+  ypos -438
+ }
+ Write {
+  channels all
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value element]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.exr"
+  file_type exr
+  datatype "32 bit float"
+  metadata "all metadata"
+  first_part rgba
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name SmartVectors
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos 994
+  ypos 935
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+push $N40918f00
+ Write {
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value name]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.jpg"
+  colorspace color_picking
+  file_type jpeg
+  _jpeg_quality 0.96
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name cg_proxy
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos 784
+  ypos 886
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+push $N40919600
+ Write {
+  channels all
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value name]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.exr"
+  file_type exr
+  metadata "all metadata"
+  first_part rgba
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name dmp
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos 620
+  ypos 853
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+push $N40919d00
+ Write {
+  channels rgba
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value name]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.exr"
+  file_type exr
+  metadata "all metadata"
+  first_part rgba
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name roto
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos 400
+  ypos 840
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+push $N4091a400
+ Write {
+  channels rgba
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value name]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.exr"
+  file_type exr
+  metadata "all metadata"
+  first_part rgba
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name mattes
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos 180
+  ypos 750
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+push $N4091ab00
+ Write {
+  channels rgba
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value element]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.exr"
+  file_type exr
+  metadata "all metadata"
+  first_part rgba
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name denoise
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos -40
+  ypos 863
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+push $N4091ab00
+ Dot {
+  name Dot2
+  selected true
+  xpos -226
+  ypos -438
+ }
+ Write {
+  channels all
+  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskname]/images/\[value element]/\[value scriptelement]/\[value res]/\[value scriptelement].%04d.exr"
+  file_type exr
+  autocrop true
+  metadata "all metadata"
+  first_part rgba
+  create_directories {{"\[string equal \[value parent.output] \[value name]]"}}
+  checkHashOnRead false
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name precomp
+  label "\n\[value file]\n\[value compression]\n\[value metadata]\n\[value colorspace]"
+  selected true
+  xpos -260
+  ypos 766
+  disable {{"!\[string equal \[value parent.output] \[value name]]"}}
+  addUserKnob {20 User l "Custom Knobs"}
+  addUserKnob {1 scriptname}
+  scriptname "\[value parent.scriptname]"
+  addUserKnob {1 shotname}
+  shotname "\[value parent.shotname]"
+  addUserKnob {1 versionnumber}
+  versionnumber "\[value parent.versionnumber]"
+  addUserKnob {1 showacronym}
+  showacronym "\[lindex \[split \[value scriptname] _] 0]"
+  addUserKnob {1 taskname}
+  taskname "\[value parent.taskname]"
+  addUserKnob {1 res l resolution}
+  res "\[value parent.resolution]"
+  addUserKnob {1 element}
+  element "\[value parent.element]"
+  addUserKnob {1 scriptelement}
+  scriptelement "\[value parent.scriptelement]"
+ }
+ Switch {
+  inputs 7
+  which {{"\[value parent.output.0]"}}
+  name Output_Switch
+  label "Do not rename this node"
+  selected true
+  xpos -40
+  ypos 1132
+ }
+ Output {
+  name Output1
+  selected true
+  xpos -40
+  ypos 1358
+ }
+end_group
+StickyNote {
  inputs 0
- file_type exr
- origset true
- colorspace scene_linear
- name Degrain_Plate
- xpos 13380
- ypos -86
+ name StickyNote28
+ label "REPO, IF ANY --->"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 14
+ xpos 13221
+ ypos 3163
 }
-Dot {
- name Dot45
- label " DEGRAINED"
- note_font_size 20
- xpos 13414
- ypos 90
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label "<--- Set retime in OFlow\nfor faster workflow\n\n* It will adjust the Kronos automatically \nso it renders with Kronos."
+ note_font "DejaVu Sans Bold"
+ note_font_size 12
+ xpos 13629
+ ypos 3023
 }
-set Nbe335d00 [stack 0]
-PostageStamp {
- name DEGRAINEDPLATE1
- xpos 13600
- ypos 3903
- hide_input true
- postage_stamp true
+StickyNote {
+ inputs 0
+ name StickyNote27
+ tile_color 0xcc14ff
+ label "SET TO '0' FOR vZERO CREATION / RENDER"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 15
+ xpos 13480
+ ypos 4452
 }
-push $Nbe383900
-PostageStamp {
- name PLATE3
- xpos 13160
- ypos 3903
- hide_input true
- postage_stamp true
-}
-push $Nbe335d00
-Dot {
- name Dot63
- label "  DEGRAINED COMP OUTPUT\n  PRECOMP HERE FOR ANY PAINT WORK ASSIST TASKS"
+StickyNote {
+ inputs 0
+ name StickyNote21
+ label "IF THERE IS REPO or RETIME,\nYOU MAY NEED TO USE THE SCATTER FEATURE! \nMAKE SURE TO MOVE AROUND THE RE-SAMPLE \nREGION TO GET THE PROPER GRAIN!\n\n* NEVER ADD REPO or RETIME AFTER GRAIN! *\n* NEVER SCALE GRAIN *\n"
  note_font "Bitstream Vera Sans Bold"
  note_font_size 16
- note_font_color 0x7a01ff
- xpos 13414
- ypos 3738
+ xpos 13541
+ ypos 3654
 }
-Crop {
- box {0 0 3840 2160}
- name Crop1
- xpos 13380
- ypos 3856
+StickyNote {
+ inputs 0
+ name StickyNote29
+ tile_color 0xcc14ff
+ label "   vZERO should have the \nreference retime and repos! (if any)   "
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 15
+ xpos 13498
+ ypos 4493
 }
-DasGrain_v1.7.gizmo {
- inputs 3
- name DasGrain2
- xpos 13380
- ypos 3920
- in_colorspace scene_linear
- out_colorspace scene_linear
- maskChannelMask1 -rgba.red
- additional_frames ""
- maskChannelMask -rgba.green
- lut {master {}
-   red {}
-   green {}
-   blue {}
-   alpha {}}
- box {100 100 612 588}
- sample_frame 1018
- concealer 0
- maskChannelMask_1 -rgba.alpha
-}
-Dot {
- name Dot66
- xpos 13414
- ypos 4457
-}
-set Nbc03b200 [stack 0]
+push $N409beb00
 Group {
  name CBFX_Write1
  tile_color 0xbfbf00ff
  label "\nShot: \"\[value Write1.shotname]\"\nTask: \"\[value Write1.taskname]\"\nVersion: \"\[value Write1.versionnumber]\""
  xpos 13380
- ypos 4670
+ ypos 5013
  addUserKnob {20 User l Options}
  addUserKnob {41 file +INVISIBLE T Write1.file}
  addUserKnob {41 Render l render -STARTLINE +INVISIBLE T Write1.Render}
@@ -449,112 +1243,3 @@ Group {
   ypos -199
  }
 end_group
-Read {
- inputs 0
- origset true
- colorspace reference
- name VFX_Ref
- xpos 12940
- ypos -759
-}
-TimeOffset {
- time_offset 1008
- time ""
- name TimeOffset2
- xpos 12940
- ypos -651
-}
-Dot {
- name Dot39
- xpos 12974
- ypos -538
-}
-Read {
- inputs 0
- origset true
- colorspace reference
- name Ref
- xpos 12720
- ypos -759
-}
-TimeOffset {
- time_offset 1008
- time ""
- name TimeOffset4
- xpos 12720
- ypos -651
-}
-Dot {
- name Dot41
- xpos 12754
- ypos -538
-}
-Switch {
- inputs 2
- which 1
- name Switch2
- xpos 12834
- ypos -542
-}
-Dot {
- name Dot42
- xpos 12868
- ypos -390
-}
-PostageStamp {
- name REFORMATTED_PLATE2
- label "REFERENCE CHECK"
- note_font "Bitstream Vera Sans Bold"
- xpos 12830
- ypos 4425
- hide_input true
- postage_stamp true
-}
-Reformat {
- format "3840 2160 0 0 3840 2160 1 GO2_Active"
- resize fill
- filter Mitchell
- name Reformat6
- xpos 12830
- ypos 4528
-}
-Dot {
- name Dot62
- xpos 12864
- ypos 4602
-}
-push $Nbc03b200
-Dot {
- name Dot67
- xpos 12974
- ypos 4457
-}
-Group {
- name CBFX_Color1
- tile_color 0x635aff
- xpos 12940
- ypos 4502
- addUserKnob {20 User l Settings}
- addUserKnob {26 text l " " -STARTLINE T "Search Context"}
- addUserKnob {4 search_context l " " M {"The Current Scene File" "The Connected Node"}}
- addUserKnob {26 text_1 l "" +STARTLINE}
- addUserKnob {22 reload_all l "<img src=\":qrc/images/Roto/Color.png\"> <b>Reload All</b>" t "Hits the \"Load Template\" button on all CBFX_Color nodes in your scene" T "from imp import reload\n\nimport auto_lut\nreload(auto_lut)\nauto_lut.refresh_nodes()" +STARTLINE}
- addUserKnob {22 show_in_filesystem l "<img height=10 src=\":qrc/images/FolderIcon.png\"><b> Show in Filesystem</b>" -STARTLINE +INVISIBLE T "import os\nfrom imp import reload\n\n\n\ndirectory = None\n\nwith nuke.thisNode():\n    for i in nuke.allNodes():\n        if i.name().lower().replace('_', '').startswith('shotlut'):\n            if 'file' in i.knobs():\n                directory = i\['file'].evaluate()\n\nif directory:\n    if os.path.isfile(directory):\n        directory = os.path.dirname(directory)\n\n    import utils\n    reload(utils)\n    utils.browse_directory(directory)"}
- addUserKnob {22 load_template l "<br><img src=\":qrc/images/arrow_down.png\"><b>Load<br>&nbsp;&nbsp;&nbsp;&nbsp;Template</b><br>" t "Imports the color template for the current nuke scene" T "from imp import reload\nimport auto_lut\nreload(auto_lut)\nauto_lut.main()" +STARTLINE}
- addUserKnob {22 set_viewer_input l "<br><img src=\":qrc/images/View.png\"><b> Set as<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input Process</b><br>" t "Sets this node as the active viewer's \"Viewer Input\" process. Doing so forces Nuke to always look through this node, no matter what your viewer is currently connected to.\n\nUseful for previewing the full color process on specific parts of the node tree. " -STARTLINE +INVISIBLE T "from imp import reload\n\nimport auto_lut\nreload(auto_lut)\nauto_lut.set_input_process()"}
-}
- Input {
-  inputs 0
-  name Input
- }
- Output {
-  name Output1
- }
-end_group
-Merge2 {
- inputs 2
- operation difference
- name Merge8
- xpos 12940
- ypos 4598
-}

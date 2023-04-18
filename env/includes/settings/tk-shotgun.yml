@@ -12,6 +12,7 @@ includes:
 - ./cbfx-deleter.yml
 - ./cbfx-timelogger.yml
 - ./cbfx-ingest.yml
+- ./cbfx-archiver.yml
 
 ################################################################################
 
@@ -46,6 +47,7 @@ settings.tk-shotgun.project:
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
     cbfx-timelogger: "@settings.cbfx-timelogger"
     cbfx-ingest: "@settings.cbfx-ingest"
+    cbfx-archiver: "@settings.cbfx-archiver"
   location: "@engines.tk-shotgun.location"
 
 # project_step
@@ -91,6 +93,7 @@ settings.tk-shotgun.sequence:
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
     cbfx-timelogger: "@settings.cbfx-timelogger"
+    cbfx-archiver: "@settings.cbfx-archiver"
   location: "@engines.tk-shotgun.location"
 
 # shot
@@ -102,6 +105,7 @@ settings.tk-shotgun.shot:
     tk-shotgun-folders: "@settings.tk-shotgun-folders"
     tk-shotgun-launchfolder: "@settings.tk-shotgun-launchfolder"
     cbfx-timelogger: "@settings.cbfx-timelogger"
+    cbfx-archiver: "@settings.cbfx-archiver"
   location: "@engines.tk-shotgun.location"
 
 # seq_step

@@ -3,16 +3,16 @@
 version 12.2 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="28" w="1904" h="873" maximized="1" screen="0">
+    <window x="0" y="28" w="1920" h="881" maximized="1" screen="0">
         <splitter orientation="1">
-            <split size="642" stretch="1"/>
+            <split size="658" stretch="1"/>
             <splitter orientation="2">
-                <split size="511"/>
+                <split size="516"/>
                 <dock id="" activePageId="Viewer.1">
                     <page id="uk.co.thefoundry.scripteditor.2"/>
                     <page id="Viewer.1"/>
                 </dock>
-                <split size="319"/>
+                <split size="322"/>
                 <dock id="" activePageId="Properties.1">
                     <page id="Properties.1"/>
                 </dock>
@@ -27,7 +27,7 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name /shows/omn2/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_write_v000.nk
+ name /shows/OBL/pipe/sgtk/config/core/schema/show/pipe/nuke/templates/cbfx_write_v000.nk
  colorManagement OCIO
  defaultViewerLUT "OCIO LUTs"
  workingSpaceLUT scene_linear
@@ -57,13 +57,6 @@ StickyNote {
  xpos 147
  ypos -149
 }
-StickyNote {
- inputs 0
- name StickyNote1
- label "Modify your write node settings per your project's requirements!\nThings like the output format, compression, colorspace should all be changed as per the show specs.\n\nNOTE: This Write node has special knobs added to the \"Custom Knobs\" tab. These probably shouldn't be edited unless you know what you're doing.\nThey figure out pieces of the total file path, ultimately shortening the expression you'd normally see in the \"File\" knob. This way it's more human-readable."
- xpos 245
- ypos 517
-}
 Read {
  inputs 0
  origset true
@@ -85,6 +78,7 @@ CopyMetaData {
  ypos -124
 }
 Write {
+ channels all
  file "/shows/\[value showacronym]/shots/\[value shotname]/tasks/\[value taskshortname]/images/\[value taskshortname]/\[value scriptname]/\[value res]/\[value scriptname].%04d.exr"
  file_type exr
  metadata "all metadata"
@@ -103,7 +97,7 @@ Write {
  addUserKnob {1 versionnumber}
  versionnumber "\[lindex \[split \[lindex \[split \[value scriptname] _] end] v] end]"
  addUserKnob {1 showacronym}
- showacronym "\[string tolower \[lindex \[split \[value scriptname] _] 0]]"
+ showacronym "\[string toupper \[lindex \[split \[value scriptname] _] 0]]"
  addUserKnob {1 taskname}
  taskname "\[join \[lrange \[split \[value scriptname] _] 4 end-1] _]"
  addUserKnob {1 taskshortname}
@@ -115,4 +109,18 @@ Output {
  name Output1
  xpos 0
  ypos 691
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label "To learn more, <b>see the full README on the studio wiki</b> here:\nhttp://wiki.cbfx.com/en/pipe/Nuke/Gizmos/CBFX_Write"
+ xpos 334
+ ypos 985
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "Modify your write node settings per your project's requirements!\nThings like the output format, compression, colorspace should all be changed as per the show specs.\n\nNOTE: This Write node has special knobs added to the \"Custom Knobs\" tab. These probably shouldn't be edited unless you know what you're doing.\nThey figure out pieces of the total file path, ultimately shortening the expression you'd normally see in the \"File\" knob. This way it's more human-readable."
+ xpos 245
+ ypos 517
 }
