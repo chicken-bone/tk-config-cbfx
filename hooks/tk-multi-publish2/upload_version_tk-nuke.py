@@ -213,8 +213,8 @@ class UploadVersionPlugin(HookBaseClass):
             if correlate.get('templates').get('rep') == rep_template.name: # base requirement for triggering a correlate
                 match.append(True)
                 if correlate.get('fields'):
-                    for field, value in correlate.get('fields').get('rep').iteritems():
-                        if field in rep_fields.keys():
+                    for field, value in correlate.get('fields').get('rep').items():
+                        if field in list(rep_fields.keys()):
                             if rep_fields.get(field) == value:
                                 match.append(True)
                                 dest_fields[field] = correlate.get('fields').get('source').get(field)

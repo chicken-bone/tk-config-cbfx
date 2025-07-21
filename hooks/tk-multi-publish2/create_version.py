@@ -259,7 +259,7 @@ class BasicVersionPlugin(HookBaseClass):
                 publisher.shotgun.update("Version", version["id"], finalize_tasks["update"])
 
             if finalize_tasks["upload"]:
-                for field, path in finalize_tasks["upload"].iteritems():
+                for field, path in finalize_tasks["upload"].items():
                     self.logger.info("Uploading content...")
 
                     # on windows, ensure the path is utf-8 encoded to avoid issues with

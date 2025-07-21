@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------
-The ChickenBone Default Configuration
+The NEXODUS Default Configuration
 -------------------------------------------------------------------------
 
 This is the default configuration for VFX-type projects.

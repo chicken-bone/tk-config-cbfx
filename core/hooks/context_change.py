@@ -156,7 +156,7 @@ class ContextChange(get_hook_baseclass()):
                     env_vars["LUT"] = show_lut
 
             # set the env variables for OCIO to pick up
-            for key, value in env_vars.iteritems():
+            for key, value in env_vars.items():
                 if not value:
                     if os.environ.get(key):
                         self.logger.debug("Clearing ENV variable: {}".format(key))
