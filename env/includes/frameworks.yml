@@ -58,32 +58,3 @@ frameworks:
       version: v0.2.2
       type: app_store
       name: tk-framework-lmv
-
-# ---- NEXODUS frameworks
-
-  tk-framework-nx_v0.x.x:
-    Custom Format Entity: CustomNonProjectEntity02
-    Project Default Format Field: sg_default_format
-    location:
-      ### Toolkit Component Entity
-      name: tk-framework-nx
-      type: shotgun
-      entity_type: CustomNonProjectEntity03
-      field: sg_uploaded_app
-      version: 190266 #tk-framework-nx-0.1.8
-
-  # # desktopserver - provides a server to run local commands.
-  # tk-framework-desktopserver_v1.x.x:
-  #   add_ami_entities: [Playlist]
-  #   location:
-  #     ### Github Release
-  #     # type: github_release
-  #     # organization: nimbleheroes
-  #     # repository: tk-framework-desktopserver
-  #     # version: v1.4.6.1
-  #     ### Toolkit Component Entity
-  #     name: tk-framework-desktopserver
-  #     type: shotgun
-  #     entity_type: CustomNonProjectEntity03
-  #     field: sg_uploaded_app
-  #     version: 185630
