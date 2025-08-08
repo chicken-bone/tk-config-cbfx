@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------
-The NEXODUS Default Configuration
+The CBFX Default Configuration
 -------------------------------------------------------------------------
 
 This is the default configuration for VFX-type projects.

@@ -135,7 +135,7 @@ apps.tk-mari-projectmanager.location:
   version: v1.3.1
 
 
-# ---- NEXODUS Custom apps
+# ---- CBFX Custom apps
 
 # nuke_tools
 apps.tk-nuke-tools.location:
