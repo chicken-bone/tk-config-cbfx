@@ -50,7 +50,7 @@ class ContextChange(get_hook_baseclass()):
        ``!=`` operator.
     """
 
-    __field_job_pipe = "tank_name"
+    __field_folder_name = "tank_name"
     __field_camera_raw = "sg_camera_raw"
     __field_lut = "sg_lut"
     __field_fps = "sg_frame_rate"
@@ -74,7 +74,7 @@ class ContextChange(get_hook_baseclass()):
         "code",
         __field_camera_raw,
         __field_lut,
-        __field_job_pipe,
+        __field_folder_name,
         __field_fps,
     ]
     __task_fields = ["code", "entity"]
@@ -159,7 +159,7 @@ class ContextChange(get_hook_baseclass()):
             # setting job details for setting proper job environment
             if vfxjob_loaded:
                 vfxjob.utils.prep_environment_for_rez(
-                    self.project_entity.get(self.__field_job_pipe)
+                    self.project_entity.get(self.__field_folder_name)
                 )
 
     def build_environs(self, context_type):
