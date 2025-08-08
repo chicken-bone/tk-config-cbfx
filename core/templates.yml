@@ -502,7 +502,7 @@ paths:
         definition: '@shot_pubs_area/images/{image_category}/@shot_nuke_render_seq'
 
     # movie output
-    shot_nuke_render_mov: '{Shot}_{Step}[_{name}]_v{version}/[{nuke.layer}_][{nuke.view}_]{frame_format}_{ext}/{Shot}_{Step}[_{name}]_v{version}-[{nuke.layer}_][{nuke.view}_]{frame_format}.{ext}'
+    shot_nuke_render_mov: '{Shot}_{Step}[_{name}]_v{version}/[{nuke.layer}_][{nuke.view}_]{frame_format}_{ext}/{Shot}_{Step}[_{name}]_v{version}-[{nuke.layer}_][{nuke.view}_]{frame_format}[_{SEQ}].{ext}'
     shot_nuke_work_render_mov:
         definition: '@shot_work_area/images/{image_category}/@shot_nuke_render_mov'
     shot_nuke_pub_render_mov:

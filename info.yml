@@ -1,7 +1,7 @@
 # Metadata defining the behaviour and requirements for this configuration
 
 # More verbose description of this item
-display_name: "NEXODUS Default Config"
+display_name: "CBFX Default Config"
 description: "A VFX Project Config and our default configuration."
 
 # Required minimum versions for this item to run

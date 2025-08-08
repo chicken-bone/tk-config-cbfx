@@ -12,164 +12,130 @@ includes:
 apps.tk-multi-about.location:
   type: app_store
   name: tk-multi-about
-  version: v0.4.2
+  version: v0.5.2
 apps.tk-multi-breakdown.location:
   type: app_store
   name: tk-multi-breakdown
-  version: v1.8.1
+  version: v1.9.1
+apps.tk-multi-breakdown2.location:
+  type: app_store
+  name: tk-multi-breakdown2
+  version: v0.4.4
+apps.tk-multi-data-validation.location:
+  type: app_store
+  name: tk-multi-data-validation
+  version: v0.3.2
 apps.tk-multi-demo.location:
   type: app_store
   name: tk-multi-demo
-  version: v1.3.5
+  version: v1.5.3-beta.4
 apps.tk-multi-launchapp.location:
   type: app_store
   name: tk-multi-launchapp
-  version: v0.12.2
+  version: v0.13.5
 apps.tk-multi-loader2.location:
   type: app_store
   name: tk-multi-loader2
-  version: v1.22.1
+  version: v1.25.2
 apps.tk-multi-publish2.location:
   type: app_store
   name: tk-multi-publish2
-  version: v2.6.4
+  version: v2.10.4
 apps.tk-multi-pythonconsole.location:
   type: app_store
   name: tk-multi-pythonconsole
-  version: v1.3.1
+  version: v1.4.3
 apps.tk-multi-reviewsubmission.location:
   type: app_store
   name: tk-multi-reviewsubmission
-  version: v1.1.1
+  version: v1.3.1
+# apps.tk-multi-scenebuilder.location:
+#   type: app_store
+#   name: tk-multi-scenebuilder
+#   version: v0.1.1
 apps.tk-multi-screeningroom.location:
   type: app_store
   name: tk-multi-screeningroom
-  version: v0.5.1
-
+  version: v0.6.2
+apps.tk-multi-setframerange.location:
+  type: app_store
+  name: tk-multi-setframerange
+  version: v0.6.2
 apps.tk-multi-shotgunpanel.location:
   type: app_store
   name: tk-multi-shotgunpanel
-  version: v1.8.5
+  version: v1.9.2
 apps.tk-multi-snapshot.location:
   type: app_store
   name: tk-multi-snapshot
-  version: v0.9.1
-apps.tk-multi-workfiles.location:
-  type: app_store
-  name: tk-multi-workfiles
-  version: v0.7.4
+  version: v0.10.1
 apps.tk-multi-workfiles2.location:
   type: app_store
   name: tk-multi-workfiles2
-  version: v0.13.3
+  version: v0.15.9
 apps.tk-multi-devutils.location:
   type: app_store
   name: tk-multi-devutils
-  version: v1.2.1
-
+  version: v1.3.1
+apps.tk-multi-bg-publish.location:
+  type: app_store
+  name: tk-multi-bg-publish
+  version: v0.2.1
+apps.tk-shotgun-folders.location:
+  type: app_store
+  name: tk-shotgun-folders
+  version: v0.4.0
 apps.tk-shotgun-launchfolder.location:
   type: app_store
   name: tk-shotgun-launchfolder
-  version: v0.3.1
+  version: v0.4.0
 apps.tk-shotgun-launchpublish.location:
   type: app_store
   name: tk-shotgun-launchpublish
-  version: v0.5.1
+  version: v0.7.1
+# apps.tk-shotgun-launchvredreview.location:
+#   type: app_store
+#   name: tk-shotgun-launchvredreview
+#   version: v1.2.1
 apps.tk-hiero-export.location:
   type: app_store
   name: tk-hiero-export
-  version: v0.5.3
+  version: v0.8.3
 apps.tk-hiero-openinshotgun.location:
   type: app_store
   name: tk-hiero-openinshotgun
-  version: v0.4.2
+  version: v0.5.0
 apps.tk-houdini-alembicnode.location:
   type: app_store
   name: tk-houdini-alembicnode
-  version: v0.5.2
+  version: v0.6.0
 apps.tk-houdini-mantranode.location:
   type: app_store
   name: tk-houdini-mantranode
-  version: v0.5.2
+  version: v0.6.0
 apps.tk-nuke-quickreview.location:
   type: app_store
   name: tk-nuke-quickreview
-  version: v1.0.3
+  version: v1.3.2
 apps.tk-nuke-writenode.location:
   name: tk-nuke-writenode
   type: app_store
-  version: v1.6.1
+  version: v1.7.2
+apps.tk-flame-export.location:
+  name: tk-flame-export
+  type: app_store
+  version: v1.11.3
+apps.tk-flame-review.location:
+  name: tk-flame-review
+  type: app_store
+  version: v1.5.4
 apps.tk-mari-projectmanager.location:
   name: tk-mari-projectmanager
   type: app_store
   version: v1.3.1
 
-# ---- SHOTGUN APP TAKEOVERS
 
-# shotgun folders
-apps.tk-shotgun-folders.location:
-  ### App Store
-  # name: tk-shotgun-folders
-  # type: app_store
-  # version: v0.1.7
-  ### Github Release
-  # type: github_release
-  # organization: nimbleheroes
-  # repository: tk-shotgun-folders
-  # version: v0.2.0-nx.1
-  ### Toolkit Component Entity
-  name: tk-shotgun-folders
-  type: shotgun
-  entity_type: CustomNonProjectEntity03
-  field: sg_uploaded_app
-  version: 185588 #tk-shotgun-folders-0.2.0-nx.1
-
-# # writenode
-# apps.tk-nuke-writenode.location:
-#   ### App Store
-#   # name: tk-nuke-writenode
-#   # type: app_store
-#   # version: v1.4.2
-#   ### Github Release
-#   # type: github_release
-#   # organization: nimbleheroes
-#   # repository: tk-nuke-writenode
-#   # version: v1.4.2.14
-#   ### Toolkit Component Entity
-#   name: tk-nuke-writenode
-#   type: shotgun
-#   entity_type: CustomNonProjectEntity03
-#   field: sg_uploaded_app
-#   version: 187895 #tk-nuke-writenode-1.4.2.15
-
-# setframerange
-apps.tk-multi-setframerange.location:
-  ### App Store
-  # name: tk-multi-setframerange
-  # type: app_store
-  # version: v0.4.1
-  ### Github Release
-  # type: github_release
-  # organization: nimbleheroes
-  # repository: tk-multi-setframerange
-  # version: v0.4.2
-  ### Toolkit Component Entity
-  name: tk-multi-setframerange
-  type: shotgun
-  entity_type: CustomNonProjectEntity03
-  field: sg_uploaded_app
-  version: 185586 #tk-multi-setframerange-0.4.2
-
-# ---- NEXODUS Custom apps
-
-# ocio
-apps.tk-multi-ocio.location:
-  ### Toolkit Component Entity
-  name: tk-multi-ocio
-  type: shotgun
-  entity_type: CustomNonProjectEntity03
-  field: sg_uploaded_app
-  version: 183554 #tk-multi-ocio-0.2.0
+# ---- CBFX Custom apps
 
 # nuke_tools
 apps.tk-nuke-tools.location:
@@ -184,43 +150,33 @@ apps.tk-nuke-tools.location:
 
 # delivery app
 apps.cbfx-delivery.location:
-  name: cbfx-delivery
-  type: path
-  windows_path: S:\etc\sgtk\cbfx-delivery
-  linux_path: /pipe/etc/sgtk/cbfx-delivery
-  mac_path: /Volumes/pipe/etc/sgtk/cbfx-delivery
+  type: git
+  path: https://$GITHUB_DEPLOY_TOKEN@github.com/chicken-bone/cbfx-delivery.git
+  version: v1.0.1
 
 # deleter app
 apps.cbfx-deleter.location:
-  name: cbfx-deleter
-  type: path
-  windows_path: S:\etc\sgtk\cbfx-deleter
-  linux_path: /pipe/etc/sgtk/cbfx-deleter
-  mac_path: /Volumes/pipe/etc/sgtk/cbfx-deleter
+  type: git
+  path: https://$GITHUB_DEPLOY_TOKEN@github.com/chicken-bone/cbfx-deleter.git
+  version: v1.0.1
 
 # timelogger app
 apps.cbfx-timelogger.location:
-  name: cbfx-timelogger
-  type: path
-  windows_path: S:\etc\sgtk\cbfx-timelogger
-  linux_path: /pipe/etc/sgtk/cbfx-timelogger
-  mac_path: /Volumes/pipe/etc/sgtk/cbfx-timelogger
+  type: git
+  path: https://$GITHUB_DEPLOY_TOKEN@github.com/chicken-bone/cbfx-timelogger.git
+  version: v1.0.1
 
 # ingest app
 apps.cbfx-ingest.location:
-  name: cbfx-ingest
-  type: path
-  windows_path: S:\etc\sgtk\cbfx-ingest
-  linux_path: /pipe/etc/sgtk/cbfx-ingest
-  mac_path: /Volumes/pipe/etc/sgtk/cbfx-ingest
+  type: git
+  path: https://$GITHUB_DEPLOY_TOKEN@github.com/chicken-bone/cbfx-ingest.git
+  version: v1.0.1
 
 # archiver app
 apps.cbfx-archiver.location:
-  name: cbfx-archiver
-  type: path
-  windows_path: S:\etc\sgtk\cbfx-archiver
-  linux_path: /pipe/etc/sgtk/cbfx-archiver
-  mac_path: /Volumes/pipe/etc/sgtk/cbfx-archiver
+  type: git
+  path: https://$GITHUB_DEPLOY_TOKEN@github.com/chicken-bone/cbfx-archiver.git
+  version: v1.0.1
 
 ################################################################################
 # reference all of the common frameworks

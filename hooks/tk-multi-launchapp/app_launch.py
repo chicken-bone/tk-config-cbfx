@@ -16,21 +16,21 @@ class AppLaunch(sgtk.Hook):
 
     def execute(self, app_path, app_args, version, engine_name, **kwargs):
         """
-        The execute functon of the hook will be called to start the required application
+        The execute function of the hook will be called to start the required application
 
         :param app_path: (str) The path of the application executable
         :param app_args: (str) Any arguments the application may require
         :param version: (str) version of the application being run if set in the
             "versions" settings of the Launcher instance, otherwise None
-        :param engine_name (str) The name of the engine associated with the
+        :param engine_name: (str) The name of the engine associated with the
             software about to be launched.
 
         :returns: (dict) The two valid keys are 'command' (str) and 'return_code' (int).
         """
         system = sys.platform
 
-        if system == "linux2":
-            # on linux, we launch a gnome terminal in debug mode
+        if system in ("linux", "linux2"):
+            # on Linux, we launch a gnome terminal in debug mode
             if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
                 cmd = 'gnome-terminal -- bash -c "{} {}; exec bash"'.format(app_path, app_args)
             else:
@@ -56,14 +56,19 @@ class AppLaunch(sgtk.Hook):
                 cmd = "%s %s &" % (app_path, app_args)
 
         elif system == "win32":
-            # on windows, we run the start command.
+            # on Windows, we run the start command.
             if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
                 prompt_flag = ""
             else:
-                # if we're NOT in debug mode we use the the /B flag which suppress
+                # if we're NOT in debug mode we use the /B flag which suppresses
                 # the cmd window
                 prompt_flag = "/B "
             cmd = "start {}\"{}\" \"{}\" {}".format(prompt_flag, engine_name, app_path, app_args)
+
+        else:
+            # Handle unknown systems
+            self.logger.warning(f"Unsupported operating system: {system}")
+            return {"command": None, "return_code": 1}
 
         # run the command to launch the app
         exit_code = os.system(cmd)

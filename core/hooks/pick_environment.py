@@ -17,61 +17,65 @@ class PickEnvironment(Hook):
         if context.source_entity:
             if context.source_entity["type"] == "Version":
                 env = "version"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
             elif context.source_entity["type"] == "PublishedFile":
                 env = "published_file"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
+                return env
+            elif context.source_entity["type"] == "Playlist":
+                env = "playlist"
+                self.logger.debug(f"environment returned: {env}")
                 return env
 
         if context.project is None:
             # Our context is completely empty. We're going into the site context.
             env = "site"
-            self.logger.debug("environment returned: {}".format(env))
+            self.logger.debug(f"environment returned: {env}")
             return env
 
         if context.entity is None and context.step is None:
             # We have a project but not an entity or step.
             env = "project"
-            self.logger.debug("environment returned: {}".format(env))
+            self.logger.debug(f"environment returned: {env}")
             return env
 
         if context.entity is None and context.step:
             # We have a project and a step.
             env = "project_step"
-            self.logger.debug("environment returned: {}".format(env))
+            self.logger.debug(f"environment returned: {env}")
             return env
 
         if context.entity and context.step is None:
             # We have an entity but no step.
             if context.entity["type"] == "Shot":
                 env = "shot"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
             if context.entity["type"] == "Asset":
                 env = "asset"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
             if context.entity["type"] == "Sequence":
                 env = "sequence"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
 
         if context.entity and context.step:
             # We have a step and an entity.
             if context.entity["type"] == "Project":
                 env = "project_step"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
             if context.entity["type"] == "Shot":
                 env = "shot_step"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
             if context.entity["type"] == "Asset":
                 env = "asset_step"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
             if context.entity["type"] == "Sequence":
                 env = "sequence_step"
-                self.logger.debug("environment returned: {}".format(env))
+                self.logger.debug(f"environment returned: {env}")
                 return env
