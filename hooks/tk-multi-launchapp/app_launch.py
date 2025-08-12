@@ -27,47 +27,35 @@ class AppLaunch(sgtk.Hook):
 
         :returns: (dict) The two valid keys are 'command' (str) and 'return_code' (int).
         """
-        system = sys.platform
+        
 
-        if system in ("linux", "linux2"):
+        # get the tank_name for the project
+        ctx = self.sgtk.context_from_path(self.sgtk.project_path)
+        project = self.sgtk.shotgun.find_one(
+            "Project", [["id", "is", ctx.project["id"]]], ["tank_name"]
+        )
+        tank_name = project["tank_name"]
+        prompt_flag = ""
+
+        if sgtk.util.is_linux():
             # on Linux, we launch a gnome terminal in debug mode
             if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
-                cmd = 'gnome-terminal -- bash -c "{} {}; exec bash"'.format(app_path, app_args)
+                cmd = f"""gnome-terminal -- bash -c "vfxjob-init {tank_name} -c "{app_path} {app_args}" ; exec bash" """
             else:
-                cmd = "{} {} &".format(app_path, app_args)
+                cmd = f"""bash -c "vfxjob-init {tank_name} -c "{app_path} {app_args}"" &"""
 
-        elif system == "darwin":
-            # If we're on OS X, then we have two possibilities: we can be asked
-            # to launch an application bundle using the "open" command, or we
-            # might have been given an executable that we need to treat like
-            # any other Unix-style command. The best way we have to know whether
-            # we're in one situation or the other is to check the app path we're
-            # being asked to launch; if it's a .app, we use the "open" command,
-            # and if it's not then we treat it like a typical, Unix executable.
-            if app_path.endswith(".app"):
-                # The -n flag tells the OS to launch a new instance even if one is
-                # already running. The -a flag specifies that the path is an
-                # application and supports both the app bundle form or the full
-                # executable form.
-                cmd = "open -n -a \"%s\"" % (app_path)
-                if app_args:
-                    cmd += " --args \"%s\"" % app_args.replace("\"", "\\\"")
-            else:
-                cmd = "%s %s &" % (app_path, app_args)
-
-        elif system == "win32":
+        elif sgtk.util.is_windows():
             # on Windows, we run the start command.
-            if kwargs.get('show_prompt') or os.getenv('TK_DEBUG'):
-                prompt_flag = ""
-            else:
-                # if we're NOT in debug mode we use the /B flag which suppresses
+            if not kwargs.get("show_prompt") and not os.getenv("TK_DEBUG"):
+                # if we're NOT in debug mode we use the the /B flag which suppress
                 # the cmd window
                 prompt_flag = "/B "
-            cmd = "start {}\"{}\" \"{}\" {}".format(prompt_flag, engine_name, app_path, app_args)
+
+            cmd = f"""start {prompt_flag}"App" "vfxjob-init {tank_name} -c "{app_path} {app_args}"" """
 
         else:
             # Handle unknown systems
-            self.logger.warning(f"Unsupported operating system: {system}")
+            self.logger.warning(f"Unsupported operating system: {sys.platform}")
             return {"command": None, "return_code": 1}
 
         # run the command to launch the app
