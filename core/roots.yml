@@ -5,9 +5,9 @@ primary:
     shotgun_storage_id: 171 # /mnt/jobs
     default: true
 
-pipeline:
-    description:
-        A top-level root folder for pipeline data. Pipeline folders
-        will be created beneath this location.
-    shotgun_storage_id: 172 # /mnt/pipes/vfxjob
+# pipeline:
+#     description:
+#         A top-level root folder for pipeline data. Pipeline folders
+#         will be created beneath this location.
+#     shotgun_storage_id: 172 # /mnt/pipes/vfxjob
     
