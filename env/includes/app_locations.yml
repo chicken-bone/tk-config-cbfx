@@ -82,9 +82,15 @@ apps.tk-multi-bg-publish.location:
   name: tk-multi-bg-publish
   version: v0.2.1
 apps.tk-shotgun-folders.location:
-  type: app_store
-  name: tk-shotgun-folders
-  version: v0.4.0
+  # type: app_store
+  # name: tk-shotgun-folders
+  # version: v0.4.0
+  # type: dev
+  # path: ~/Documents/repos/tk-shotgun-folders
+  type: github_release
+  organization: chicken-bone
+  repository: tk-shotgun-folders
+  version: v0.4.0-cbfx.1
 apps.tk-shotgun-launchfolder.location:
   type: app_store
   name: tk-shotgun-launchfolder
