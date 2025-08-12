@@ -171,46 +171,6 @@ paths:
 
     ##########################################################################################
     #
-    # Pipeline paths
-    #
-    # Any path template starting with "pipe_" will get an environment variable automatically
-    # set before application launch by the before_app_launch.py hook.
-    #
-
-    pipe_ocio_area:
-        definition: 'pipe/ocio'
-    pipe_ocio_config:
-        definition: 'pipe/ocio/config.ocio'
-    pipe_ocio_config_3d:
-        definition: 'pipe/ocio/config_3d.ocio'
-
-    pipe_nuke_path:
-        definition: 'pipe/nuke/python'
-    pipe_nuke_tools_path:
-        definition: 'pipe/nuke/tools'
-
-    pipe_hiero_path:
-        definition: 'pipe/hiero/python'
-
-    pipe_maya_path:
-        definition: 'pipe/maya'
-    pipe_maya_script_path:
-        definition: 'pipe/maya/scripts'
-    pipe_maya_module_path:
-        definition: 'pipe/maya/modules'
-    pipe_maya_plugin_path:
-        definition: 'pipe/maya/plugins'
-    pipe_maya_library_path:
-        definition: 'pipe/maya/library'
-
-    pipe_houdini_path:
-        definition: 'pipe/houdini'
-
-    pipe_cache_area:
-        definition: 'cache/'
-
-    ##########################################################################################
-    #
     # Show level paths
     #
 
